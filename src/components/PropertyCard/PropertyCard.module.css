@@ -1,0 +1,111 @@
+/* PropertyCard component styles */
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+}
+
+.imageWrapper {
+    position: relative;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.superhostBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    position: absolute;
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+    background-color: var(--color-bg-card);
+    color: var(--color-text-light);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-sm);
+
+}
+
+.superhostIcon {
+    width: var(--font-size-sm);
+    height: var(--font-size-sm);
+    color: var(--color-accent-gold);
+    fill: var(--color-accent-gold);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+}
+
+.title {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-light);
+}
+
+.description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.capacity {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.capacityItem {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.capacityIcon {
+    width: var(--font-size-base);
+    height: var(--font-size-base);
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-base);
+    color: var(--color-text-light);
+    font-weight: 700;
+}
+
+.priceUnit {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    font-weight: 400;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+}
+
+.ratingIcon {
+    width: var(--font-size-base);
+    height: var(--font-size-base);
+    color: var(--color-accent-gold);
+    fill: var(--color-accent-gold);
+}
