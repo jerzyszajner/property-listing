@@ -1,0 +1,73 @@
+/* Global styles and layout */
+@import './assets/fonts/fonts.css';
+
+:root {
+    /* Base / Backgrounds */
+    --color-bg-main: #121826;
+    --color-bg-panel: #1F2839;
+    --color-bg-card: #121826;
+
+    /* Functional / States / Accents */
+    --color-filter-active: #4A5467;
+    --color-filter-hover: #697385;
+    --color-accent-gold: #F4C667;
+    --color-toggle-on: #4E81ED;
+    --color-toggle-off: #2A365A;
+    --color-toggle-thumb: #F3F9FF;
+
+    /* Text */
+    --color-text-light: #C2C8CF;
+    --color-text-muted: #697385;
+    --color-text-dark: #111725;
+
+    /* Borders */
+    --color-border-default: #2A365A;
+    --color-border-hover: #4F80EE;
+    --color-border-active: #6897FF;
+    --color-border-gradient-top: #4A4F74;
+    --color-border-gradient-bottom: #632F42;
+    --color-border-gradient: linear-gradient(to bottom,
+            var(--color-border-gradient-top),
+            var(--color-border-gradient-bottom));
+
+    /* Font sizes */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 2rem;
+    --font-size-xxxl: 3rem;
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+
+    /* Border radius */
+    --border-radius-xs: 0.25rem;
+    --border-radius-sm: 0.5rem;
+    --border-radius-md: 1rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    line-height: 1.6;
+    color: var(--color-text-light);
+    background-color: var(--color-bg-main);
+}
+
+img {
+    -webkit-user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
