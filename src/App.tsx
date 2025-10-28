@@ -1,24 +1,12 @@
 import { useProperties } from "./hooks/useProperties";
+import PropertyList from "./components/PropertyList/PropertyList";
+import Spinner from "./components/Spinner/Spinner";
 
 function App() {
-  const { properties, loading, error } = useProperties();
-
-  if (loading) return <div>Loading...</div>;
+  const { properties, isLoading, error } = useProperties();
+  if (isLoading) return <Spinner />;
   if (error) return <div>Error: {error}</div>;
-
-  return (
-    <>
-      <h1>Properties: {properties.length}</h1>
-      {properties.map((property) => (
-        <div key={property.id}>
-          <h3>{property.title}</h3>
-          <p>{property.location}</p>
-          <p>${property.price}</p>
-          <img src={property.image} alt={property.title} />
-        </div>
-      ))}
-    </>
-  );
+  return <PropertyList properties={properties} />;
 }
 
 export default App;

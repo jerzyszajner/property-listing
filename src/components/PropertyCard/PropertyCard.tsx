@@ -2,8 +2,12 @@ import type { Property } from "../../types/property";
 import { Star, Home, Users } from "lucide-react";
 import styles from "./PropertyCard.module.css";
 
+interface PropertyCardProps {
+  property: Property;
+}
+
 /* PropertyCard component */
-const PropertyCard = ({ property }: { property: Property }) => {
+const PropertyCard = ({ property }: PropertyCardProps) => {
   return (
     <li className={styles.card}>
       {/* === Image section === */}

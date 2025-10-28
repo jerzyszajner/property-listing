@@ -83,7 +83,7 @@
 
 .price {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     font-size: var(--font-size-base);
     color: var(--color-text-light);
     font-weight: 700;

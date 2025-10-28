@@ -51,6 +51,7 @@
     --border-radius-xs: 0.25rem;
     --border-radius-sm: 0.5rem;
     --border-radius-md: 1rem;
+    --border-radius-circle: 50%;
 }
 
 * {
