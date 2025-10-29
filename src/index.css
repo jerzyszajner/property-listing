@@ -7,6 +7,9 @@
     --color-bg-panel: #1F2839;
     --color-bg-card: #121826;
 
+    /* Overlays */
+    --color-overlay-dark: rgba(0, 0, 0, 0.4);
+
     /* Functional / States / Accents */
     --color-filter-active: #4A5467;
     --color-filter-hover: #697385;
