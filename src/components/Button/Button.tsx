@@ -1,0 +1,37 @@
+import clsx from "clsx";
+import styles from "./Button.module.css";
+
+type ButtonProps = {
+  children?: React.ReactNode;
+  variant?: "primary" | "secondary" | "filter" | "active";
+  className?: string;
+  onClick?: () => void;
+  type?: "button" | "submit" | "reset";
+  "aria-pressed"?: boolean;
+  disabled?: boolean;
+};
+
+/* Button component */
+const Button = ({
+  children,
+  variant = "primary",
+  className,
+  onClick,
+  type = "button",
+  disabled = false,
+  ...rest
+}: ButtonProps) => {
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={clsx(styles.button, styles[variant], className)}
+      {...rest}
+    >
+      {children}
+    </button>
+  );
+};
+
+export default Button;
