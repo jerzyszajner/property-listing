@@ -4,9 +4,7 @@ const Spinner = () => {
   return (
     <div className={styles.spinnerContainer}>
       {/* Loading spinner animation */}
-      <div
-        className={`${styles.spinnerCircle} ${styles.spinnerClassName}`}
-      ></div>
+      <div className={styles.spinnerCircle}></div>
     </div>
   );
 };
