@@ -1,0 +1,44 @@
+/* Select component styles */
+.selectWrapper {
+    position: relative;
+    display: inline-block;
+    min-width: 120px;
+}
+
+.select {
+    appearance: none;
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text-light);
+    padding: var(--spacing-sm) var(--spacing-md);
+    padding-right: 2.5rem;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    width: 100%;
+}
+
+.select:focus {
+    outline: none;
+    border-color: var(--color-focus);
+}
+
+.select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.arrow {
+    position: absolute;
+    right: var(--spacing-md);
+    top: 55%;
+    transform: translateY(-55%);
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .select {
+        height: var(--spacing-xxl);
+    }
+}

@@ -14,9 +14,11 @@
     --color-filter-active: #4A5467;
     --color-filter-hover: #697385;
     --color-accent-gold: #F4C667;
-    --color-toggle-on: #4E81ED;
-    --color-toggle-off: #2A365A;
+    --color-toggle-track-on: #4E81ED;
+    --color-toggle-track-off: #2A365A;
     --color-toggle-thumb: #F3F9FF;
+    --color-toggle-thumb-hover: #BFD9FF;
+    --color-focus: #6897FF;
 
     /* Text */
     --color-text-light: #C2C8CF;
@@ -68,10 +70,19 @@ body {
     line-height: 1.6;
     color: var(--color-text-light);
     background-color: var(--color-bg-main);
+    -webkit-user-select: none;
+    user-select: none;
+    padding: var(--spacing-xxl);
 }
 
 img {
     -webkit-user-drag: none;
     user-select: none;
     -webkit-user-select: none;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
 }
