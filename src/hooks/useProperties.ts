@@ -2,8 +2,14 @@ import { useState, useEffect } from "react";
 import { fetchProperties } from "../services/propertyService";
 import type { Property } from "../types/property";
 
+export interface UsePropertiesReturn {
+  properties: Property[];
+  isLoading: boolean;
+  error: string | null;
+}
+
 // Hook for fetching properties data
-export const useProperties = () => {
+export const useProperties = (): UsePropertiesReturn => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
