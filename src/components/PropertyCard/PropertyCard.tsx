@@ -1,4 +1,4 @@
-import type { Property } from "../../types/property";
+import type { Property } from "@/types/property";
 import { Star, Home, Users } from "lucide-react";
 import styles from "./PropertyCard.module.css";
 

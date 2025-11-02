@@ -1,6 +1,6 @@
-import Button from "../Button/Button";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import Select from "../Select/Select";
+import Button from "@/components/Button/Button";
+import ToggleSwitch from "@/components/ToggleSwitch/ToggleSwitch";
+import Select from "@/components/Select/Select";
 import { GUEST_OPTIONS } from "./filterOptions";
 import styles from "./FilterPanel.module.css";
 

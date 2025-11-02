@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchProperties } from "../services/propertyService";
-import type { Property } from "../types/property";
+import { fetchProperties } from "@/services/propertyService";
+import type { Property } from "@/types/property";
 
 export interface UsePropertiesReturn {
   properties: Property[];

@@ -1,4 +1,4 @@
-import heroImage from "../../assets/images/hero.webp";
+import heroImage from "@/assets/images/hero.webp";
 import styles from "./Header.module.css";
 
 /* Header component */

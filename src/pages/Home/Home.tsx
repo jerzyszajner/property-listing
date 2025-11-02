@@ -1,9 +1,9 @@
-import { useProperties } from "../../hooks/useProperties";
-import { usePropertyFilters } from "../../hooks/usePropertyFilters";
-import Header from "../../components/Header/Header";
-import PropertyList from "../../components/PropertyList/PropertyList";
-import Spinner from "../../components/Spinner/Spinner";
-import FilterPanel from "../../components/FilterPanel/FilterPanel";
+import { useProperties } from "@/hooks/useProperties";
+import { usePropertyFilters } from "@/hooks/usePropertyFilters";
+import Header from "@/components/Header/Header";
+import PropertyList from "@/components/PropertyList/PropertyList";
+import Spinner from "@/components/Spinner/Spinner";
+import FilterPanel from "@/components/FilterPanel/FilterPanel";
 
 /* Home page */
 const Home = () => {

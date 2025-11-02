@@ -4,11 +4,11 @@ import {
   Route,
 } from "react-router-dom";
 
-import App from "../App";
+import App from "@/App";
 
 /* Pages */
-import Home from "../pages/Home/Home";
-import NotFound from "../pages/NotFound/NotFound";
+import Home from "@/pages/Home/Home";
+import NotFound from "@/pages/NotFound/NotFound";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

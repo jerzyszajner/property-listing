@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import type { Property } from "../types/property";
+import type { Property } from "@/types/property";
 
 const ALL_LOCATIONS = "All Stays";
 const ALL_GUESTS = "0";
