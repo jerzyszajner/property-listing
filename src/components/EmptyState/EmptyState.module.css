@@ -1,0 +1,32 @@
+/* EmptyState component styles */
+.emptyState {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 31rem;
+    padding: var(--spacing-xl);
+}
+
+.emptyMessage {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .emptyState {
+        padding: var(--spacing-md);
+        min-height: 15rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .emptyState {
+        padding: var(--spacing-sm);
+        min-height: 10rem;
+    }
+
+    .emptyMessage {
+        font-size: var(--font-size-base);
+    }
+}
