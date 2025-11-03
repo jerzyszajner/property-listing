@@ -4,6 +4,7 @@ import Header from "@/components/Header/Header";
 import PropertyList from "@/components/PropertyList/PropertyList";
 import Spinner from "@/components/Spinner/Spinner";
 import FilterPanel from "@/components/FilterPanel/FilterPanel";
+import styles from "./Home.module.css";
 
 /* Home page */
 const Home = () => {
@@ -22,19 +23,21 @@ const Home = () => {
   if (isLoading) return <Spinner />;
   if (error) return <div>Error: {error}</div>;
   return (
-    <>
-      <Header />
-      <FilterPanel
-        selectedLocation={selectedLocation}
-        onLocationChange={setSelectedLocation}
-        availableLocations={availableLocations}
-        isSuperhost={isSuperhost}
-        onSuperhostChange={setIsSuperhost}
-        guestCount={guestCount}
-        onGuestCountChange={setGuestCount}
-      />
-      <PropertyList properties={filteredByGuests} />
-    </>
+    <div className={styles.home}>
+      <div className={styles.wrapper}>
+        <Header />
+        <FilterPanel
+          selectedLocation={selectedLocation}
+          onLocationChange={setSelectedLocation}
+          availableLocations={availableLocations}
+          isSuperhost={isSuperhost}
+          onSuperhostChange={setIsSuperhost}
+          guestCount={guestCount}
+          onGuestCountChange={setGuestCount}
+        />
+        <PropertyList properties={filteredByGuests} />
+      </div>
+    </div>
   );
 };
 

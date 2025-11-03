@@ -1,29 +1,6 @@
-/* App component styles */
-.appContainer {
+.app {
     max-width: 1200px;
     margin: 0 auto;
-    position: relative;
-    background-color: var(--color-bg-main);
-    border-radius: var(--border-radius-md);
-    padding: var(--spacing-md);
-}
-
-.appContainer::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    margin: -1rem;
-    background: var(--color-border-gradient);
-    border-radius: var(--border-radius-md);
-    z-index: -1;
-}
-
-@media (max-width: 768px) {
-    .appContainer {
-        padding: 0;
-    }
-
-    .appContainer::before {
-        display: none;
-    }
+    width: 100%;
+    height: 100%;
 }

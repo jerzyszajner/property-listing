@@ -29,11 +29,6 @@
     --color-border-default: #2A365A;
     --color-border-hover: #4F80EE;
     --color-border-active: #6897FF;
-    --color-border-gradient-top: #4A4F74;
-    --color-border-gradient-bottom: #632F42;
-    --color-border-gradient: linear-gradient(to bottom,
-            var(--color-border-gradient-top),
-            var(--color-border-gradient-bottom));
 
     /* Font sizes */
     --font-size-xs: 0.75rem;
@@ -72,17 +67,16 @@ body {
     background-color: var(--color-bg-main);
     -webkit-user-select: none;
     user-select: none;
-    padding: var(--spacing-xxl);
+    min-height: 100vh;
+}
+
+#root {
+    width: 100%;
+    height: 100%;
 }
 
 img {
     -webkit-user-drag: none;
     user-select: none;
     -webkit-user-select: none;
-}
-
-@media (max-width: 768px) {
-    body {
-        padding: 0;
-    }
 }
