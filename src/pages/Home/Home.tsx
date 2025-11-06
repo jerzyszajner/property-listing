@@ -1,9 +1,9 @@
-import { useProperties } from "@/hooks/useProperties";
-import { usePropertyFilters } from "@/hooks/usePropertyFilters";
-import Header from "@/components/Header/Header";
-import PropertyList from "@/components/PropertyList/PropertyList";
+import { useProperties } from "./hooks/useProperties";
+import { usePropertyFilters } from "./hooks/usePropertyFilters";
+import HomeHeader from "./components/HomeHeader/HomeHeader";
+import HomeFilterPanel from "./components/HomeFilterPanel/HomeFilterPanel";
+import HomePropertyList from "./components/HomePropertyList/HomePropertyList";
 import Spinner from "@/components/Spinner/Spinner";
-import FilterPanel from "@/components/FilterPanel/FilterPanel";
 import styles from "./Home.module.css";
 
 /* Home page */
@@ -25,8 +25,8 @@ const Home = () => {
   return (
     <div className={styles.home}>
       <div className={styles.wrapper}>
-        <Header />
-        <FilterPanel
+        <HomeHeader />
+        <HomeFilterPanel
           selectedLocation={selectedLocation}
           onLocationChange={setSelectedLocation}
           availableLocations={availableLocations}
@@ -35,7 +35,7 @@ const Home = () => {
           guestCount={guestCount}
           onGuestCountChange={setGuestCount}
         />
-        <PropertyList properties={filteredByGuests} />
+        <HomePropertyList properties={filteredByGuests} />
       </div>
     </div>
   );

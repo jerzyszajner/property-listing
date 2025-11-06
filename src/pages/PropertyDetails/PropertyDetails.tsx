@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useProperty } from "./hooks/useProperty";
 import PropertyHeader from "./components/PropertyHeader/PropertyHeader";
 import PropertyInfo from "./components/PropertyInfo/PropertyInfo";
-import BookingPanel from "./components/BookingPanel/BookingPanel";
+import PropertyBookingPanel from "./components/PropertyBookingPanel/PropertyBookingPanel";
 import Divider from "@/components/Divider/Divider";
 import PropertyMap from "./components/PropertyMap/PropertyMap";
 import styles from "./PropertyDetails.module.css";
@@ -22,7 +22,7 @@ const PropertyDetails = () => {
       <PropertyHeader property={property} />
       <div className={styles.propertyContent}>
         <PropertyInfo property={property} />
-        <BookingPanel
+        <PropertyBookingPanel
           property={property}
           guestCount={guestCount}
           onGuestCountChange={setGuestCount}

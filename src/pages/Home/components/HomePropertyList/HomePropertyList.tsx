@@ -1,14 +1,14 @@
 import type { Property } from "@/types/property";
-import PropertyCard from "@/components/PropertyCard/PropertyCard";
+import HomePropertyCard from "../HomePropertyCard/HomePropertyCard";
 import EmptyState from "@/components/EmptyState/EmptyState";
-import styles from "./PropertyList.module.css";
+import styles from "./HomePropertyList.module.css";
 
-interface PropertyListProps {
+interface HomePropertyListProps {
   properties: Property[];
 }
 
-/* PropertyList component */
-const PropertyList = ({ properties }: PropertyListProps) => {
+/* HomePropertyList component */
+const HomePropertyList = ({ properties }: HomePropertyListProps) => {
   if (properties.length === 0) {
     return <EmptyState message="No properties found matching your filters." />;
   }
@@ -16,10 +16,10 @@ const PropertyList = ({ properties }: PropertyListProps) => {
   return (
     <ul className={styles.propertyList}>
       {properties.map((property) => (
-        <PropertyCard key={property.id} property={property} />
+        <HomePropertyCard key={property.id} property={property} />
       ))}
     </ul>
   );
 };
 
-export default PropertyList;
+export default HomePropertyList;

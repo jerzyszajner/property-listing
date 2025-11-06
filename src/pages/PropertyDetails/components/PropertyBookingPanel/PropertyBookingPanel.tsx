@@ -3,20 +3,20 @@ import { GUEST_OPTIONS } from "./guestOptions";
 import Select from "@/components/Select/Select";
 import Button from "@/components/Button/Button";
 import Divider from "@/components/Divider/Divider";
-import styles from "./BookingPanel.module.css";
+import styles from "./PropertyBookingPanel.module.css";
 
-interface BookingPanelProps {
+interface PropertyBookingPanelProps {
   property: Property;
   guestCount: string;
   onGuestCountChange: (value: string) => void;
 }
 
-/* BookingPanel component */
-const BookingPanel = ({
+/* PropertyBookingPanel component */
+const PropertyBookingPanel = ({
   property,
   guestCount,
   onGuestCountChange,
-}: BookingPanelProps) => {
+}: PropertyBookingPanelProps) => {
   const price = property.price;
 
   return (
@@ -92,4 +92,4 @@ const BookingPanel = ({
   );
 };
 
-export default BookingPanel;
+export default PropertyBookingPanel;

@@ -1,10 +1,10 @@
 import Button from "@/components/Button/Button";
 import ToggleSwitch from "@/components/ToggleSwitch/ToggleSwitch";
 import Select from "@/components/Select/Select";
-import { GUEST_OPTIONS } from "./filterOptions";
-import styles from "./FilterPanel.module.css";
+import { GUEST_OPTIONS } from "./homeFilterOptions";
+import styles from "./HomeFilterPanel.module.css";
 
-type FilterPanelProps = {
+type HomeFilterPanelProps = {
   selectedLocation: string;
   onLocationChange: (newLocation: string) => void;
   availableLocations: string[];
@@ -14,8 +14,8 @@ type FilterPanelProps = {
   onGuestCountChange: (value: string) => void;
 };
 
-/* FilterPanel component */
-const FilterPanel = ({
+/* HomeFilterPanel component */
+const HomeFilterPanel = ({
   selectedLocation,
   onLocationChange,
   availableLocations,
@@ -23,7 +23,7 @@ const FilterPanel = ({
   onSuperhostChange,
   guestCount,
   onGuestCountChange,
-}: FilterPanelProps) => {
+}: HomeFilterPanelProps) => {
   return (
     <div className={styles.filterPanel}>
       <div className={styles.locationFilters}>
@@ -65,4 +65,4 @@ const FilterPanel = ({
   );
 };
 
-export default FilterPanel;
+export default HomeFilterPanel;

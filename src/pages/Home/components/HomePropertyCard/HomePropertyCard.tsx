@@ -1,14 +1,14 @@
 import type { Property } from "@/types/property";
 import { Star, ShieldCheck, Home, Users } from "lucide-react";
 import { Link } from "react-router-dom";
-import styles from "./PropertyCard.module.css";
+import styles from "./HomePropertyCard.module.css";
 
-interface PropertyCardProps {
+interface HomePropertyCardProps {
   property: Property;
 }
 
-/* PropertyCard component */
-const PropertyCard = ({ property }: PropertyCardProps) => {
+/* HomePropertyCard component */
+const HomePropertyCard = ({ property }: HomePropertyCardProps) => {
   return (
     <li className={styles.card}>
       <Link to={`/property/${property.id}`} className={styles.link}>
@@ -62,4 +62,4 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
   );
 };
 
-export default PropertyCard;
+export default HomePropertyCard;

@@ -1,8 +1,8 @@
 import heroImage from "@/assets/images/hero.webp";
-import styles from "./Header.module.css";
+import styles from "./HomeHeader.module.css";
 
-/* Header component */
-const Header = () => {
+/* HomeHeader component */
+const HomeHeader = () => {
   return (
     <header className={styles.header}>
       <img
@@ -23,4 +23,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HomeHeader;
