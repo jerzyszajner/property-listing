@@ -1,0 +1,34 @@
+/* PropertyMap component styles */
+.map {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.title {
+    font-size: var(--font-size-lg);
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-base);
+}
+
+.locationIcon {
+    width: var(--icon-size-inline);
+    height: var(--icon-size-inline);
+}
+
+.locationText {
+    font-weight: 500;
+}
+
+.mapImage {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--border-radius-md);
+    object-fit: cover;
+}

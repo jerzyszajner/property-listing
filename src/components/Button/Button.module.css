@@ -12,8 +12,13 @@
 
 /* Variants */
 .primary {
-    background-color: var(--color-toggle-on);
+    background-color: var(--color-accent-blue);
     color: var(--color-text-light);
+}
+
+.primary:hover {
+    background-color: var(--color-focus);
+    border-color: var(--color-focus);
 }
 
 .secondary {
@@ -58,4 +63,5 @@
     .button {
         height: var(--spacing-xxl);
     }
+
 }

@@ -1,0 +1,75 @@
+/* PropertyInfo component styles */
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.hostInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hostText {
+    font-size: var(--font-size-xl);
+}
+
+.hostImage {
+    border-radius: var(--border-radius-circle);
+    width: var(--spacing-xxl);
+    height: var(--spacing-xxl);
+}
+
+.capacitySection {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.capacityItem {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-base);
+    color: var(--color-text-muted);
+}
+
+.capacityIcon {
+    width: var(--font-size-base);
+    height: var(--font-size-base);
+}
+
+.description {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-base);
+}
+
+.amenities {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.amenitiesTitle {
+    font-size: var(--font-size-lg);
+}
+
+.amenitiesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--spacing-md);
+
+}
+
+.amenityItem {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-base);
+}
+
+.amenityIcon {
+    width: var(--icon-size-inline);
+    height: var(--icon-size-inline);
+}

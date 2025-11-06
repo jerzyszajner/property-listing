@@ -56,7 +56,6 @@ const FilterPanel = ({
             options={GUEST_OPTIONS}
             value={guestCount}
             onChange={onGuestCountChange}
-            placeholder="Choose guests"
             ariaLabel="Select number of guests"
             id="guests"
           />

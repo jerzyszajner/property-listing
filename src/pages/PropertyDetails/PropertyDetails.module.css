@@ -1,0 +1,22 @@
+/* PropertyDetails page styles */
+.propertyDetails {
+    padding: var(--spacing-xxl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.propertyContent {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+    .propertyDetails {
+        padding: var(--spacing-md);
+    }
+
+    .propertyContent {
+        flex-direction: column;
+    }
+}
