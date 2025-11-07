@@ -11,12 +11,14 @@
     gap: var(--spacing-lg);
 }
 
+@media (max-width: 1050px) {
+    .propertyContent {
+        flex-direction: column;
+    }
+}
+
 @media (max-width: 768px) {
     .propertyDetails {
         padding: var(--spacing-md);
-    }
-
-    .propertyContent {
-        flex-direction: column;
     }
 }

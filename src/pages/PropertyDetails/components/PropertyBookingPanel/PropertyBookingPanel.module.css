@@ -6,7 +6,8 @@
     padding: var(--spacing-md);
     border: 1px solid var(--color-text-muted);
     border-radius: var(--border-radius-md);
-    width: 50%;
+    min-width: 350px;
+    flex: 1;
 }
 
 .price {
@@ -26,12 +27,14 @@
 .inputGrupRow {
     display: flex;
     gap: var(--spacing-sm);
+    width: 100%;
 }
 
 .inputGroup {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
+    width: 100%;
 }
 
 .label {
@@ -52,6 +55,9 @@
     cursor: pointer;
     color-scheme: dark;
     height: 2.3rem;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .input::-webkit-calendar-picker-indicator {
@@ -99,20 +105,19 @@
 }
 
 @media (max-width: 768px) {
-    .panel {
-        width: 100%;
-    }
-
-    .inputGrupRow {
-        flex-direction: column;
-    }
-
     .input {
-        height: 50px;
+        height: var(--spacing-xxl);
+
     }
 
     .buttons {
         gap: var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .inputGrupRow {
+        flex-direction: column;
     }
 
 }
