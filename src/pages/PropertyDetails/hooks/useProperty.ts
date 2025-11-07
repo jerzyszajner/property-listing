@@ -25,9 +25,7 @@ export const useProperty = (id: string | undefined): UsePropertyReturn => {
       try {
         setIsLoading(true);
         const data = await fetchProperties();
-        const foundProperty = data.find(
-          (property) => property.id === Number(id)
-        );
+        const foundProperty = data.find((property) => property.id === id);
 
         if (!foundProperty) {
           setError("Property not found");
