@@ -17,10 +17,10 @@ export const useProperties = (): UsePropertiesReturn => {
   useEffect(() => {
     const loadProperties = async () => {
       try {
+        setError(null);
         setIsLoading(true);
         const data = await fetchProperties();
         setProperties(data);
-        setError(null);
       } catch (err) {
         setError(
           err instanceof Error ? err.message : "Failed to load properties"

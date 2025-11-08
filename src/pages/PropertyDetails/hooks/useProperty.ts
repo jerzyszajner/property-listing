@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchProperties } from "@/services/propertyService";
+import { fetchPropertyById } from "@/services/propertyService";
 import type { Property } from "@/types/property";
 
 export interface UsePropertyReturn {
@@ -23,17 +23,10 @@ export const useProperty = (id: string | undefined): UsePropertyReturn => {
 
     const loadProperty = async () => {
       try {
+        setError(null);
         setIsLoading(true);
-        const data = await fetchProperties();
-        const foundProperty = data.find((property) => property.id === id);
-
-        if (!foundProperty) {
-          setError("Property not found");
-          setProperty(null);
-        } else {
-          setProperty(foundProperty);
-          setError(null);
-        }
+        const data = await fetchPropertyById(id);
+        setProperty(data);
       } catch (err) {
         setError(
           err instanceof Error ? err.message : "Failed to load property"
