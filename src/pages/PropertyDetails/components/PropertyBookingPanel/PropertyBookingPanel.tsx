@@ -1,5 +1,5 @@
 import type { Property } from "@/types/property";
-import { GUEST_OPTIONS } from "./guestOptions";
+import { GUEST_OPTIONS } from "./PropertyBookingPanelConfig";
 import Select from "@/components/Select/Select";
 import Button from "@/components/Button/Button";
 import Divider from "@/components/Divider/Divider";
@@ -17,7 +17,7 @@ const PropertyBookingPanel = ({
   guestCount,
   onGuestCountChange,
 }: PropertyBookingPanelProps) => {
-  const price = property.price;
+  const price = property.price ?? 0;
 
   return (
     <div className={styles.panel}>

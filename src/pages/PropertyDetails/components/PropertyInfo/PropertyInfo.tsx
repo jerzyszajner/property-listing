@@ -1,14 +1,7 @@
 import type { Property } from "@/types/property";
-import {
-  Wifi,
-  Waves,
-  Utensils,
-  Flame,
-  Home,
-  ChefHat,
-  Users,
-} from "lucide-react";
+import { Home, Users } from "lucide-react";
 import Divider from "@/components/Divider/Divider";
+import { AMENITIES_CONFIG } from "./propertyInfoConfig";
 import styles from "./PropertyInfo.module.css";
 
 interface PropertyInfoProps {
@@ -17,19 +10,17 @@ interface PropertyInfoProps {
 
 /* PropertyInfo component */
 const PropertyInfo = ({ property }: PropertyInfoProps) => {
-  const hostName = "Lars";
-  const hostImage = "https://randomuser.me/api/portraits/men/32.jpg";
-  const bedrooms = property.capacity.bedroom;
-  const persons = property.capacity.people;
+  const hostName = property.host?.name;
+  const hostImage = property.host?.image;
+  const bedrooms = property.capacity?.bedroom;
+  const persons = property.capacity?.people;
+  const amenities = property.amenities ?? [];
+  const description = property.description ?? "";
 
-  const amenities = [
-    { icon: Wifi, label: "Wifi" },
-    { icon: Waves, label: "Washer" },
-    { icon: ChefHat, label: "BBQ grill" },
-    { icon: Home, label: "Private patio or balcony" },
-    { icon: Utensils, label: "Full kitchen" },
-    { icon: Flame, label: "Indoor fireplace" },
-  ];
+  const amenitiesToShow = AMENITIES_CONFIG.filter(({ key }) =>
+    amenities.includes(key)
+  );
+
   return (
     <div className={styles.info}>
       {/* === Host Section === */}
@@ -56,7 +47,7 @@ const PropertyInfo = ({ property }: PropertyInfoProps) => {
 
       {/* === Description === */}
       <div className={styles.description}>
-        <p>{property.description}</p>
+        <p>{description}</p>
       </div>
 
       <Divider />
@@ -65,15 +56,12 @@ const PropertyInfo = ({ property }: PropertyInfoProps) => {
       <div className={styles.amenities}>
         <h3 className={styles.amenitiesTitle}>What this place offers</h3>
         <div className={styles.amenitiesGrid}>
-          {amenities.map((amenity, index) => {
-            const Icon = amenity.icon;
-            return (
-              <div key={index} className={styles.amenityItem}>
-                <Icon className={styles.amenityIcon} />
-                <span>{amenity.label}</span>
-              </div>
-            );
-          })}
+          {amenitiesToShow.map(({ key, icon: Icon, label }) => (
+            <div key={key} className={styles.amenityItem}>
+              <Icon className={styles.amenityIcon} />
+              <span>{label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>

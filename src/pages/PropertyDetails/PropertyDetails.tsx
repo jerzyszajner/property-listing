@@ -6,6 +6,7 @@ import PropertyInfo from "./components/PropertyInfo/PropertyInfo";
 import PropertyBookingPanel from "./components/PropertyBookingPanel/PropertyBookingPanel";
 import Divider from "@/components/Divider/Divider";
 import PropertyMap from "./components/PropertyMap/PropertyMap";
+import Spinner from "@/components/Spinner/Spinner";
 import styles from "./PropertyDetails.module.css";
 
 /* PropertyDetails page */
@@ -14,9 +15,9 @@ const PropertyDetails = () => {
   const { property, isLoading, error } = useProperty(id);
   const [guestCount, setGuestCount] = useState("");
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Spinner />;
   if (error) return <div>Error: {error}</div>;
-  if (!property) return <div>No property</div>;
+  if (!property) return <div>Property not found</div>;
   return (
     <div className={styles.propertyDetails}>
       <PropertyHeader property={property} />

@@ -22,6 +22,10 @@ export const fetchProperties = async (): Promise<Property[]> => {
         people: Number(data.capacity?.people ?? 0),
         bedroom: Number(data.capacity?.bedroom ?? 0),
       },
+      host: {
+        name: data.host?.name ?? "",
+        image: data.host?.image ?? "",
+      },
     };
   });
 };
@@ -48,6 +52,10 @@ export const fetchPropertyById = async (
     capacity: {
       people: Number(data.capacity?.people ?? 0),
       bedroom: Number(data.capacity?.bedroom ?? 0),
+    },
+    host: {
+      name: data.host?.name ?? "",
+      image: data.host?.image ?? "",
     },
   };
 };

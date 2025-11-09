@@ -1,7 +1,7 @@
 import Button from "@/components/Button/Button";
 import ToggleSwitch from "@/components/ToggleSwitch/ToggleSwitch";
 import Select from "@/components/Select/Select";
-import { GUEST_OPTIONS } from "./homeFilterOptions";
+import { GUEST_OPTIONS } from "./homeFilterPanelConfig";
 import styles from "./HomeFilterPanel.module.css";
 
 type HomeFilterPanelProps = {

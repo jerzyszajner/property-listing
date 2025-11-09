@@ -8,6 +8,12 @@ interface PropertyHeaderProps {
 }
 
 const PropertyHeader = ({ property }: PropertyHeaderProps) => {
+  const title = property.title ?? "";
+  const rating = property.rating ?? 0;
+  const isSuperhost = property.superhost ?? false;
+  const location = property.location ?? "";
+  const image = property.image ?? "";
+
   return (
     <header className={styles.header}>
       {/* === Back Link === */}
@@ -17,16 +23,16 @@ const PropertyHeader = ({ property }: PropertyHeaderProps) => {
       </Link>
 
       {/* === Title === */}
-      <h1 className={styles.title}>{property.title}</h1>
+      <h1 className={styles.title}>{title}</h1>
 
       {/* === Meta Info === */}
       <div className={styles.meta}>
         <div className={styles.rating}>
           <Star className={styles.ratingIcon} />
-          <span className={styles.ratingText}>{property.rating}</span>
+          <span className={styles.ratingText}>{rating}</span>
         </div>
 
-        {property.superhost && (
+        {isSuperhost && (
           <div className={styles.host}>
             <ShieldCheck className={styles.hostIcon} />
             <span className={styles.hostText}>Superhost</span>
@@ -35,17 +41,13 @@ const PropertyHeader = ({ property }: PropertyHeaderProps) => {
 
         <div className={styles.location}>
           <MapPin className={styles.locationIcon} />
-          <span className={styles.locationText}>{property.location}</span>
+          <span className={styles.locationText}>{location}</span>
         </div>
       </div>
 
       {/* === Property Image  === */}
       <div className={styles.imageWrapper}>
-        <img
-          src={property.image}
-          alt={property.title}
-          className={styles.image}
-        />
+        <img src={image} alt={title} className={styles.image} />
       </div>
     </header>
   );

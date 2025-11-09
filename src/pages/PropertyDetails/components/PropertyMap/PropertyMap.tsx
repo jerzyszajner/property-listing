@@ -9,6 +9,8 @@ interface PropertyMapProps {
 
 /* PropertyMap component */
 const PropertyMap = ({ property }: PropertyMapProps) => {
+  const location = property.location ?? "";
+
   return (
     <div className={styles.map}>
       {/* === Title === */}
@@ -17,13 +19,13 @@ const PropertyMap = ({ property }: PropertyMapProps) => {
       {/* === Location === */}
       <div className={styles.location}>
         <MapPin className={styles.locationIcon} />
-        <span className={styles.locationText}>{property.location}</span>
+        <span className={styles.locationText}>{location}</span>
       </div>
 
       {/* === Map Image === */}
       <img
         src={mapImage}
-        alt={`Map showing location of ${property.location}`}
+        alt={`Map showing location of ${location}`}
         className={styles.mapImage}
       />
     </div>

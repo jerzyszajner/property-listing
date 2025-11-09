@@ -9,18 +9,24 @@ interface HomePropertyCardProps {
 
 /* HomePropertyCard component */
 const HomePropertyCard = ({ property }: HomePropertyCardProps) => {
+  const id = property.id;
+  const image = property.image ?? "";
+  const title = property.title ?? "";
+  const description = property.description ?? "";
+  const price = property.price ?? 0;
+  const rating = property.rating ?? 0;
+  const isSuperhost = property.superhost ?? false;
+  const bedrooms = property.capacity?.bedroom ?? 0;
+  const guests = property.capacity?.people ?? 0;
+
   return (
     <li className={styles.card}>
-      <Link to={`/property/${property.id}`} className={styles.link}>
+      <Link to={`/property/${id}`} className={styles.link}>
         {/* === Image section === */}
         <div className={styles.imageWrapper}>
-          <img
-            src={property.image}
-            alt={property.title}
-            className={styles.image}
-          />
+          <img src={image} alt={title} className={styles.image} />
 
-          {property.superhost && (
+          {isSuperhost && (
             <span className={styles.hostBadge}>
               Superhost <ShieldCheck className={styles.hostIcon} />
             </span>
@@ -29,31 +35,31 @@ const HomePropertyCard = ({ property }: HomePropertyCardProps) => {
 
         {/* === Content section === */}
         <div className={styles.content}>
-          <h3 className={styles.title}>{property.title}</h3>
-          <p className={styles.description}>{property.description}</p>
+          <h3 className={styles.title}>{title}</h3>
+          <p className={styles.description}>{description}</p>
 
           {/* === Capacity section === */}
           <div className={styles.capacity}>
             <span className={styles.capacityItem}>
               <Home className={styles.capacityIcon} />
-              {property.capacity.bedroom} bedroom
+              {bedrooms} bedroom
             </span>
             <span className={styles.capacityItem}>
               <Users className={styles.capacityIcon} />
-              {property.capacity.people} person
+              {guests} person
             </span>
           </div>
 
           {/* === Footer section === */}
           <div className={styles.footer}>
             <span className={styles.price}>
-              ${property.price}
+              ${price}
               <span className={styles.priceUnit}>/night</span>
             </span>
 
             <span className={styles.rating}>
               <Star className={styles.ratingIcon} />
-              {property.rating}
+              {rating}
             </span>
           </div>
         </div>

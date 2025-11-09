@@ -1,6 +1,7 @@
 export type Property = {
   id: string;
   title: string;
+  amenities: string[];
   description: string;
   price: number;
   rating: number;
@@ -9,6 +10,10 @@ export type Property = {
   capacity: {
     people: number;
     bedroom: number;
+  };
+  host: {
+    name: string;
+    image: string;
   };
   image: string;
 };
