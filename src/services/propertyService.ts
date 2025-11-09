@@ -17,6 +17,12 @@ export const fetchProperties = async (): Promise<Property[]> => {
       rating: Number(data.rating ?? 0),
       superhost: Boolean(data.superhost),
       location: data.location ?? "",
+      coordinates: data.coordinates
+        ? {
+            lat: Number(data.coordinates.lat),
+            lng: Number(data.coordinates.lng),
+          }
+        : undefined,
       image: data.image ?? "",
       capacity: {
         people: Number(data.capacity?.people ?? 0),
@@ -48,6 +54,12 @@ export const fetchPropertyById = async (
     rating: Number(data.rating ?? 0),
     superhost: Boolean(data.superhost),
     location: data.location ?? "",
+    coordinates: data.coordinates
+      ? {
+          lat: Number(data.coordinates.lat),
+          lng: Number(data.coordinates.lng),
+        }
+      : undefined,
     image: data.image ?? "",
     capacity: {
       people: Number(data.capacity?.people ?? 0),

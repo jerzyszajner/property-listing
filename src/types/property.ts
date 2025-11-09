@@ -7,6 +7,10 @@ export type Property = {
   rating: number;
   superhost: boolean;
   location: string;
+  coordinates?: {
+    lat: number;
+    lng: number;
+  };
   capacity: {
     people: number;
     bedroom: number;
