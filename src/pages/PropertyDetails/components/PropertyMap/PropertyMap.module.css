@@ -26,7 +26,7 @@
     user-select: text;
     -webkit-user-select: text;
     -moz-user-select: text;
-    white-space: nowrap
+    white-space: nowrap;
 }
 
 .mapContainer {
@@ -36,6 +36,12 @@
     border-radius: var(--border-radius-md);
     object-fit: cover;
     overflow: hidden;
+    filter: grayscale(0.2) brightness(0.8);
+    transition: filter 0.3s ease;
+}
+
+.mapContainer:hover {
+    filter: none;
 }
 
 .directionsLink {
@@ -55,12 +61,99 @@
     border-color: var(--color-border-hover);
 }
 
-@media (max-width: 480px) {
-    .location {
-        font-size: var(--font-size-sm);
-    }
+.infoCard {
+    display: flex;
+    align-items: stretch;
+    background: var(--color-bg-light);
+    padding: var(--spacing-sm);
+    border-radius: 0 var(--border-radius-md) var(--border-radius-md) var(--border-radius-md);
+    box-shadow: 0 4px 12px var(--color-overlay-dark);
+    width: 300px;
+    pointer-events: auto;
+}
 
-    .directionsLink {
-        margin-left: var(--spacing-sm);
+.image {
+    width: 90px;
+    height: auto;
+    border-radius: var(--border-radius-sm);
+    object-fit: cover;
+    margin-right: var(--spacing-sm);
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    font-family: 'Lato', sans-serif;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-dark);
+}
+
+.titleContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--spacing-xs);
+}
+
+.closeButton {
+    width: 24px;
+    height: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.closeButtonIcon {
+    width: 24px;
+    height: 24px;
+    color: var(--color-text-dark);
+    transition: color 0.3s ease;
+}
+
+.closeButtonIcon:hover {
+    color: var(--color-text-muted);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+}
+
+.ratingIcon {
+    height: var(--icon-size-inline);
+    width: var(--icon-size-inline);
+    color: var(--color-accent-gold);
+}
+
+.link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-accent-blue);
+    transition: color 0.3s ease;
+    gap: var(--spacing-xs);
+    text-decoration: none;
+}
+
+.link:hover {
+    color: var(--color-text-muted);
+}
+
+.linkIcon {
+    width: var(--icon-size-inline);
+    height: var(--icon-size-inline);
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.linkIcon:hover {
+    color: var(--color-text-muted);
+}
+
+@media (max-width: 480px) {
+    .mapContainer {
+        aspect-ratio: 1 / 1;
     }
 }
