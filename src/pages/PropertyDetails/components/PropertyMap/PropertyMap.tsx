@@ -91,6 +91,7 @@ const PropertyMap = ({ property }: PropertyMapProps) => {
             <div
               className={styles.infoCard}
               onClick={(e) => e.stopPropagation()}
+              onTouchStart={(e) => e.stopPropagation()}
             >
               <img src={image} alt={title} className={styles.image} />
 
