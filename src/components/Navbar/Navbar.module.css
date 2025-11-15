@@ -1,0 +1,212 @@
+/* Navbar component styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: var(--color-bg-navbar);
+    backdrop-filter: blur(30px) saturate(180%);
+    border-bottom: 1px solid var(--color-border-navbar);
+
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-md) var(--spacing-xxl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logoLink {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+}
+
+.logoImage {
+    width: 100%;
+    height: 100%;
+}
+
+.links {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.link {
+    text-decoration: none;
+    color: var(--color-text-light);
+    transition: color 0.3s ease;
+}
+
+.link:hover:not(.active) {
+    color: var(--color-text-muted);
+}
+
+.hamburgerButton {
+    z-index: 1000;
+    background: transparent;
+    border: none;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hamburgerIcon {
+    color: var(--color-bg-light);
+    width: var(--font-size-xxl);
+    height: var(--font-size-xxl);
+    transition: color 0.3s ease;
+}
+
+.hamburgerIcon:hover {
+    color: var(--color-text-muted);
+}
+
+/* Sidebar */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--color-overlay-navbar);
+    backdrop-filter: blur(30px) saturate(180%);
+}
+
+.sidebar {
+    border-right: 1px solid var(--color-border-navbar);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--color-bg-navbar);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    transform: translateX(0);
+    animation: slideInFromLeft 0.3s ease;
+}
+
+.sidebarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border-navbar);
+}
+
+.closeButton {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-light);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.closeIcon {
+    color: var(--color-bg-light);
+    width: var(--font-size-xxl);
+    height: var(--font-size-xxl);
+    transition: color 0.3s ease;
+}
+
+.closeIcon:hover {
+    color: var(--color-text-muted);
+}
+
+.sidebarNav {
+    flex: 1;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    overflow-y: auto;
+}
+
+.sidebarMainLinks,
+.sidebarUserLinks {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.sidebarItem {
+    list-style: none;
+}
+
+.sidebarLink {
+    text-decoration: none;
+    color: var(--color-text-light);
+    padding: var(--spacing-md);
+    background-color: transparent;
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: block;
+}
+
+.sidebarLink:hover:not(.active) {
+    background-color: var(--color-bg-panel);
+    color: var(--color-text-muted);
+}
+
+.sidebarLogout {
+    background: transparent;
+    border: none;
+    color: var(--color-text-light);
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    text-align: left;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebarLogout:hover {
+    background-color: var(--color-bg-panel);
+    color: var(--color-text-muted);
+}
+
+/* Side menu animation */
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.active {
+    color: var(--color-accent-blue);
+}
+
+@media (min-width: 769px) {
+    .sidebarMainLinks {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: var(--spacing-md) var(--spacing-md);
+    }
+
+    .links {
+        display: none;
+    }
+}

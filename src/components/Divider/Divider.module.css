@@ -1,7 +1,13 @@
 /* Divider component styles */
-.divider {
+.default {
     width: 100%;
     height: 0.5px;
     background-color: var(--color-text-muted);
+    margin: var(--spacing-md) 0;
+}
+
+.muted {
+    height: 1px;
+    background: var(--color-border-navbar);
     margin: var(--spacing-md) 0;
 }

@@ -6,10 +6,12 @@
     --color-bg-main: #121826;
     --color-bg-panel: #1F2839;
     --color-bg-card: #121826;
+    --color-bg-navbar: rgba(18, 24, 38, 0.85);
     --color-bg-light: #F3F9FF;
 
     /* Overlays */
     --color-overlay-dark: rgba(0, 0, 0, 0.4);
+    --color-overlay-navbar: rgba(18, 24, 38, 0.65);
 
     /* Functional / States / Accents */
     --color-filter-active: #4A5467;
@@ -31,6 +33,7 @@
     --color-border-default: #2A365A;
     --color-border-hover: #4F80EE;
     --color-border-active: #6897FF;
+    --color-border-navbar: rgba(42, 54, 90, 0.3);
 
     /* Font sizes */
     --font-size-xs: 0.75rem;
@@ -73,6 +76,7 @@ body {
     -webkit-user-select: none;
     user-select: none;
     min-height: 100vh;
+    overflow-y: scroll;
 }
 
 #root {
@@ -80,8 +84,22 @@ body {
     height: 100%;
 }
 
+li {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+}
+
 img {
     -webkit-user-drag: none;
     user-select: none;
     -webkit-user-select: none;
+}
+
+/* Prevent scrolling when menu is open */
+body.menu-open {
+    position: fixed;
+    width: 100%;
 }

@@ -1,8 +1,13 @@
 import styles from "./Divider.module.css";
+import clsx from "clsx";
+
+type DividerProps = {
+  variant?: "default" | "muted";
+};
 
 /* Divider component */
-const Divider = () => {
-  return <div className={styles.divider}></div>;
+const Divider = ({ variant = "default" }: DividerProps) => {
+  return <div className={clsx(styles[variant])}></div>;
 };
 
 export default Divider;
