@@ -1,3 +1,4 @@
+/* PropertyListFilterPanel configuration */
 export type GuestOption = {
   value: string;
   label: string;

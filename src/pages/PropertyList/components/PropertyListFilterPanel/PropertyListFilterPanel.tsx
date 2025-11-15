@@ -1,10 +1,10 @@
 import Button from "@/components/Button/Button";
 import ToggleSwitch from "@/components/ToggleSwitch/ToggleSwitch";
 import Select from "@/components/Select/Select";
-import { GUEST_OPTIONS } from "./homeFilterPanelConfig";
-import styles from "./HomeFilterPanel.module.css";
+import { GUEST_OPTIONS } from "./propertyListFilterPanelConfig";
+import styles from "./PropertyListFilterPanel.module.css";
 
-type HomeFilterPanelProps = {
+type PropertyListFilterPanelProps = {
   selectedLocation: string;
   onLocationChange: (newLocation: string) => void;
   availableLocations: string[];
@@ -14,8 +14,8 @@ type HomeFilterPanelProps = {
   onGuestCountChange: (value: string) => void;
 };
 
-/* HomeFilterPanel component */
-const HomeFilterPanel = ({
+/* PropertyListFilterPanel component */
+const PropertyListFilterPanel = ({
   selectedLocation,
   onLocationChange,
   availableLocations,
@@ -23,7 +23,7 @@ const HomeFilterPanel = ({
   onSuperhostChange,
   guestCount,
   onGuestCountChange,
-}: HomeFilterPanelProps) => {
+}: PropertyListFilterPanelProps) => {
   return (
     <div className={styles.filterPanel}>
       <div className={styles.locationFilters}>
@@ -65,4 +65,4 @@ const HomeFilterPanel = ({
   );
 };
 
-export default HomeFilterPanel;
+export default PropertyListFilterPanel;

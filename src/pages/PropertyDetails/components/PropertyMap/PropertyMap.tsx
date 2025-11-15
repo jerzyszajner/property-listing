@@ -77,7 +77,7 @@ const PropertyMap = ({ property }: PropertyMapProps) => {
       {/* === Google Map === */}
       <GoogleMap
         center={coordinates}
-        zoom={10}
+        zoom={15}
         mapContainerClassName={styles.mapContainer}
         onClick={() => setInfoOpen(false)}
       >

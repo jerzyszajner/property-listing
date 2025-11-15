@@ -1,5 +1,5 @@
 import type { Property } from "@/types/property";
-import { GUEST_OPTIONS } from "./PropertyBookingPanelConfig";
+import { GUEST_OPTIONS } from "./propertyBookingPanelConfig";
 import Select from "@/components/Select/Select";
 import Button from "@/components/Button/Button";
 import Divider from "@/components/Divider/Divider";

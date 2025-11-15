@@ -29,7 +29,7 @@ const PropertyDetails = () => {
           onGuestCountChange={setGuestCount}
         />
       </div>
-      <Divider />
+      <Divider variant="default" />
       <PropertyMap property={property} />
     </div>
   );

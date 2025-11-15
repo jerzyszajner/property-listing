@@ -7,7 +7,7 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+    border-radius: var(--border-radius-md);
 }
 
 .header::before {

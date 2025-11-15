@@ -43,14 +43,14 @@ const PropertyInfo = ({ property }: PropertyInfoProps) => {
         </span>
       </div>
 
-      <Divider />
+      <Divider variant="default" />
 
       {/* === Description === */}
       <div className={styles.description}>
         <p>{description}</p>
       </div>
 
-      <Divider />
+      <Divider variant="default" />
 
       {/* === Amenities === */}
       <div className={styles.amenities}>

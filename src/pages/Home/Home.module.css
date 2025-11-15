@@ -3,19 +3,8 @@
     padding: var(--spacing-xxl);
 }
 
-.wrapper {
-    outline: 8px solid var(--color-border-default);
-    padding: var(--spacing-md);
-    border-radius: var(--border-radius-md);
-}
-
 @media (max-width: 768px) {
     .home {
         padding: 0;
-    }
-
-    .wrapper {
-        padding: 0;
-        outline: none;
     }
 }

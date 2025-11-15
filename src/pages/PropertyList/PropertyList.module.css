@@ -1,4 +1,8 @@
-/* HomePropertyList component styles */
+/* PropertyList page styles */
+.propertyListPage {
+    padding: var(--spacing-xxl);
+}
+
 .propertyList {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -8,6 +12,15 @@
 }
 
 @media (max-width: 768px) {
+    .propertyListPage {
+        padding: 0;
+    }
+
+    .wrapper {
+        padding: 0;
+        outline: none;
+    }
+
     .propertyList {
         padding: var(--spacing-md);
     }

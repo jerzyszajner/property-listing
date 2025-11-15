@@ -4,7 +4,7 @@ import styles from "./HomeHeader.module.css";
 /* HomeHeader component */
 const HomeHeader = () => {
   return (
-    <header className={styles.header}>
+    <section className={styles.header}>
       <img
         src={heroImage}
         alt="Mountain cabin landscape"
@@ -19,7 +19,7 @@ const HomeHeader = () => {
         </h1>
         <p className={styles.subtitle}>Find and book a great experience.</p>
       </div>
-    </header>
+    </section>
   );
 };
 

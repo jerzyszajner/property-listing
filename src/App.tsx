@@ -4,7 +4,9 @@ import styles from "./App.module.css";
 function App() {
   return (
     <>
-      <Navbar />
+      <header>
+        <Navbar />
+      </header>
       <main className={styles.app}>
         <Outlet />
       </main>

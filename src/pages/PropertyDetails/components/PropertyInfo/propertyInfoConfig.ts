@@ -1,3 +1,4 @@
+/* PropertyInfo configuration */
 import { Wifi, Waves, ChefHat, Coffee, Utensils, Flame } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 

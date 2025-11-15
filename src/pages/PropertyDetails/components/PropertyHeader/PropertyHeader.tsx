@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import type { Property } from "@/types/property";
-import { Star, ShieldCheck, MapPin, ArrowLeft } from "lucide-react";
+import { Star, ShieldCheck, MapPin } from "lucide-react";
+import fallbackImage from "@/assets/images/fallback.webp";
 import styles from "./PropertyHeader.module.css";
 
 interface PropertyHeaderProps {
@@ -12,16 +12,10 @@ const PropertyHeader = ({ property }: PropertyHeaderProps) => {
   const rating = property.rating ?? 0;
   const isSuperhost = property.superhost ?? false;
   const location = property.location ?? "";
-  const image = property.image ?? "";
+  const image = property.image ?? fallbackImage;
 
   return (
-    <header className={styles.header}>
-      {/* === Back Link === */}
-      <Link to={"/"} className={styles.link}>
-        <ArrowLeft className={styles.linkIcon} />
-        <span className={styles.linkText}>Go to Home</span>
-      </Link>
-
+    <section className={styles.header}>
       {/* === Title === */}
       <h1 className={styles.title}>{title}</h1>
 
@@ -49,7 +43,7 @@ const PropertyHeader = ({ property }: PropertyHeaderProps) => {
       <div className={styles.imageWrapper}>
         <img src={image} alt={title} className={styles.image} />
       </div>
-    </header>
+    </section>
   );
 };
 
