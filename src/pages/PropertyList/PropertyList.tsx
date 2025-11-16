@@ -1,7 +1,7 @@
-import { useProperties } from "./hooks/useProperties";
+import { useProperties } from "@/hooks/useProperties";
 import { usePropertyFilters } from "./hooks/usePropertyFilters";
 import PropertyListFilterPanel from "./components/PropertyListFilterPanel/PropertyListFilterPanel";
-import PropertyCard from "./components/PropertyCard/PropertyCard";
+import PropertyCard from "@/components/PropertyCard/PropertyCard";
 import EmptyState from "@/components/EmptyState/EmptyState";
 import Spinner from "@/components/Spinner/Spinner";
 

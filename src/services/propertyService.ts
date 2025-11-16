@@ -1,5 +1,5 @@
 import type { Property } from "@/types/property";
-import { database } from "./firebaseConfig";
+import { database } from "@/config/firebaseConfig";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 
 // Service function for fetching all properties from Firestore

@@ -1,0 +1,33 @@
+/* SearchSuggestions component styles */
+.suggestions {
+    background-color: var(--color-bg-panel);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.title {
+    color: var(--color-text-light);
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-sm);
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.item {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.item:hover {
+    color: var(--color-accent-blue);
+}

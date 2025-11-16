@@ -1,0 +1,25 @@
+import type { Property } from "@/types/property";
+import PropertyCard from "@/components/PropertyCard/PropertyCard";
+import styles from "./SearchResults.module.css";
+
+interface SearchResultsProps {
+  results: Property[];
+}
+
+/* SearchResults component */
+const SearchResults = ({ results }: SearchResultsProps) => {
+  if (results.length === 0) return null;
+
+  return (
+    <div className={styles.results}>
+      <h3 className={styles.title}>Found: {results.length}</h3>
+      <ul className={styles.list}>
+        {results.map((property) => (
+          <PropertyCard key={property.id} property={property} />
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default SearchResults;

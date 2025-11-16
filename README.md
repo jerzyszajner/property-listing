@@ -6,6 +6,7 @@ Modern property listing application built with React and TypeScript. Browse and 
 
 ## Features
 
+- AI-powered natural language search
 - Filter by location, guest count, and superhost status
 - Responsive design with modern UI
 - Performance-optimized with memoized filtering hooks
@@ -19,6 +20,8 @@ Modern property listing application built with React and TypeScript. Browse and 
 - CSS Modules
 - Custom React Hooks
 - Firebase (Firestore)
+- Google Maps API - Interactive maps for property locations
+- Google Gemini AI - Natural language property search
 - [Lucide React](https://lucide.dev) - Icon library
 - [clsx](https://github.com/lukeed/clsx) - Conditional classnames utility
 
@@ -35,7 +38,8 @@ Modern property listing application built with React and TypeScript. Browse and 
    VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
    VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
    VITE_FIREBASE_APP_ID=your_app_id
-   VITE_GOOGLE_MAPS_API_KEY
+   VITE_GOOGLE_MAPS_API_KEY=your_api_key
+   VITE_GEMINI_API_KEY=your_api_key
    ```
 
 ## Getting Started

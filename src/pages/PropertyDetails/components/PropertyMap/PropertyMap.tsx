@@ -6,7 +6,7 @@ import {
   useJsApiLoader,
   OverlayView,
 } from "@react-google-maps/api";
-import { googleMapsConfig } from "@/services/googleMapsConfig";
+import { googleMapsConfig } from "@/config/googleMapsConfig";
 import Spinner from "@/components/Spinner/Spinner";
 import { useState } from "react";
 import styles from "./PropertyMap.module.css";

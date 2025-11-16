@@ -1,5 +1,5 @@
 import { collection, addDoc } from "firebase/firestore";
-import { database } from "@/services/firebaseConfig";
+import { database } from "@/config/firebaseConfig";
 import Button from "@/components/Button/Button";
 import type { Property } from "@/types/property";
 

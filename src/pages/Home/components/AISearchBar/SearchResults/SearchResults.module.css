@@ -1,0 +1,22 @@
+/* SearchResults component styles */
+.results {
+    margin-top: var(--spacing-xl);
+}
+
+.title {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-lg);
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    list-style: none;
+}
+
+@media (max-width: 768px) {
+    .list {
+        grid-template-columns: 1fr;
+    }
+}
