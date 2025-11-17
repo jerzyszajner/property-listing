@@ -1,10 +1,14 @@
 /* Home page styles */
 .home {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxxl);
     padding: var(--spacing-xxl);
 }
 
 @media (max-width: 768px) {
     .home {
         padding: 0;
+        gap: var(--spacing-xl);
     }
 }

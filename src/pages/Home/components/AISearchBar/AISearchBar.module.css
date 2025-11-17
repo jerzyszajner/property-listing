@@ -1,8 +1,7 @@
 /* AISearchBar component styles */
 .container {
-    padding: var(--spacing-xl);
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 0 var(--spacing-xxl);
+    width: 100%;
 }
 
 .error {
