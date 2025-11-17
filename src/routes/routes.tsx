@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -5,20 +6,51 @@ import {
 } from "react-router-dom";
 
 import App from "@/App";
+import Spinner from "@/components/Spinner/Spinner";
 
-/* Pages */
-import Home from "@/pages/Home/Home";
-import PropertyList from "@/pages/PropertyList/PropertyList";
-import PropertyDetails from "@/pages/PropertyDetails/PropertyDetails";
-import NotFound from "@/pages/NotFound/NotFound";
+/* Pages - lazy loaded */
+const Home = lazy(() => import("@/pages/Home/Home"));
+const PropertyList = lazy(() => import("@/pages/PropertyList/PropertyList"));
+const PropertyDetails = lazy(
+  () => import("@/pages/PropertyDetails/PropertyDetails")
+);
+const NotFound = lazy(() => import("@/pages/NotFound/NotFound"));
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index element={<Home />} />
-      <Route path="/properties" element={<PropertyList />} />
-      <Route path="/property/:id" element={<PropertyDetails />} />
-      <Route path="*" element={<NotFound />} />
+      <Route
+        index
+        element={
+          <Suspense fallback={<Spinner />}>
+            <Home />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/properties"
+        element={
+          <Suspense fallback={<Spinner />}>
+            <PropertyList />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/property/:id"
+        element={
+          <Suspense fallback={<Spinner />}>
+            <PropertyDetails />
+          </Suspense>
+        }
+      />
+      <Route
+        path="*"
+        element={
+          <Suspense fallback={<Spinner />}>
+            <NotFound />
+          </Suspense>
+        }
+      />
     </Route>
   )
 );
