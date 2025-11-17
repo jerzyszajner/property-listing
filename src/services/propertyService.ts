@@ -2,38 +2,44 @@ import type { Property } from "@/types/property";
 import { database } from "@/config/firebaseConfig";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 
+// Helper function for mapping Firestore document to Property
+const mapDocumentToProperty = (document: {
+  id: string;
+  data: () => Record<string, unknown> | undefined;
+}): Property => {
+  const data = document.data();
+
+  return {
+    id: document.id,
+    title: (data?.title as string) ?? "",
+    amenities: (data?.amenities as string[]) ?? [],
+    description: (data?.description as string) ?? "",
+    price: Number(data?.price ?? 0),
+    rating: Number(data?.rating ?? 0),
+    superhost: Boolean(data?.superhost),
+    location: (data?.location as string) ?? "",
+    coordinates: data?.coordinates
+      ? {
+          lat: Number((data.coordinates as { lat: number; lng: number }).lat),
+          lng: Number((data.coordinates as { lat: number; lng: number }).lng),
+        }
+      : undefined,
+    image: (data?.image as string) ?? "",
+    capacity: {
+      people: Number((data?.capacity as { people?: number })?.people ?? 0),
+      bedroom: Number((data?.capacity as { bedroom?: number })?.bedroom ?? 0),
+    },
+    host: {
+      name: (data?.host as { name?: string })?.name ?? "",
+      image: (data?.host as { image?: string })?.image ?? "",
+    },
+  };
+};
+
 // Service function for fetching all properties from Firestore
 export const fetchProperties = async (): Promise<Property[]> => {
   const querySnapshot = await getDocs(collection(database, "properties"));
-
-  return querySnapshot.docs.map((doc) => {
-    const data = doc.data();
-    return {
-      id: doc.id,
-      title: data.title ?? "",
-      amenities: (data.amenities as string[]) ?? [],
-      description: data.description ?? "",
-      price: Number(data.price ?? 0),
-      rating: Number(data.rating ?? 0),
-      superhost: Boolean(data.superhost),
-      location: data.location ?? "",
-      coordinates: data.coordinates
-        ? {
-            lat: Number(data.coordinates.lat),
-            lng: Number(data.coordinates.lng),
-          }
-        : undefined,
-      image: data.image ?? "",
-      capacity: {
-        people: Number(data.capacity?.people ?? 0),
-        bedroom: Number(data.capacity?.bedroom ?? 0),
-      },
-      host: {
-        name: data.host?.name ?? "",
-        image: data.host?.image ?? "",
-      },
-    };
-  });
+  return querySnapshot.docs.map(mapDocumentToProperty);
 };
 
 // Service function for fetching a single property by id from Firestore
@@ -41,33 +47,10 @@ export const fetchPropertyById = async (
   id: string
 ): Promise<Property | null> => {
   const docSnapshot = await getDoc(doc(database, "properties", id));
+
   if (!docSnapshot.exists()) {
     return null;
   }
-  const data = docSnapshot.data();
-  return {
-    id: docSnapshot.id,
-    title: data.title ?? "",
-    amenities: (data.amenities as string[]) ?? [],
-    description: data.description ?? "",
-    price: Number(data.price ?? 0),
-    rating: Number(data.rating ?? 0),
-    superhost: Boolean(data.superhost),
-    location: data.location ?? "",
-    coordinates: data.coordinates
-      ? {
-          lat: Number(data.coordinates.lat),
-          lng: Number(data.coordinates.lng),
-        }
-      : undefined,
-    image: data.image ?? "",
-    capacity: {
-      people: Number(data.capacity?.people ?? 0),
-      bedroom: Number(data.capacity?.bedroom ?? 0),
-    },
-    host: {
-      name: data.host?.name ?? "",
-      image: data.host?.image ?? "",
-    },
-  };
+
+  return mapDocumentToProperty(docSnapshot);
 };

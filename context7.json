@@ -1,0 +1,14 @@
+{
+  "libraries": [
+    "react@19.1.1",
+    "react-dom@19.1.1",
+    "react-router-dom@7.9.5",
+    "typescript@5.9",
+    "vite@7.1.7",
+    "firebase@12.5.0",
+    "@google/genai@1.29.1",
+    "@react-google-maps/api@2.20.7",
+    "lucide-react@0.548.0",
+    "clsx@2.1.1"
+  ]
+}
