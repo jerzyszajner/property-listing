@@ -3,7 +3,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 31rem;
     padding: var(--spacing-xl);
 }
 
@@ -13,19 +12,7 @@
     text-align: center;
 }
 
-@media (max-width: 768px) {
-    .emptyState {
-        padding: var(--spacing-md);
-        min-height: 15rem;
-    }
-}
-
 @media (max-width: 480px) {
-    .emptyState {
-        padding: var(--spacing-sm);
-        min-height: 10rem;
-    }
-
     .emptyMessage {
         font-size: var(--font-size-base);
     }

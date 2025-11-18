@@ -93,4 +93,12 @@
         width: var(--spacing-lg);
         height: var(--spacing-lg);
     }
+
+    .stepTitle {
+        font-size: var(--font-size-base);
+    }
+
+    .stepDescription {
+        font-size: var(--font-size-xs);
+    }
 }

@@ -69,6 +69,10 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     font-family: 'Lato', sans-serif;
     line-height: 1.6;
@@ -76,7 +80,7 @@ body {
     background-color: var(--color-bg-main);
     -webkit-user-select: none;
     user-select: none;
-    min-height: 100vh;
+    height: 100%;
     overflow-y: scroll;
 }
 

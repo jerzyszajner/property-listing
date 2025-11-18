@@ -1,6 +1,5 @@
 import { useProperties } from "@/hooks/useProperties";
 import { useAISearch } from "@/pages/Home/hooks/useAISearch";
-import EmptyState from "@/components/EmptyState/EmptyState";
 import SearchInput from "./SearchInput/SearchInput";
 import SearchSuggestions from "./SearchSuggestions/SearchSuggestions";
 import SearchResults from "./SearchResults/SearchResults";
@@ -36,7 +35,9 @@ const AISearchBar = () => {
       <SearchResults results={results} />
 
       {showEmptyState && (
-        <EmptyState message={`No properties found for: "${searchQuery}"`} />
+        <div
+          className={styles.error}
+        >{`No properties found for: "${searchQuery}"`}</div>
       )}
     </div>
   );

@@ -4,7 +4,7 @@ import Footer from "@/components/Footer/Footer";
 import styles from "./App.module.css";
 function App() {
   return (
-    <>
+    <div className={styles.appWrapper}>
       <header>
         <Navbar />
       </header>
@@ -14,7 +14,7 @@ function App() {
       <footer>
         <Footer />
       </footer>
-    </>
+    </div>
   );
 }
 
