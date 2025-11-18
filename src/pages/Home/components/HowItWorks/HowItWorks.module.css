@@ -5,7 +5,7 @@
 
 .container {
     width: 100%;
-    padding: 0 var(--spacing-xl);
+    /* padding: var(--spacing-xl); */
 }
 
 .title {
@@ -24,8 +24,9 @@
 
 .steps {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-xl);
+    grid-template-columns: repeat(3, minmax(0, 300px));
+    justify-content: space-between;
+    gap: var(--spacing-lg);
 }
 
 .step {
@@ -76,17 +77,12 @@
 
     .subtitle {
         font-size: var(--font-size-sm);
-        margin-bottom: var(--spacing-xl);
-    }
-
-    .steps {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-xl);
+        margin-bottom: var(--spacing-xxl);
     }
 
     .iconWrapper {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
     }
 
     .icon {
@@ -100,5 +96,12 @@
 
     .stepDescription {
         font-size: var(--font-size-xs);
+    }
+}
+
+@media (max-width: 480px) {
+    .steps {
+        grid-template-columns: repeat(1, minmax(0, 300px));
+        justify-content: center;
     }
 }

@@ -9,6 +9,12 @@
 @media (max-width: 768px) {
     .home {
         padding: 0;
+        gap: var(--spacing-xxl);
+    }
+}
+
+@media (max-width: 480px) {
+    .home {
         gap: var(--spacing-xl);
     }
 }
