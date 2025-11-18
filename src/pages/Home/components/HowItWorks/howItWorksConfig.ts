@@ -2,10 +2,20 @@
 import { Search, Filter, MapPin } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+export type SectionHeaderConfig = {
+  title: string;
+  subtitle: string;
+};
+
 export type Step = {
   icon: LucideIcon;
   title: string;
   description: string;
+};
+
+export const SECTION_HEADER_CONFIG: SectionHeaderConfig = {
+  title: "How It Works",
+  subtitle: "Finding your next home is simple, fast, and secure.",
 };
 
 export const STEPS_CONFIG: Step[] = [

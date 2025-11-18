@@ -1,0 +1,44 @@
+/* About page styles */
+.about {
+    padding: var(--spacing-xxl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxxl);
+}
+
+.intro {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.description {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+    .about {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .description {
+        font-size: var(--font-size-base);
+    }
+}
+
+@media (max-width: 480px) {
+    .about {
+        gap: var(--spacing-xl);
+    }
+
+    .features {
+        gap: var(--spacing-md);
+    }
+}

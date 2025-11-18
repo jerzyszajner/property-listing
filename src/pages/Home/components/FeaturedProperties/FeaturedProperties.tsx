@@ -1,8 +1,9 @@
 import { useProperties } from "@/hooks/useProperties";
-import { useFeaturedProperties } from "../../hooks/useFeaturedProperties ";
+import { useFeaturedProperties } from "../../hooks/useFeaturedProperties";
 import PropertyCard from "@/components/PropertyCard/PropertyCard";
 import SectionHeader from "../SectionHeader/SectionHeader";
 import Spinner from "@/components/Spinner/Spinner";
+import { SECTION_HEADER_CONFIG } from "./featuredPropertiesConfig";
 import styles from "./FeaturedProperties.module.css";
 
 /* FeaturedProperties component */
@@ -18,8 +19,8 @@ const FeaturedProperties = () => {
     <section className={styles.section}>
       <div className={styles.container}>
         <SectionHeader
-          title="Featured Properties"
-          subtitle="Discover our top rated properties for your next vacation"
+          title={SECTION_HEADER_CONFIG.title}
+          subtitle={SECTION_HEADER_CONFIG.subtitle}
         />
 
         <ul className={styles.propertyList}>

@@ -14,6 +14,7 @@ const PropertyList = lazy(() => import("@/pages/PropertyList/PropertyList"));
 const PropertyDetails = lazy(
   () => import("@/pages/PropertyDetails/PropertyDetails")
 );
+const About = lazy(() => import("@/pages/About/About"));
 const NotFound = lazy(() => import("@/pages/NotFound/NotFound"));
 
 export const router = createBrowserRouter(
@@ -40,6 +41,14 @@ export const router = createBrowserRouter(
         element={
           <Suspense fallback={<Spinner />}>
             <PropertyDetails />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/about"
+        element={
+          <Suspense fallback={<Spinner />}>
+            <About />
           </Suspense>
         }
       />

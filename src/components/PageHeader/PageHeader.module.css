@@ -1,0 +1,15 @@
+.header {
+    width: 100%;
+    color: var(--color-text-light);
+    text-align: center;
+}
+
+.title {
+    font-size: var(--font-size-xxxl);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-md);
+}
+
+.subtitle {
+    font-size: var(--font-size-lg);
+}

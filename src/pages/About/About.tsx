@@ -1,0 +1,32 @@
+import PageHeader from "@/components/PageHeader/PageHeader";
+import {
+  PAGE_HEADER_CONFIG,
+  DESCRIPTION_CONFIG,
+  FEATURES_CONFIG,
+} from "./aboutConfig";
+import IconCard from "@/components/IconCard/IconCard";
+import styles from "./About.module.css";
+
+/* About page */
+const About = () => {
+  return (
+    <div className={styles.about}>
+      <PageHeader
+        title={PAGE_HEADER_CONFIG.title}
+        subtitle={PAGE_HEADER_CONFIG.subtitle}
+      />
+
+      <section className={styles.intro}>
+        <p className={styles.description}>{DESCRIPTION_CONFIG}</p>
+      </section>
+
+      <section className={styles.features}>
+        {FEATURES_CONFIG.map((feature, index) => {
+          return <IconCard key={index} item={feature} />;
+        })}
+      </section>
+    </div>
+  );
+};
+
+export default About;

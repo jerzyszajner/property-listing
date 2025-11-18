@@ -4,7 +4,6 @@ import PropertyListFilterPanel from "./components/PropertyListFilterPanel/Proper
 import PropertyCard from "@/components/PropertyCard/PropertyCard";
 import EmptyState from "@/components/EmptyState/EmptyState";
 import Spinner from "@/components/Spinner/Spinner";
-
 import styles from "./PropertyList.module.css";
 
 /* PropertyList page */
