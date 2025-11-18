@@ -1,4 +1,5 @@
 import { STEPS_CONFIG } from "./howItWorksConfig";
+import SectionHeader from "../SectionHeader/SectionHeader";
 import styles from "./HowItWorks.module.css";
 
 /* HowItWorks component */
@@ -6,10 +7,10 @@ const HowItWorks = () => {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        <h2 className={styles.title}>How It Works</h2>
-        <p className={styles.subtitle}>
-          Finding your next home is simple, fast, and secure.
-        </p>
+        <SectionHeader
+          title="How It Works"
+          subtitle="Finding your next home is simple, fast, and secure."
+        />
 
         <div className={styles.steps}>
           {STEPS_CONFIG.map((step, index) => {

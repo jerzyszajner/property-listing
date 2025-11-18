@@ -1,0 +1,21 @@
+/* FeaturedProperties component styles */
+.section {
+    background-color: var(--color-bg-main);
+}
+
+.container {
+    width: 100%;
+}
+
+.propertyList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+    .propertyList {
+        gap: var(--spacing-md);
+        padding: 0 var(--spacing-md) var(--spacing-md);
+    }
+}
