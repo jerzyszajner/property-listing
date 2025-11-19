@@ -1,0 +1,7 @@
+/* FormError component styles */
+.error {
+    color: var(--color-error);
+    font-size: var(--font-size-sm);
+    line-height: 1.1;
+    min-height: var(--spacing-md);
+}

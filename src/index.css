@@ -23,6 +23,7 @@
     --color-toggle-thumb: #F3F9FF;
     --color-toggle-thumb-hover: #BFD9FF;
     --color-focus: #6897FF;
+    --color-error: #E57373;
 
     /* Text */
     --color-text-light: #C2C8CF;
@@ -33,7 +34,7 @@
     --color-border-default: #2A365A;
     --color-border-hover: #4F80EE;
     --color-border-active: #6897FF;
-    --color-border-navbar: rgba(42, 54, 90, 0.3);
+    --color-border-navbar: #2a365a4d;
 
     /* Font sizes */
     --font-size-xs: 0.75rem;
