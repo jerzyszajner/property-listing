@@ -3,7 +3,7 @@ import styles from "./Button.module.css";
 
 type ButtonProps = {
   children?: React.ReactNode;
-  variant?: "primary" | "secondary" | "filter" | "active";
+  variant?: "primary" | "secondary" | "filter" | "active" | "closeCircle";
   className?: string;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";

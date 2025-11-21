@@ -10,6 +10,7 @@
     --color-bg-light: #F3F9FF;
 
     /* Overlays */
+    --color-overlay-light: rgba(0, 0, 0, 0.1);
     --color-overlay-dark: rgba(0, 0, 0, 0.4);
     --color-overlay-navbar: rgba(18, 24, 38, 0.65);
 
@@ -23,7 +24,8 @@
     --color-toggle-thumb: #F3F9FF;
     --color-toggle-thumb-hover: #BFD9FF;
     --color-focus: #6897FF;
-    --color-error: #E57373;
+    --color-error: #c53030;
+    --color-success: #10b981;
 
     /* Text */
     --color-text-light: #C2C8CF;

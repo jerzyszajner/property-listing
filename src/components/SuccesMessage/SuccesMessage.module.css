@@ -1,0 +1,46 @@
+/* SuccessMessage component styles */
+.successMessage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-overlay-light);
+    backdrop-filter: blur(2px);
+}
+
+.icon {
+    width: 64px;
+    height: 64px;
+    color: var(--color-success);
+    stroke-width: 2;
+}
+
+.message {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-text-light);
+    text-align: center;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .successMessage {
+        padding: var(--spacing-xl);
+        min-height: 150px;
+    }
+
+    .icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .message {
+        font-size: var(--font-size-lg);
+    }
+}
