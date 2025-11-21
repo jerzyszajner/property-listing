@@ -13,3 +13,23 @@
 .subtitle {
     font-size: var(--font-size-lg);
 }
+
+@media (max-width: 768px) {
+    .title {
+        font-size: var(--font-size-xxl);
+    }
+
+    .subtitle {
+        font-size: var(--font-size-base);
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: var(--font-size-xl);
+    }
+
+    .subtitle {
+        font-size: var(--font-size-sm);
+    }
+}

@@ -97,34 +97,9 @@
 
 .sidebarHeader {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: var(--spacing-lg);
     border-bottom: 1px solid var(--color-border-navbar);
-}
-
-.closeButton {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: var(--color-text-light);
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
-}
-
-.closeIcon {
-    color: var(--color-bg-light);
-    width: var(--font-size-xxl);
-    height: var(--font-size-xxl);
-    transition: color 0.3s ease;
-}
-
-.closeIcon:hover {
-    color: var(--color-text-muted);
 }
 
 .sidebarNav {

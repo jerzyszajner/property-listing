@@ -1,4 +1,5 @@
 import type { Property } from "@/types/property";
+import clsx from "clsx";
 import { GUEST_OPTIONS } from "./propertyBookingPanelConfig";
 import Select from "@/components/Select/Select";
 import Button from "@/components/Button/Button";
@@ -83,7 +84,7 @@ const PropertyBookingPanel = ({
 
         <Divider />
 
-        <div className={`${styles.priceItem} ${styles.priceTotal}`}>
+        <div className={clsx(styles.priceItem, styles.priceTotal)}>
           <span className={styles.priceLabel}>Total</span>
           <span className={styles.priceValue}>$1,425</span>
         </div>

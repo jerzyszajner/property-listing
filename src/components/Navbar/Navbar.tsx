@@ -61,13 +61,6 @@ const Navbar = () => {
                 <Link to="/" className={styles.logoLink} onClick={closeMenu}>
                   <img src={logo} alt="Logo" className={styles.logoImage} />
                 </Link>
-                <button
-                  onClick={closeMenu}
-                  className={styles.closeButton}
-                  aria-label="Close menu"
-                >
-                  <X className={styles.closeIcon} />
-                </button>
               </div>
 
               {/* === Sidebar Navigation === */}
