@@ -1,14 +1,14 @@
-import { MapPin, Star, X, ExternalLink } from "lucide-react";
+import { useState } from "react";
+import { MapPin } from "lucide-react";
 import type { Property } from "@/types/property";
 import {
   GoogleMap,
   Marker,
   useJsApiLoader,
-  OverlayView,
+  InfoWindow,
 } from "@react-google-maps/api";
 import { googleMapsConfig } from "@/config/googleMapsConfig";
 import Spinner from "@/components/Spinner/Spinner";
-import { useState } from "react";
 import styles from "./PropertyMap.module.css";
 
 interface PropertyMapProps {
@@ -19,17 +19,27 @@ interface PropertyMapProps {
 const PropertyMap = ({ property }: PropertyMapProps) => {
   const title = property.title ?? "";
   const image = property.image ?? "";
-  const price = property.price ?? 0;
-  const rating = property.rating ?? 0;
-  const location = property.location ?? "";
-  const coordinates = property.coordinates;
-  const mapsUrl = coordinates
-    ? `https://www.google.com/maps/dir/?api=1&destination=${coordinates.lat},${coordinates.lng}`
+  const address = property.address;
+  const street = address.street;
+  const number = address.number;
+  const postalCode = address.postalCode;
+  const city = address.city;
+  const country = address.country;
+  const coordinates = property.coordinates ?? { lat: 0, lng: 0 };
+
+  const fullAddress = `${street} ${number}, ${postalCode} ${city}, ${country}`;
+  const directionsUrl = fullAddress
+    ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+        fullAddress
+      )}`
+    : undefined;
+  const viewOnMapUrl = fullAddress
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        fullAddress
+      )}`
     : undefined;
 
-  const formatCoordinate = (value: number) => value.toFixed(4);
-
-  const { isLoaded, loadError } = useJsApiLoader({
+  const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: googleMapsConfig.apiKey,
   });
 
@@ -38,38 +48,22 @@ const PropertyMap = ({ property }: PropertyMapProps) => {
   if (!isLoaded) {
     return <Spinner />;
   }
-
-  if (loadError) {
-    return <div>Error: {loadError.message}</div>;
-  }
-
-  if (!coordinates) {
-    return (
-      <div className={styles.map}>
-        <h3 className={styles.title}>Where you'll be</h3>
-        <p>No coordinates available for this property.</p>
-      </div>
-    );
-  }
-
   return (
     <div className={styles.map}>
       {/* === Title === */}
       <h3 className={styles.title}>Where you'll be</h3>
 
       {/* === Location === */}
-      <div className={styles.location}>
+      <div className={styles.locationContainer}>
         <MapPin className={styles.locationIcon} />
         <span className={styles.locationText}>
-          {location} | {formatCoordinate(coordinates.lat)}° N,{" "}
-          {formatCoordinate(coordinates.lng)}° E
           <a
-            href={mapsUrl}
+            href={directionsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.directionsLink}
+            className={styles.link}
           >
-            Get Directions
+            {fullAddress}
           </a>
         </span>
       </div>
@@ -84,44 +78,34 @@ const PropertyMap = ({ property }: PropertyMapProps) => {
         <Marker position={coordinates} onClick={() => setInfoOpen(true)} />
 
         {infoOpen && (
-          <OverlayView
+          <InfoWindow
             position={coordinates}
-            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+            onCloseClick={() => setInfoOpen(false)}
+            options={{
+              pixelOffset: new google.maps.Size(0, -43),
+              headerContent: `${title}`,
+            }}
           >
-            <div
-              className={styles.infoCard}
-              onClick={(e) => e.stopPropagation()}
-              onTouchStart={(e) => e.stopPropagation()}
-            >
+            <div className={styles.infoWindowContent}>
               <img src={image} alt={title} className={styles.image} />
-
-              <div className={styles.text}>
-                <div className={styles.titleContainer}>
-                  <h4>{title}</h4>
-                  <button
-                    className={styles.closeButton}
-                    onClick={() => setInfoOpen(false)}
-                  >
-                    <X className={styles.closeButtonIcon} />
-                  </button>
+              <div className={styles.infoContent}>
+                <div>
+                  {street} {number}
                 </div>
-
-                <div className={styles.rating}>
-                  <Star className={styles.ratingIcon} /> {rating}
-                </div>
-                <div className={styles.price}>${price}/night</div>
+                <div>{postalCode}</div>
+                <div>{city}</div>
+                <div>{country}</div>
                 <a
-                  href={mapsUrl}
+                  href={viewOnMapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.link}
                 >
-                  Get Directions
-                  <ExternalLink className={styles.linkIcon} />
+                  View on Google Maps
                 </a>
               </div>
             </div>
-          </OverlayView>
+          </InfoWindow>
         )}
       </GoogleMap>
     </div>
