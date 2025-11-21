@@ -17,7 +17,13 @@ const mapDocumentToProperty = (document: {
     price: Number(data?.price ?? 0),
     rating: Number(data?.rating ?? 0),
     superhost: Boolean(data?.superhost),
-    location: (data?.location as string) ?? "",
+    address: {
+      street: (data?.address as { street?: string })?.street ?? "",
+      number: (data?.address as { number?: string })?.number ?? "",
+      postalCode: (data?.address as { postalCode?: string })?.postalCode ?? "",
+      city: (data?.address as { city?: string })?.city ?? "",
+      country: (data?.address as { country?: string })?.country ?? "",
+    },
     coordinates: data?.coordinates
       ? {
           lat: Number((data.coordinates as { lat: number; lng: number }).lat),

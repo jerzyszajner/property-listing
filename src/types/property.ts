@@ -6,7 +6,13 @@ export type Property = {
   price: number;
   rating: number;
   superhost: boolean;
-  location: string;
+  address: {
+    street: string;
+    number: string;
+    postalCode: string;
+    city: string;
+    country: string;
+  };
   coordinates?: {
     lat: number;
     lng: number;

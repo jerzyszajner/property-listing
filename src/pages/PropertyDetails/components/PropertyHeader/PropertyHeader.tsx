@@ -11,7 +11,7 @@ const PropertyHeader = ({ property }: PropertyHeaderProps) => {
   const title = property.title ?? "";
   const rating = property.rating ?? 0;
   const isSuperhost = property.superhost ?? false;
-  const location = property.location ?? "";
+  const country = property.address.country;
   const image = property.image ?? fallbackImage;
 
   return (
@@ -35,7 +35,7 @@ const PropertyHeader = ({ property }: PropertyHeaderProps) => {
 
         <div className={styles.location}>
           <MapPin className={styles.locationIcon} />
-          <span className={styles.locationText}>{location}</span>
+          <span className={styles.locationText}>{country}</span>
         </div>
       </div>
 

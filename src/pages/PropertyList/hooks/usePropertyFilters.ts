@@ -28,7 +28,7 @@ export const usePropertyFilters = (
   // Extract unique locations from properties
   const availableLocations = useMemo(() => {
     const uniqueLocations = Array.from(
-      new Set(properties.map((property) => property.location))
+      new Set(properties.map((property) => property.address.country))
     );
     return [ALL_LOCATIONS, ...uniqueLocations];
   }, [properties]);
@@ -39,7 +39,7 @@ export const usePropertyFilters = (
       return properties;
     }
     return properties.filter(
-      (property) => property.location === selectedLocation
+      (property) => property.address.country === selectedLocation
     );
   }, [properties, selectedLocation]);
 
