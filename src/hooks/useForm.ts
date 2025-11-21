@@ -11,6 +11,7 @@ export interface UseFormReturn {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   handleSubmit: (e: React.FormEvent) => void;
+  resetForm: () => void;
 }
 
 export interface UseFormOptions {
@@ -65,6 +66,11 @@ export const useForm = ({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const resetForm = () => {
+    setFormData(initialValues);
+    setErrors({});
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -81,5 +87,6 @@ export const useForm = ({
     errors,
     handleChange,
     handleSubmit,
+    resetForm,
   };
 };
