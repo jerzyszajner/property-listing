@@ -52,7 +52,7 @@ User query: "${query}"
 Available properties:
 ${JSON.stringify(searchableProperties)}
 
-OUTPUT FORMAT (STRICT):
+OUTPUT FORMAT:
 {
   "suggest": [],
   "matches": []
@@ -60,30 +60,35 @@ OUTPUT FORMAT (STRICT):
 
 RULES:
 
-1. If the query is unclear, extremely short (1–2 characters), or only a number:
-   - DO NOT guess.
-   - Provide 2–4 suggestions of what the user might mean.
-   - "matches" must be an empty array.
+1. Unclear/ambiguous query:
+   - Query is 1-2 characters
+   - Query is only a number without context
+   - Query is too vague to match properties
+   - Return 2-4 suggestions in "suggest"
+   - Return empty "matches"
 
-2. If the query is clear:
-   - "suggest" must be an empty array.
-   - Fill "matches" with ONLY the IDs of genuinely relevant properties.
+2. Clear query:
+   - Return empty "suggest"
+   - Return matching property IDs in "matches"
 
-3. STRICT MATCHING FOR NUMBERS:
-   - If query is only a number:
-       Match ONLY if number EXACTLY equals:
-       - bedroom
-       - people
-       - or price.
-       Otherwise: return matches: [].
+3. Capacity matching:
+   - "X people/guests" → match where people >= X
+   - "X bedrooms/rooms" → match where bedroom >= X
 
-4. If no properties match → return:
-{
-  "suggest": [],
-  "matches": []
-}
+4. Location matching:
+   - Match by country or city name
+   - Case-insensitive
 
-5. NEVER guess. NEVER hallucinate. ALWAYS return valid JSON.
+5. Combined criteria:
+   - All criteria must match (AND logic)
+
+6. Number-only query:
+   - Match only if exactly equals: bedroom, people, or price
+   - Otherwise return suggestions
+
+7. No matches → return empty arrays
+
+Return valid JSON only.
 `;
 
   try {

@@ -20,6 +20,7 @@ export const useAISearch = (properties: Property[]): UseAISearchReturn => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async () => {
     const trimmedQuery = searchQuery.trim();
@@ -31,6 +32,7 @@ export const useAISearch = (properties: Property[]): UseAISearchReturn => {
 
     setIsLoading(true);
     setError(null);
+    setHasSearched(true);
 
     try {
       const { suggest, matches } = await searchPropertiesWithAI(
@@ -59,6 +61,7 @@ export const useAISearch = (properties: Property[]): UseAISearchReturn => {
   };
 
   const showEmptyState =
+    hasSearched &&
     results.length === 0 &&
     !isLoading &&
     !!searchQuery &&
