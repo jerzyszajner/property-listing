@@ -1,14 +1,14 @@
 import clsx from "clsx";
 import styles from "./ToggleSwitch.module.css";
 
-type ToggleSwitchProps = {
+interface ToggleSwitchProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
   ariaLabel?: string;
   ariaLabelledBy?: string;
   disabled?: boolean;
   id?: string;
-};
+}
 
 /* ToggleSwitch component */
 const ToggleSwitch = ({

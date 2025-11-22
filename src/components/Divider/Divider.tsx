@@ -1,9 +1,9 @@
 import styles from "./Divider.module.css";
 import clsx from "clsx";
 
-type DividerProps = {
+interface DividerProps {
   variant?: "default" | "muted";
-};
+}
 
 /* Divider component */
 const Divider = ({ variant = "default" }: DividerProps) => {

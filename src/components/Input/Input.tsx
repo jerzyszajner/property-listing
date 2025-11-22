@@ -2,10 +2,10 @@ import { forwardRef } from "react";
 import clsx from "clsx";
 import styles from "./Input.module.css";
 
-type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   variant?: "default" | "transparent";
-};
+}
 
 /* Input component */
 const Input = forwardRef<HTMLInputElement, InputProps>(

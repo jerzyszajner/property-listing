@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import styles from "./Button.module.css";
 
-type ButtonProps = {
+interface ButtonProps {
   children?: React.ReactNode;
   variant?: "primary" | "secondary" | "filter" | "active" | "closeCircle";
   className?: string;
@@ -9,7 +9,7 @@ type ButtonProps = {
   type?: "button" | "submit" | "reset";
   "aria-pressed"?: boolean;
   disabled?: boolean;
-};
+}
 
 /* Button component */
 const Button = ({

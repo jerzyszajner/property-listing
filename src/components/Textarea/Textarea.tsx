@@ -2,9 +2,10 @@ import { forwardRef } from "react";
 import clsx from "clsx";
 import styles from "./Textarea.module.css";
 
-type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+interface TextareaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string;
-};
+}
 
 /* Textarea component */
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(

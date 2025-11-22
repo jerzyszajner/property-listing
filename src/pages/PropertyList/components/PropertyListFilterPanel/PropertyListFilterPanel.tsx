@@ -4,7 +4,7 @@ import Select from "@/components/Select/Select";
 import { GUEST_OPTIONS } from "./propertyListFilterPanelConfig";
 import styles from "./PropertyListFilterPanel.module.css";
 
-type PropertyListFilterPanelProps = {
+interface PropertyListFilterPanelProps {
   selectedLocation: string;
   onLocationChange: (newLocation: string) => void;
   availableLocations: string[];
@@ -12,7 +12,7 @@ type PropertyListFilterPanelProps = {
   onSuperhostChange: (value: boolean) => void;
   guestCount: string;
   onGuestCountChange: (value: string) => void;
-};
+}
 
 /* PropertyListFilterPanel component */
 const PropertyListFilterPanel = ({

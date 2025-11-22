@@ -1,3 +1,4 @@
+// Property type for Firestore database
 export type Property = {
   id: string;
   title: string;

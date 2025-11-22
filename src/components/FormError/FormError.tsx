@@ -1,9 +1,9 @@
 import styles from "./FormError.module.css";
 
-type FormErrorProps = {
+interface FormErrorProps {
   error?: string;
   className?: string;
-};
+}
 
 /* FormError component */
 const FormError = ({ error }: FormErrorProps) => {

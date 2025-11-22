@@ -3,11 +3,11 @@ import clsx from "clsx";
 import Button from "@/components/Button/Button";
 import styles from "./Toast.module.css";
 
-type ToastProps = {
+interface ToastProps {
   message: string;
   variant?: "error" | "success";
   onClose?: () => void;
-};
+}
 
 /* Toast component */
 const Toast = ({ message, variant = "error", onClose }: ToastProps) => {
