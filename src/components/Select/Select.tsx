@@ -7,7 +7,7 @@ type SelectOption = {
   disabled?: boolean;
 };
 
-type SelectProps = {
+interface SelectProps {
   options: SelectOption[];
   value: string;
   onChange: (value: string) => void;
@@ -16,7 +16,7 @@ type SelectProps = {
   id?: string;
   ariaLabel?: string;
   className?: string;
-};
+}
 
 /* Select component */
 const Select = ({

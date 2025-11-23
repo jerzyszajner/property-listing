@@ -15,16 +15,18 @@ import styles from "./Contact.module.css";
 const Contact = () => {
   const { width, height } = useWindowSize();
   const {
-    formData,
-    errors,
-    handleChange,
+    register,
     handleSubmit,
+    errors,
+    watch,
     isSuccess,
     setIsSuccess,
     isLoading,
     error,
     setError,
   } = useContactForm();
+
+  const messageValue = watch("message");
 
   return (
     <div className={styles.contact}>
@@ -65,14 +67,12 @@ const Contact = () => {
             <Input
               type="text"
               id="fname"
-              name="fname"
               maxLength={30}
               placeholder="First name"
               autoComplete="given-name"
-              value={formData.fname}
-              onChange={handleChange}
+              {...register("fname")}
             />
-            <FormError error={errors.fname} />
+            <FormError error={errors.fname?.message} />
           </div>
 
           <div className={styles.formGroup}>
@@ -82,14 +82,12 @@ const Contact = () => {
             <Input
               type="text"
               id="lname"
-              name="lname"
               maxLength={30}
               placeholder="Last name"
               autoComplete="family-name"
-              value={formData.lname}
-              onChange={handleChange}
+              {...register("lname")}
             />
-            <FormError error={errors.lname} />
+            <FormError error={errors.lname?.message} />
           </div>
         </div>
 
@@ -102,14 +100,12 @@ const Contact = () => {
             <Input
               type="email"
               id="email"
-              name="email"
               maxLength={30}
               placeholder="Email"
               autoComplete="email"
-              value={formData.email}
-              onChange={handleChange}
+              {...register("email")}
             />
-            <FormError error={errors.email} />
+            <FormError error={errors.email?.message} />
           </div>
 
           <div className={styles.formGroup}>
@@ -119,14 +115,12 @@ const Contact = () => {
             <Input
               type="tel"
               id="phone"
-              name="phone"
               maxLength={15}
               placeholder="Phone"
               autoComplete="tel"
-              value={formData.phone}
-              onChange={handleChange}
+              {...register("phone")}
             />
-            <FormError error={errors.phone} />
+            <FormError error={errors.phone?.message} />
           </div>
         </div>
 
@@ -138,13 +132,11 @@ const Contact = () => {
           <Input
             type="text"
             id="subject"
-            name="subject"
             maxLength={50}
             placeholder="Subject"
-            value={formData.subject}
-            onChange={handleChange}
+            {...register("subject")}
           />
-          <FormError error={errors.subject} />
+          <FormError error={errors.subject?.message} />
         </div>
 
         {/* === Message Field === */}
@@ -154,16 +146,14 @@ const Contact = () => {
           </label>
           <Textarea
             id="message"
-            name="message"
             placeholder="Message"
             rows={5}
-            value={formData.message}
-            onChange={handleChange}
+            {...register("message")}
           />
           <div className={styles.errorRow}>
-            <FormError error={errors.message} />
+            <FormError error={errors.message?.message} />
             <span className={styles.charCount}>
-              {formData.message.length}/400
+              {messageValue?.length || 0}/400
             </span>
           </div>
         </div>
