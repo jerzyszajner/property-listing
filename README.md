@@ -2,26 +2,28 @@
 
 **Live Demo:** [property-listing-react.netlify.app](https://property-listing-react.netlify.app/)
 
-Modern property listing application built with React and TypeScript. Browse and filter vacation rentals by location, guest capacity, and superhost status.
+Modern property listing application built with React and TypeScript. Search vacation rentals using AI-powered natural language queries, or browse and filter by location, guest capacity, and superhost status.
 
 ## Features
 
 - AI-powered natural language search
 - Filter by location, guest count, and superhost status
+- Interactive Google Maps integration
+- Property details page
+- Contact form
 - Responsive design with modern UI
-- Performance-optimized with memoized filtering hooks
-- Type-safe with TypeScript
-- Property data stored in Firebase Firestore
 
 ## Tech Stack
 
-- React 19 + TypeScript
-- Vite
+- [React 19](https://react.dev) + [TypeScript](https://www.typescriptlang.org)
+- [Vite](https://vitejs.dev)
 - CSS Modules
 - Custom React Hooks
-- Firebase (Firestore)
-- Google Maps API - Interactive maps for property locations
-- Google Gemini AI - Natural language property search
+- [Firebase (Firestore)](https://firebase.google.com)
+- [Google Maps API](https://developers.google.com/maps) - Interactive maps for property locations
+- [Google Gemini AI](https://ai.google.dev) - Natural language property search
+- [Zod](https://zod.dev) - Schema validation for forms
+- [React Hook Form](https://react-hook-form.com) - Form state management and validation
 - [Lucide React](https://lucide.dev) - Icon library
 - [clsx](https://github.com/lukeed/clsx) - Conditional classnames utility
 
