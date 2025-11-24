@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { contactFormSchema, type ContactFormData } from "../contactSchema";
+import { contactFormSchema, type ContactFormData } from "../contactFormSchema";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { database } from "@/config/firebaseConfig";
 

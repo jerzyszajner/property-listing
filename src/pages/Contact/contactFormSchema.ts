@@ -4,7 +4,7 @@ import {
   emailSchema,
   phoneSchema,
   messageSchema,
-  optionalMaxLength,
+  subjectSchema,
 } from "@/utils/zodSchemas";
 
 /* Contact form schema */
@@ -13,7 +13,7 @@ export const contactFormSchema = z.object({
   lname: nameSchema,
   email: emailSchema,
   phone: phoneSchema,
-  subject: optionalMaxLength(50),
+  subject: subjectSchema,
   message: messageSchema,
 });
 

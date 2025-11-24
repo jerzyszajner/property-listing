@@ -115,7 +115,7 @@ const Contact = () => {
             <Input
               type="tel"
               id="phone"
-              maxLength={15}
+              maxLength={10}
               placeholder="Phone"
               autoComplete="tel"
               {...register("phone")}
@@ -148,6 +148,7 @@ const Contact = () => {
             id="message"
             placeholder="Message"
             rows={5}
+            maxLength={400}
             {...register("message")}
           />
           <div className={styles.errorRow}>
