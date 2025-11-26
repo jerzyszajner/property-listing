@@ -84,7 +84,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 280px;
+    width: 290px;
     height: 100vh;
     background: var(--color-bg-navbar);
     padding: var(--spacing-lg);

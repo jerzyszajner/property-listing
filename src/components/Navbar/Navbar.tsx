@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 import clsx from "clsx";
 import logo from "@/assets/icons/logo.svg";
 import Divider from "../Divider/Divider";
-import { MAIN_LINKS, USER_LINKS } from "./navbarConfig";
+import { MAIN_LINKS, AUTHENTICATED_LINKS, AUTH_LINKS } from "./navbarConfig";
 import { useMenu } from "./hooks/useMenu";
 import styles from "./Navbar.module.css";
 
@@ -12,7 +12,7 @@ const Navbar = () => {
   const { isOpen, toggleMenu, closeMenu } = useMenu();
 
   // TODO: Add auth context
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   return (
     <nav className={styles.navbar}>
@@ -87,7 +87,7 @@ const Navbar = () => {
                   <>
                     <Divider variant="muted" />
                     <ul className={styles.sidebarUserLinks}>
-                      {USER_LINKS.map((link) => (
+                      {AUTHENTICATED_LINKS.map((link) => (
                         <li className={styles.sidebarItem} key={link.to}>
                           <NavLink
                             to={link.to}
@@ -116,17 +116,22 @@ const Navbar = () => {
                   <>
                     <Divider variant="muted" />
                     <ul className={styles.sidebarUserLinks}>
-                      <li className={styles.sidebarItem}>
-                        <NavLink
-                          to="/login"
-                          onClick={closeMenu}
-                          className={({ isActive }) =>
-                            clsx(styles.sidebarLink, isActive && styles.active)
-                          }
-                        >
-                          Log In
-                        </NavLink>
-                      </li>
+                      {AUTH_LINKS.map((link) => (
+                        <li className={styles.sidebarItem} key={link.to}>
+                          <NavLink
+                            to={link.to}
+                            onClick={closeMenu}
+                            className={({ isActive }) =>
+                              clsx(
+                                styles.sidebarLink,
+                                isActive && styles.active
+                              )
+                            }
+                          >
+                            {link.label}
+                          </NavLink>
+                        </li>
+                      ))}
                     </ul>
                   </>
                 )}

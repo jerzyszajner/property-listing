@@ -23,7 +23,7 @@ export const MAIN_LINKS: Link[] = [
   },
 ];
 
-export const USER_LINKS: Link[] = [
+export const AUTHENTICATED_LINKS: Link[] = [
   {
     to: "/bookings",
     label: "My Bookings",
@@ -32,5 +32,16 @@ export const USER_LINKS: Link[] = [
   {
     to: "/profile",
     label: "Profile",
+  },
+];
+
+export const AUTH_LINKS: Link[] = [
+  {
+    to: "/sign-up",
+    label: "Sign Up",
+  },
+  {
+    to: "/sign-in",
+    label: "Have an account? Sign In",
   },
 ];
