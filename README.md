@@ -10,7 +10,8 @@ Modern property listing application built with React and TypeScript. Search vaca
 - Filter by location, guest count, and superhost status
 - Interactive Google Maps integration
 - Property details page
-- Contact form
+- User authentication (sign up)
+- Contact form with Firestore integration
 - Responsive design with modern UI
 
 ## Tech Stack
@@ -19,7 +20,7 @@ Modern property listing application built with React and TypeScript. Search vaca
 - [Vite](https://vitejs.dev)
 - CSS Modules
 - Custom React Hooks
-- [Firebase (Firestore)](https://firebase.google.com)
+- [Firebase (Firestore + Authentication)](https://firebase.google.com)
 - [Google Maps API](https://developers.google.com/maps) - Interactive maps for property locations
 - [Google Gemini AI](https://ai.google.dev) - Natural language property search
 - [Zod](https://zod.dev) - Schema validation for forms
@@ -29,7 +30,9 @@ Modern property listing application built with React and TypeScript. Search vaca
 
 ## Firebase Setup
 
-1. Create a project in the [Firebase Console](https://console.firebase.google.com/) and enable Firestore.
+1. Create a project in the [Firebase Console](https://console.firebase.google.com/) and enable:
+   - **Firestore Database**
+   - **Authentication** (Email/Password provider)
 2. Copy the web app config from **Project settings → General**.
 3. Create `.env.local` and add:
 
