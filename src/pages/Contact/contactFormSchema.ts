@@ -9,8 +9,8 @@ import {
 
 /* Contact form schema */
 export const contactFormSchema = z.object({
-  fname: nameSchema,
-  lname: nameSchema,
+  firstName: nameSchema,
+  lastName: nameSchema,
   email: emailSchema,
   phone: phoneSchema,
   subject: subjectSchema,

@@ -1,4 +1,4 @@
-import { PAGE_HEADER_CONFIG } from "./contactConfig";
+import { PAGE_HEADER_CONFIG, SUCCESS_MESSAGE } from "./contactConfig";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import Input from "@/components/Input/Input";
 import Textarea from "@/components/Textarea/Textarea";
@@ -34,7 +34,6 @@ const Contact = () => {
       {error && (
         <Toast message={error} variant="error" onClose={() => setError(null)} />
       )}
-      {/* === Success Message === */}
       {isSuccess && (
         <>
           <Confetti
@@ -48,7 +47,11 @@ const Contact = () => {
               setIsSuccess(false);
             }}
           />
-          <SuccessMessage message="Message sent successfully!" />
+          {/* === Success Message === */}
+          <SuccessMessage
+            title={SUCCESS_MESSAGE.title}
+            message={SUCCESS_MESSAGE.message}
+          />
         </>
       )}
       {/* === Page Header === */}
@@ -61,33 +64,33 @@ const Contact = () => {
         {/* === Name Fields === */}
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
-            <label htmlFor="fname" className={styles.label}>
+            <label htmlFor="firstName" className={styles.label}>
               First Name*
             </label>
             <Input
               type="text"
-              id="fname"
+              id="firstName"
               maxLength={30}
               placeholder="First name"
               autoComplete="given-name"
-              {...register("fname")}
+              {...register("firstName")}
             />
-            <FormError error={errors.fname?.message} />
+            <FormError error={errors.firstName?.message} />
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="lname" className={styles.label}>
+            <label htmlFor="lastName" className={styles.label}>
               Last Name*
             </label>
             <Input
               type="text"
-              id="lname"
+              id="lastName"
               maxLength={30}
               placeholder="Last name"
               autoComplete="family-name"
-              {...register("lname")}
+              {...register("lastName")}
             />
-            <FormError error={errors.lname?.message} />
+            <FormError error={errors.lastName?.message} />
           </div>
         </div>
 
