@@ -1,0 +1,63 @@
+/* SignUp page styles */
+.signUp {
+    padding: var(--spacing-xxl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxxl);
+    height: 100%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    max-width: 520px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.formRow {
+    display: flex;
+    gap: var(--spacing-lg);
+    width: 100%;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    flex: 1;
+}
+
+.label {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-base);
+}
+
+.link {
+    color: var(--color-accent-blue);
+    text-decoration: transparent;
+    font-size: var(--font-size-base);
+    transition: text-decoration 0.3s ease;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.linkContainer {
+    text-align: center;
+    margin-top: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+    .signUp {
+        padding: var(--spacing-xl) var(--spacing-md);
+        gap: var(--spacing-xl);
+    }
+
+    .formRow {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+}

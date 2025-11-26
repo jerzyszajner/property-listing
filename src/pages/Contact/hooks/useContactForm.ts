@@ -19,8 +19,8 @@ export const useContactForm = () => {
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
-      fname: "",
-      lname: "",
+      firstName: "",
+      lastName: "",
       email: "",
       phone: "",
       subject: "",
@@ -33,8 +33,8 @@ export const useContactForm = () => {
     setError(null);
     try {
       await addDoc(collection(database, "messages"), {
-        fname: data.fname,
-        lname: data.lname,
+        firstName: data.firstName,
+        lastName: data.lastName,
         email: data.email,
         phone: data.phone,
         subject: data.subject,
