@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   signInWithEmailAndPassword,
+  signOut as firebaseSignOut,
   type UserCredential,
 } from "firebase/auth";
 import { auth } from "@/config/firebaseConfig";
@@ -68,4 +69,9 @@ export const signIn = async (
   );
 
   return userCredential;
+};
+
+// Service function for user sign out with Firebase Auth
+export const signOut = async (): Promise<void> => {
+  await firebaseSignOut(auth);
 };

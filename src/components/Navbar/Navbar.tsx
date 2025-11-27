@@ -1,18 +1,26 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import clsx from "clsx";
 import logo from "@/assets/icons/logo.svg";
 import Divider from "../Divider/Divider";
 import { MAIN_LINKS, AUTHENTICATED_LINKS, AUTH_LINKS } from "./navbarConfig";
 import { useMenu } from "./hooks/useMenu";
+import { useAuthContext } from "@/contexts/AuthContext";
 import styles from "./Navbar.module.css";
 
 /* Navbar component */
 const Navbar = () => {
   const { isOpen, toggleMenu, closeMenu } = useMenu();
+  const { user, signOut, isLoading } = useAuthContext();
+  const isLoggedIn = user !== null;
 
-  // TODO: Add auth context
-  const isLoggedIn = false;
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    closeMenu();
+    await signOut();
+    navigate("sign-in");
+  };
 
   return (
     <nav className={styles.navbar}>
@@ -107,9 +115,10 @@ const Navbar = () => {
                     <Divider variant="muted" />
                     <button
                       className={styles.sidebarLogout}
-                      onClick={closeMenu}
+                      onClick={handleSignOut}
+                      disabled={isLoading}
                     >
-                      Log Out
+                      {isLoading ? "Signing out..." : "Log Out"}
                     </button>
                   </>
                 ) : (

@@ -155,6 +155,11 @@
     color: var(--color-text-muted);
 }
 
+.sidebarLogout:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 /* Side menu animation */
 @keyframes slideInFromLeft {
     from {
