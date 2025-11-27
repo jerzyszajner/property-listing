@@ -1,5 +1,5 @@
-/* SignUp page styles */
-.signUp {
+/* SignIn page styles */
+.signIn {
     padding: var(--spacing-xxl);
     display: flex;
     flex-direction: column;
@@ -46,12 +46,15 @@
 }
 
 .linkContainer {
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    gap: var(--spacing-sm);
     margin-top: var(--spacing-md);
 }
 
 @media (max-width: 768px) {
-    .signUp {
+    .signIn {
         padding: var(--spacing-xl) var(--spacing-md);
         gap: var(--spacing-xl);
     }

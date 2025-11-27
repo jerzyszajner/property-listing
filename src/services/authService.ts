@@ -1,34 +1,42 @@
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  signInWithEmailAndPassword,
   type UserCredential,
 } from "firebase/auth";
 import { auth } from "@/config/firebaseConfig";
 
 // Helper function for mapping Firebase errors to user friendly messages
 export const getAuthErrorMessage = (error: unknown): string => {
-  if (error instanceof Error && "code" in error) {
-    const code = (error as { code: string }).code;
-    switch (code) {
-      case "auth/email-already-in-use":
-        return "Email already in use";
-      case "auth/invalid-email":
-        return "Invalid email address";
-      case "auth/weak-password":
-        return "Password should be at least 6 characters";
-      case "auth/user-not-found":
-        return "User not found";
-      case "auth/wrong-password":
-        return "Wrong password";
-      case "auth/too-many-requests":
-        return "Too many requests. Please try again later";
-      case "auth/user-disabled":
-        return "This account has been disabled";
-      default:
-        return "An error occurred. Please try again";
-    }
+  const code = (error as { code?: string })?.code;
+
+  switch (code) {
+    case "auth/email-already-in-use":
+      return "Email already in use";
+    case "auth/invalid-email":
+      return "Invalid email address";
+    case "auth/weak-password":
+      return "Password should be at least 8 characters";
+    case "auth/invalid-credential":
+      return "Invalid email or password";
+    case "auth/user-not-found":
+      return "User not found";
+    case "auth/wrong-password":
+      return "Wrong password";
+    case "auth/user-disabled":
+      return "This account has been disabled";
+    case "auth/too-many-requests":
+      return "Too many requests. Please try again later";
+
+    // Network and system errors
+    case "auth/network-request-failed":
+      return "Network error. Please check your connection";
+    case "auth/internal-error":
+      return "An internal error occurred. Please try again";
+
+    default:
+      return "An error occurred. Please try again";
   }
-  return "An error occurred. Please try again";
 };
 
 // Service function for user sign up with Firebase Auth
@@ -44,7 +52,20 @@ export const signUp = async (
   const user = userCredential.user;
 
   await sendEmailVerification(user);
-  console.log("Email verification sent");
+
+  return userCredential;
+};
+
+// Service function for user sign in with Firebase Auth
+export const signIn = async (
+  email: string,
+  password: string
+): Promise<UserCredential> => {
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
 
   return userCredential;
 };

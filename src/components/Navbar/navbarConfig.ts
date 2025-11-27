@@ -42,6 +42,6 @@ export const AUTH_LINKS: Link[] = [
   },
   {
     to: "/sign-in",
-    label: "Have an account? Sign In",
+    label: "Sign In",
   },
 ];

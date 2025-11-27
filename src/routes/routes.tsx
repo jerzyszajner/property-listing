@@ -17,6 +17,7 @@ const PropertyDetails = lazy(
 const About = lazy(() => import("@/pages/About/About"));
 const Contact = lazy(() => import("@/pages/Contact/Contact"));
 const SignUp = lazy(() => import("@/pages/SignUp/SignUp"));
+const SignIn = lazy(() => import("@/pages/SignIn/SignIn"));
 const NotFound = lazy(() => import("@/pages/NotFound/NotFound"));
 
 export const router = createBrowserRouter(
@@ -67,6 +68,14 @@ export const router = createBrowserRouter(
         element={
           <Suspense fallback={<Spinner />}>
             <SignUp />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/sign-in"
+        element={
+          <Suspense fallback={<Spinner />}>
+            <SignIn />
           </Suspense>
         }
       />

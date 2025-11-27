@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signUpFormSchema, type SignUpFormData } from "../signUpFormSchema";
-import { signUp, getAuthErrorMessage } from "@/services/authService";
-import { createUserProfile } from "@/services/userService";
+import { signInFormSchema, type SignInFormData } from "../signInFormSchema";
+import { signIn, getAuthErrorMessage } from "@/services/authService";
 
-// Hook for sign up form
-export const useSignUpForm = () => {
+// Hook for sign in form
+export const useSignInForm = () => {
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -18,15 +17,11 @@ export const useSignUpForm = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-  } = useForm<SignUpFormData>({
-    resolver: zodResolver(signUpFormSchema),
+  } = useForm<SignInFormData>({
+    resolver: zodResolver(signInFormSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
       email: "",
-      phone: "",
       password: "",
-      confirmPassword: "",
     },
     mode: "onBlur",
   });
@@ -42,17 +37,10 @@ export const useSignUpForm = () => {
     }
   }, [isSuccess, navigate]);
 
-  const onSubmit = async (data: SignUpFormData) => {
+  const onSubmit = async (data: SignInFormData) => {
     setError(null);
     try {
-      const userCredential = await signUp(data.email, data.password);
-
-      await createUserProfile(userCredential.user.uid, {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        phone: data.phone,
-      });
+      await signIn(data.email, data.password);
 
       reset();
       setIsSuccess(true);
