@@ -41,7 +41,6 @@ export const useSignInForm = () => {
     setError(null);
     try {
       await signIn(data.email, data.password);
-
       reset();
       setIsSuccess(true);
     } catch (err) {
