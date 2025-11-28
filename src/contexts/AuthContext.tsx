@@ -3,16 +3,10 @@ import type { ReactNode } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import type { User } from "firebase/auth";
 import { auth } from "@/config/firebaseConfig";
-import {
-  signOut as authSignOut,
-  getAuthErrorMessage,
-} from "@/services/authService";
 
 export interface AuthContextValue {
   user: User | null;
   isLoading: boolean;
-  signOut: () => Promise<void>;
-  error: string | null;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -25,7 +19,6 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Listen for authentication state changes
@@ -37,19 +30,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return () => unsubscribe();
   }, []);
 
-  const handleSignOut = async (): Promise<void> => {
-    setError(null);
-    try {
-      await authSignOut();
-    } catch (err) {
-      setError(getAuthErrorMessage(err));
-    }
-  };
-
   return (
-    <AuthContext.Provider
-      value={{ user, isLoading, signOut: handleSignOut, error }}
-    >
+    <AuthContext.Provider value={{ user, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
