@@ -21,6 +21,7 @@ const About = () => {
       </section>
 
       <section className={styles.features}>
+        {/* Map FEATURES_CONFIG (AI Powered Search, Verified Properties, Interactive Maps) */}
         {FEATURES_CONFIG.map((feature, index) => {
           return <IconCard key={index} item={feature} />;
         })}

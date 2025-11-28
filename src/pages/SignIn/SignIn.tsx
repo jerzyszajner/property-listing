@@ -86,6 +86,7 @@ function SignIn() {
 
         {/* === Link to Reset Password === */}
         <div className={styles.linkContainer}>
+          {/* Map SIGN_IN_FORM_LINKS (Sign Up, Reset Password) */}
           {SIGN_IN_FORM_LINKS.map((link) => (
             <Link to={link.to} className={styles.link} key={link.to}>
               {link.label}

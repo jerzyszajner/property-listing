@@ -14,6 +14,7 @@ const HowItWorks = () => {
         />
 
         <div className={styles.steps}>
+          {/* Map STEPS_CONFIG (AI Search Engine, Filter & Browse, Explore Details) */}
           {STEPS_CONFIG.map((step, index) => (
             <IconCard key={index} item={step} />
           ))}

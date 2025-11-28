@@ -27,6 +27,7 @@ const PropertyListFilterPanel = ({
   return (
     <div className={styles.filterPanel}>
       <div className={styles.locationFilters}>
+        {/* Map availableLocations (location filter buttons) */}
         {availableLocations.map((location) => (
           <Button
             key={location}
