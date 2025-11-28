@@ -3,6 +3,7 @@ import {
   sendEmailVerification,
   signInWithEmailAndPassword,
   signOut as firebaseSignOut,
+  sendPasswordResetEmail,
   type UserCredential,
 } from "firebase/auth";
 import { auth } from "@/config/firebaseConfig";
@@ -74,4 +75,9 @@ export const signIn = async (
 // Service function for user sign out with Firebase Auth
 export const signOut = async (): Promise<void> => {
   await firebaseSignOut(auth);
+};
+
+// Service function for user reset password with Firebase Auth
+export const resetPassword = async (email: string): Promise<void> => {
+  await sendPasswordResetEmail(auth, email);
 };

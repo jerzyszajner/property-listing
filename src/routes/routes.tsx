@@ -18,6 +18,7 @@ const About = lazy(() => import("@/pages/About/About"));
 const Contact = lazy(() => import("@/pages/Contact/Contact"));
 const SignUp = lazy(() => import("@/pages/SignUp/SignUp"));
 const SignIn = lazy(() => import("@/pages/SignIn/SignIn"));
+const ResetPassword = lazy(() => import("@/pages/ResetPassword/ResetPassword"));
 const NotFound = lazy(() => import("@/pages/NotFound/NotFound"));
 
 export const router = createBrowserRouter(
@@ -76,6 +77,14 @@ export const router = createBrowserRouter(
         element={
           <Suspense fallback={<Spinner />}>
             <SignIn />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/reset-password"
+        element={
+          <Suspense fallback={<Spinner />}>
+            <ResetPassword />
           </Suspense>
         }
       />
