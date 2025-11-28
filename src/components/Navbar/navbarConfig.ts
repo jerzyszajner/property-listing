@@ -35,11 +35,7 @@ export const AUTHENTICATED_LINKS: Link[] = [
   },
 ];
 
-export const AUTH_LINKS: Link[] = [
-  {
-    to: "/sign-up",
-    label: "Sign Up",
-  },
+export const AUTH_LINK: Link[] = [
   {
     to: "/sign-in",
     label: "Sign In",

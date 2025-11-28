@@ -118,10 +118,6 @@
     gap: var(--spacing-sm);
 }
 
-.sidebarItem {
-    list-style: none;
-}
-
 .sidebarLink {
     text-decoration: none;
     color: var(--color-text-light);
@@ -130,6 +126,9 @@
     border-radius: var(--border-radius-sm);
     transition: background-color 0.3s ease, color 0.3s ease;
     display: block;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
 }
 
 .sidebarLink:hover:not(.active) {
@@ -148,6 +147,14 @@
     border-radius: var(--border-radius-sm);
     text-align: left;
     transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.icon {
+    width: var(--icon-size-inline);
+    height: var(--icon-size-inline);
 }
 
 .sidebarLogout:hover {

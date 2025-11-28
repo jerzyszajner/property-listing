@@ -1,9 +1,9 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn, LogOut } from "lucide-react";
 import clsx from "clsx";
 import logo from "@/assets/icons/logo.svg";
 import Divider from "../Divider/Divider";
-import { MAIN_LINKS, AUTHENTICATED_LINKS, AUTH_LINKS } from "./navbarConfig";
+import { MAIN_LINKS, AUTHENTICATED_LINKS, AUTH_LINK } from "./navbarConfig";
 import { useMenu } from "./hooks/useMenu";
 import { useAuthContext } from "@/contexts/AuthContext";
 import styles from "./Navbar.module.css";
@@ -32,6 +32,7 @@ const Navbar = () => {
 
         {/* === Main Navigation === */}
         <ul className={styles.links}>
+          {/* Map MAIN_LINKS (Home, Properties, About, Contact) */}
           {MAIN_LINKS.map((link) => (
             <li className={styles.linkItem} key={link.to}>
               <NavLink
@@ -75,6 +76,7 @@ const Navbar = () => {
               <nav className={styles.sidebarNav}>
                 {/* === Main Links === */}
                 <ul className={styles.sidebarMainLinks}>
+                  {/* Map MAIN_LINKS (Home, Properties, About, Contact) */}
                   {MAIN_LINKS.map((link) => (
                     <li className={styles.sidebarItem} key={link.to}>
                       <NavLink
@@ -95,6 +97,7 @@ const Navbar = () => {
                   <>
                     <Divider variant="muted" />
                     <ul className={styles.sidebarUserLinks}>
+                      {/* Map AUTHENTICATED_LINKS (My Bookings, Profile) */}
                       {AUTHENTICATED_LINKS.map((link) => (
                         <li className={styles.sidebarItem} key={link.to}>
                           <NavLink
@@ -118,14 +121,16 @@ const Navbar = () => {
                       onClick={handleSignOut}
                       disabled={isLoading}
                     >
-                      {isLoading ? "Signing out..." : "Log Out"}
+                      {isLoading ? "Signing out..." : "Sign Out"}
+                      <LogOut className={styles.icon} />
                     </button>
                   </>
                 ) : (
                   <>
                     <Divider variant="muted" />
                     <ul className={styles.sidebarUserLinks}>
-                      {AUTH_LINKS.map((link) => (
+                      {/* Map AUTH_LINK (Sign In) */}
+                      {AUTH_LINK.map((link) => (
                         <li className={styles.sidebarItem} key={link.to}>
                           <NavLink
                             to={link.to}
@@ -138,6 +143,7 @@ const Navbar = () => {
                             }
                           >
                             {link.label}
+                            <LogIn className={styles.icon} />
                           </NavLink>
                         </li>
                       ))}
