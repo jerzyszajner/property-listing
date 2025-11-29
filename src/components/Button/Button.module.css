@@ -18,6 +18,7 @@
 /* Variants */
 .primary {
     background-color: var(--color-accent-blue);
+    color: var(--color-text-dark);
 }
 
 .primary:hover {

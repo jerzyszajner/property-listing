@@ -1,6 +1,7 @@
 import type { Property } from "@/types/property";
 import { Star, ShieldCheck, MapPin } from "lucide-react";
 import fallbackImage from "@/assets/images/fallback.webp";
+import PageHeader from "@/components/PageHeader/PageHeader";
 import styles from "./PropertyHeader.module.css";
 
 interface PropertyHeaderProps {
@@ -17,7 +18,8 @@ const PropertyHeader = ({ property }: PropertyHeaderProps) => {
   return (
     <section className={styles.header}>
       {/* === Title === */}
-      <h1 className={styles.title}>{title}</h1>
+      {/* <h1 className={styles.title}>{title}</h1> */}
+      <PageHeader title={title} variant="left" />
 
       {/* === Meta Info === */}
       <div className={styles.meta}>

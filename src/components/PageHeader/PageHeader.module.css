@@ -1,3 +1,4 @@
+/* PageHeader component styles */
 .header {
     width: 100%;
     color: var(--color-text-light);
@@ -5,7 +6,7 @@
 }
 
 .title {
-    font-size: var(--font-size-xxxl);
+    font-size: var(--font-size-xxl);
     line-height: 1.2;
     margin-bottom: var(--spacing-md);
 }
@@ -14,9 +15,13 @@
     font-size: var(--font-size-lg);
 }
 
+.left {
+    text-align: left;
+}
+
 @media (max-width: 768px) {
     .title {
-        font-size: var(--font-size-xxl);
+        font-size: var(--font-size-xl);
     }
 
     .subtitle {
@@ -25,10 +30,6 @@
 }
 
 @media (max-width: 480px) {
-    .title {
-        font-size: var(--font-size-xl);
-    }
-
     .subtitle {
         font-size: var(--font-size-sm);
     }
