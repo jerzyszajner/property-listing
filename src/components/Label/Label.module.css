@@ -1,0 +1,5 @@
+/* Label component styles */
+.label {
+    color: var(--color-text-label);
+    font-size: var(--font-size-base);
+}

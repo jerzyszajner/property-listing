@@ -29,11 +29,6 @@
     flex: 1;
 }
 
-.label {
-    color: var(--color-text-muted);
-    font-size: var(--font-size-base);
-}
-
 .errorRow {
     display: flex;
     justify-content: space-between;

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { PAGE_HEADER_CONFIG, SUCCESS_MESSAGE } from "./signUpConfig";
 import { useSignUpForm } from "./hooks/useSignUpForm";
 import PageHeader from "@/components/PageHeader/PageHeader";
+import Label from "@/components/Label/Label";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import FormError from "@/components/FormError/FormError";
@@ -47,9 +48,9 @@ const SignUp = () => {
         {/* === Name Fields === */}
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
-            <label htmlFor="firstName" className={styles.label}>
-              First Name*
-            </label>
+            <Label htmlFor="firstName" required>
+              First Name
+            </Label>
             <Input
               type="text"
               id="firstName"
@@ -62,9 +63,9 @@ const SignUp = () => {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="lastName" className={styles.label}>
-              Last Name*
-            </label>
+            <Label htmlFor="lastName" required>
+              Last Name
+            </Label>
             <Input
               type="text"
               id="lastName"
@@ -80,9 +81,9 @@ const SignUp = () => {
         {/* === Contact Fields === */}
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
-            <label htmlFor="email" className={styles.label}>
-              Email*
-            </label>
+            <Label htmlFor="email" required>
+              Email
+            </Label>
             <Input
               type="email"
               id="email"
@@ -95,9 +96,9 @@ const SignUp = () => {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="phone" className={styles.label}>
-              Phone*
-            </label>
+            <Label htmlFor="phone" required>
+              Phone
+            </Label>
             <Input
               type="tel"
               id="phone"
@@ -113,9 +114,9 @@ const SignUp = () => {
         {/* === Password Fields === */}
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
-            <label htmlFor="password" className={styles.label}>
-              Password*
-            </label>
+            <Label htmlFor="password" required>
+              Password
+            </Label>
             <Input
               type="password"
               id="password"
@@ -127,9 +128,9 @@ const SignUp = () => {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="confirmPassword" className={styles.label}>
-              Confirm Password*
-            </label>
+            <Label htmlFor="confirmPassword" required>
+              Confirm Password
+            </Label>
             <Input
               type="password"
               id="confirmPassword"

@@ -1,5 +1,6 @@
 import { PAGE_HEADER_CONFIG, SUCCESS_MESSAGE } from "./contactConfig";
 import PageHeader from "@/components/PageHeader/PageHeader";
+import Label from "@/components/Label/Label";
 import Input from "@/components/Input/Input";
 import Textarea from "@/components/Textarea/Textarea";
 import Button from "@/components/Button/Button";
@@ -64,9 +65,9 @@ const Contact = () => {
         {/* === Name Fields === */}
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
-            <label htmlFor="firstName" className={styles.label}>
-              First Name*
-            </label>
+            <Label htmlFor="firstName" required>
+              First Name
+            </Label>
             <Input
               type="text"
               id="firstName"
@@ -79,9 +80,9 @@ const Contact = () => {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="lastName" className={styles.label}>
-              Last Name*
-            </label>
+            <Label htmlFor="lastName" required>
+              Last Name
+            </Label>
             <Input
               type="text"
               id="lastName"
@@ -97,9 +98,9 @@ const Contact = () => {
         {/* === Contact Fields === */}
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
-            <label htmlFor="email" className={styles.label}>
-              Email*
-            </label>
+            <Label htmlFor="email" required>
+              Email
+            </Label>
             <Input
               type="email"
               id="email"
@@ -112,9 +113,9 @@ const Contact = () => {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="phone" className={styles.label}>
-              Phone*
-            </label>
+            <Label htmlFor="phone" required>
+              Phone
+            </Label>
             <Input
               type="tel"
               id="phone"
@@ -129,9 +130,7 @@ const Contact = () => {
 
         {/* === Subject Field === */}
         <div className={styles.formGroup}>
-          <label htmlFor="subject" className={styles.label}>
-            Subject
-          </label>
+          <Label htmlFor="subject">Subject</Label>
           <Input
             type="text"
             id="subject"
@@ -144,9 +143,9 @@ const Contact = () => {
 
         {/* === Message Field === */}
         <div className={styles.formGroup}>
-          <label htmlFor="message" className={styles.label}>
-            Message*
-          </label>
+          <Label htmlFor="message" required>
+            Message
+          </Label>
           <Textarea
             id="message"
             placeholder="Message"

@@ -6,6 +6,7 @@ import {
 } from "./signInConfig";
 import { useSignInForm } from "./hooks/useSignInForm";
 import PageHeader from "@/components/PageHeader/PageHeader";
+import Label from "@/components/Label/Label";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import FormError from "@/components/FormError/FormError";
@@ -50,9 +51,9 @@ function SignIn() {
         {/* === Name Fields === */}
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
-            <label htmlFor="email" className={styles.label}>
-              Email*
-            </label>
+            <Label htmlFor="email" required>
+              Email
+            </Label>
             <Input
               type="email"
               id="email"
@@ -65,9 +66,9 @@ function SignIn() {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="password" className={styles.label}>
-              Password*
-            </label>
+            <Label htmlFor="password" required>
+              Password
+            </Label>
             <Input
               type="password"
               id="password"

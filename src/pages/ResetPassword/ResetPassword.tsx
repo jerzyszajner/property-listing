@@ -1,6 +1,7 @@
 import { PAGE_HEADER_CONFIG, SUCCESS_MESSAGE } from "./resetPasswordConfig";
 import { useResetPasswordForm } from "./hooks/useResetPasswordForm";
 import PageHeader from "@/components/PageHeader/PageHeader";
+import Label from "@/components/Label/Label";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import FormError from "@/components/FormError/FormError";
@@ -43,9 +44,9 @@ const ResetPassword = () => {
 
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
         <div className={styles.formGroup}>
-          <label htmlFor="email" className={styles.label}>
-            Email*
-          </label>
+          <Label htmlFor="email" required>
+            Email
+          </Label>
           <Input
             type="email"
             id="email"

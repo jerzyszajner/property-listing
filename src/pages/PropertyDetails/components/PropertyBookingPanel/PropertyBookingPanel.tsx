@@ -1,6 +1,7 @@
 import type { Property } from "@/types/property";
 import clsx from "clsx";
 import { GUEST_OPTIONS } from "./propertyBookingPanelConfig";
+import Label from "@/components/Label/Label";
 import Select from "@/components/Select/Select";
 import Button from "@/components/Button/Button";
 import Divider from "@/components/Divider/Divider";
@@ -31,26 +32,26 @@ const PropertyBookingPanel = ({
       <div className={styles.inputGrupRow}>
         {/* === Check-in === */}
         <div className={styles.inputGroup}>
-          <label htmlFor="check-inn" className={styles.label}>
+          <Label htmlFor="check-inn" required>
             Check-in
-          </label>
+          </Label>
           <input type="date" id="check-inn" className={styles.input} />
         </div>
 
         {/* === Check-out === */}
         <div className={styles.inputGroup}>
-          <label htmlFor="check-out" className={styles.label}>
+          <Label htmlFor="check-out" required>
             Check-out
-          </label>
+          </Label>
           <input type="date" id="check-out" className={styles.input} />
         </div>
       </div>
 
       {/* === Guests === */}
       <div className={styles.inputGroup}>
-        <label htmlFor="guests" className={styles.label}>
+        <Label htmlFor="guests" required>
           Guests
-        </label>
+        </Label>
         <Select
           options={GUEST_OPTIONS}
           value={guestCount}
