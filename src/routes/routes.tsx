@@ -7,6 +7,7 @@ import {
 
 import App from "@/App";
 import Spinner from "@/components/Spinner/Spinner";
+import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
 
 /* Pages - lazy loaded */
 const Home = lazy(() => import("@/pages/Home/Home"));
@@ -19,11 +20,15 @@ const Contact = lazy(() => import("@/pages/Contact/Contact"));
 const SignUp = lazy(() => import("@/pages/SignUp/SignUp"));
 const SignIn = lazy(() => import("@/pages/SignIn/SignIn"));
 const ResetPassword = lazy(() => import("@/pages/ResetPassword/ResetPassword"));
+const EmailVerification = lazy(
+  () => import("@/pages/EmailVerification/EmailVerification")
+);
 const NotFound = lazy(() => import("@/pages/NotFound/NotFound"));
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
+      {/* Public routes */}
       <Route
         index
         element={
@@ -88,6 +93,18 @@ export const router = createBrowserRouter(
           </Suspense>
         }
       />
+      {/* Protected routes */}
+      <Route
+        path="/email-verification"
+        element={
+          <ProtectedRoute>
+            <Suspense fallback={<Spinner />}>
+              <EmailVerification />
+            </Suspense>
+          </ProtectedRoute>
+        }
+      />
+      {/* 404 fallback route */}
       <Route
         path="*"
         element={
