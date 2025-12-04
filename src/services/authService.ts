@@ -5,6 +5,7 @@ import {
   signOut as firebaseSignOut,
   sendPasswordResetEmail,
   type UserCredential,
+  type User,
 } from "firebase/auth";
 import { auth } from "@/config/firebaseConfig";
 
@@ -80,4 +81,23 @@ export const signOut = async (): Promise<void> => {
 // Service function for user reset password with Firebase Auth
 export const resetPassword = async (email: string): Promise<void> => {
   await sendPasswordResetEmail(auth, email);
+};
+
+// Service function for updating user data with Firebase Auth
+export const updateUser = async (): Promise<User | null> => {
+  const currentUser = auth.currentUser;
+  if (!currentUser) {
+    return null;
+  }
+  await currentUser.reload();
+  return currentUser;
+};
+
+// Service function for user email verification with Firebase Auth
+export const emailVerification = async (): Promise<void> => {
+  const currentUser = auth.currentUser;
+  if (!currentUser) {
+    throw new Error("No user is currently signed in");
+  }
+  await sendEmailVerification(currentUser);
 };
