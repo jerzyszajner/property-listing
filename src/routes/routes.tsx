@@ -9,7 +9,13 @@ import App from "@/App";
 import Spinner from "@/components/Spinner/Spinner";
 import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
 
-/* Pages - lazy loaded */
+/* Authentication pages */
+import SignIn from "@/pages/SignIn/SignIn";
+import SignUp from "@/pages/SignUp/SignUp";
+import EmailVerification from "@/pages/EmailVerification/EmailVerification";
+import ResetPassword from "@/pages/ResetPassword/ResetPassword";
+
+/* Content pages  */
 const Home = lazy(() => import("@/pages/Home/Home"));
 const PropertyList = lazy(() => import("@/pages/PropertyList/PropertyList"));
 const PropertyDetails = lazy(
@@ -17,13 +23,13 @@ const PropertyDetails = lazy(
 );
 const About = lazy(() => import("@/pages/About/About"));
 const Contact = lazy(() => import("@/pages/Contact/Contact"));
-const SignUp = lazy(() => import("@/pages/SignUp/SignUp"));
-const SignIn = lazy(() => import("@/pages/SignIn/SignIn"));
-const ResetPassword = lazy(() => import("@/pages/ResetPassword/ResetPassword"));
-const EmailVerification = lazy(
-  () => import("@/pages/EmailVerification/EmailVerification")
-);
-const NotFound = lazy(() => import("@/pages/NotFound/NotFound"));
+
+/* Protected pages */
+const Profile = lazy(() => import("@/pages/Profile/Profile"));
+const Bookings = lazy(() => import("@/pages/Bookings/Bookings"));
+
+/* Error page */
+import NotFound from "@/pages/NotFound/NotFound";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -69,50 +75,34 @@ export const router = createBrowserRouter(
           </Suspense>
         }
       />
-      <Route
-        path="/sign-up"
-        element={
-          <Suspense fallback={<Spinner />}>
-            <SignUp />
-          </Suspense>
-        }
-      />
-      <Route
-        path="/sign-in"
-        element={
-          <Suspense fallback={<Spinner />}>
-            <SignIn />
-          </Suspense>
-        }
-      />
-      <Route
-        path="/reset-password"
-        element={
-          <Suspense fallback={<Spinner />}>
-            <ResetPassword />
-          </Suspense>
-        }
-      />
+      {/* Auth flow routes  */}
+      <Route path="/sign-up" element={<SignUp />} />
+      <Route path="/sign-in" element={<SignIn />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/email-verification" element={<EmailVerification />} />
       {/* Protected routes */}
       <Route
-        path="/email-verification"
-        element={
-          <ProtectedRoute>
-            <Suspense fallback={<Spinner />}>
-              <EmailVerification />
-            </Suspense>
-          </ProtectedRoute>
-        }
-      />
-      {/* 404 fallback route */}
-      <Route
-        path="*"
+        path="/profile"
         element={
           <Suspense fallback={<Spinner />}>
-            <NotFound />
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
           </Suspense>
         }
       />
+      <Route
+        path="/bookings"
+        element={
+          <Suspense fallback={<Spinner />}>
+            <ProtectedRoute>
+              <Bookings />
+            </ProtectedRoute>
+          </Suspense>
+        }
+      />
+      {/* Error page */}
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
