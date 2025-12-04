@@ -1,0 +1,43 @@
+/* EmailVerification page styles */
+.emailVerification {
+    padding: var(--spacing-xxl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxl);
+    height: 100%;
+}
+
+.icon {
+    width: 80px;
+    height: 80px;
+    color: var(--color-accent-blue);
+    stroke-width: 1.5;
+    flex-shrink: 0;
+    margin: 0 auto;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.description {
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .emailVerification {
+        padding: var(--spacing-xl) var(--spacing-md);
+        gap: var(--spacing-xl);
+    }
+
+    .icon {
+        width: 64px;
+        height: 64px;
+    }
+}
