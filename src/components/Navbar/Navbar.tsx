@@ -47,6 +47,8 @@ const Navbar = () => {
             onClick={toggleMenu}
             className={styles.hamburgerButton}
             aria-label="Toggle menu"
+            aria-expanded={isOpen}
+            aria-controls="sidebar-menu"
           >
             {isOpen ? (
               <X className={styles.hamburgerIcon} />
@@ -56,102 +58,107 @@ const Navbar = () => {
           </button>
 
           {/* === Sidebar Menu === */}
-          {isOpen && (
-            <>
-              <div className={styles.overlay} onClick={closeMenu}></div>
-              <aside className={styles.sidebar}>
-                {/* === Sidebar Header === */}
-                <div className={styles.sidebarHeader}>
-                  <Link to="/" className={styles.logoLink} onClick={closeMenu}>
-                    <img src={logo} alt="Logo" className={styles.logoImage} />
-                  </Link>
-                </div>
+          <>
+            <div
+              className={clsx(styles.overlay, isOpen && styles.overlayVisible)}
+              onClick={closeMenu}
+            ></div>
+            <aside
+              id="sidebar-menu"
+              className={clsx(styles.sidebar, isOpen && styles.sidebarOpen)}
+              aria-hidden={!isOpen}
+            >
+              {/* === Sidebar Header === */}
+              <div className={styles.sidebarHeader}>
+                <Link to="/" className={styles.logoLink} onClick={closeMenu}>
+                  <img src={logo} alt="Logo" className={styles.logoImage} />
+                </Link>
+              </div>
 
-                {/* === Sidebar Navigation === */}
-                <nav className={styles.sidebarNav}>
-                  {/* === Main Links === */}
-                  <ul className={styles.sidebarMainLinks}>
-                    {/* Map MAIN_LINKS (Home, Properties, About, Contact) */}
-                    {MAIN_LINKS.map((link) => (
-                      <li className={styles.sidebarItem} key={link.to}>
-                        <NavLink
-                          to={link.to}
-                          className={({ isActive }) =>
-                            clsx(styles.sidebarLink, isActive && styles.active)
-                          }
-                          onClick={closeMenu}
-                        >
-                          {link.label}
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* === User Links === */}
-                  {user ? (
-                    <>
-                      <Divider variant="muted" />
-                      <ul className={styles.sidebarUserLinks}>
-                        {/* Map AUTHENTICATED_LINKS (My Bookings, Profile) */}
-                        {AUTHENTICATED_LINKS.map((link) => (
-                          <li className={styles.sidebarItem} key={link.to}>
-                            <NavLink
-                              to={link.to}
-                              className={({ isActive }) =>
-                                clsx(
-                                  styles.sidebarLink,
-                                  isActive && styles.active
-                                )
-                              }
-                              onClick={closeMenu}
-                            >
-                              {link.label}
-                            </NavLink>
-                          </li>
-                        ))}
-                      </ul>
-                      <Divider variant="muted" />
-                      <button
-                        className={styles.sidebarLogout}
-                        onClick={() => {
-                          closeMenu();
-                          handleSignOut();
-                        }}
-                        disabled={isSigningOut}
+              {/* === Sidebar Navigation === */}
+              <nav className={styles.sidebarNav}>
+                {/* === Main Links === */}
+                <ul className={styles.sidebarMainLinks}>
+                  {/* Map MAIN_LINKS (Home, Properties, About, Contact) */}
+                  {MAIN_LINKS.map((link) => (
+                    <li className={styles.sidebarItem} key={link.to}>
+                      <NavLink
+                        to={link.to}
+                        className={({ isActive }) =>
+                          clsx(styles.sidebarLink, isActive && styles.active)
+                        }
+                        onClick={closeMenu}
                       >
-                        {isSigningOut ? "Signing out..." : "Sign Out"}
-                        <LogOut className={styles.icon} />
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <Divider variant="muted" />
-                      <ul className={styles.sidebarUserLinks}>
-                        {/* Map AUTH_LINK (Sign In) */}
-                        {AUTH_LINK.map((link) => (
-                          <li className={styles.sidebarItem} key={link.to}>
-                            <NavLink
-                              to={link.to}
-                              onClick={closeMenu}
-                              className={({ isActive }) =>
-                                clsx(
-                                  styles.sidebarLink,
-                                  isActive && styles.active
-                                )
-                              }
-                            >
-                              {link.label}
-                              <LogIn className={styles.icon} />
-                            </NavLink>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                </nav>
-              </aside>
-            </>
-          )}
+                        {link.label}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* === User Links === */}
+                {user ? (
+                  <>
+                    <Divider variant="muted" />
+                    <ul className={styles.sidebarUserLinks}>
+                      {/* Map AUTHENTICATED_LINKS (My Bookings, Profile) */}
+                      {AUTHENTICATED_LINKS.map((link) => (
+                        <li className={styles.sidebarItem} key={link.to}>
+                          <NavLink
+                            to={link.to}
+                            className={({ isActive }) =>
+                              clsx(
+                                styles.sidebarLink,
+                                isActive && styles.active
+                              )
+                            }
+                            onClick={closeMenu}
+                          >
+                            {link.label}
+                          </NavLink>
+                        </li>
+                      ))}
+                    </ul>
+                    <Divider variant="muted" />
+                    <button
+                      className={styles.sidebarLogout}
+                      onClick={() => {
+                        closeMenu();
+                        handleSignOut();
+                      }}
+                      disabled={isSigningOut}
+                    >
+                      {isSigningOut ? "Signing out..." : "Sign Out"}
+                      <LogOut className={styles.icon} />
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Divider variant="muted" />
+                    <ul className={styles.sidebarUserLinks}>
+                      {/* Map AUTH_LINK (Sign In) */}
+                      {AUTH_LINK.map((link) => (
+                        <li className={styles.sidebarItem} key={link.to}>
+                          <NavLink
+                            to={link.to}
+                            onClick={closeMenu}
+                            className={({ isActive }) =>
+                              clsx(
+                                styles.sidebarLink,
+                                isActive && styles.active
+                              )
+                            }
+                          >
+                            {link.label}
+                            <LogIn className={styles.icon} />
+                          </NavLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </nav>
+            </aside>
+          </>
         </div>
       </nav>
       {/* === Error Toast === */}
