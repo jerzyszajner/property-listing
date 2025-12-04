@@ -1,12 +1,14 @@
 import { createContext, useEffect, useState, useContext } from "react";
 import type { ReactNode } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { onIdTokenChanged } from "firebase/auth";
 import type { User } from "firebase/auth";
 import { auth } from "@/config/firebaseConfig";
+import { updateUser } from "@/services/authService";
 
 export interface AuthContextValue {
   user: User | null;
   isLoading: boolean;
+  refreshUser: () => Promise<User | null>;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -22,7 +24,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     // Listen for authentication state changes
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onIdTokenChanged(auth, (currentUser) => {
       setUser(currentUser);
       setIsLoading(false);
     });
@@ -30,8 +32,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return () => unsubscribe();
   }, []);
 
+  const refreshUser = async (): Promise<User | null> => {
+    const updatedUser = await updateUser();
+    if (updatedUser) {
+      setUser(updatedUser);
+    }
+    return updatedUser;
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isLoading }}>
+    <AuthContext.Provider value={{ user, isLoading, refreshUser }}>
       {children}
     </AuthContext.Provider>
   );
