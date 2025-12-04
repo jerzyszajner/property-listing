@@ -35,7 +35,7 @@ export const useSignUpForm = () => {
     if (isSuccess) {
       const timer = setTimeout(() => {
         setIsSuccess(false);
-        navigate("/");
+        navigate("/email-verification");
       }, 2500);
 
       return () => clearTimeout(timer);

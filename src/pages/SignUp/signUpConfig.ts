@@ -16,6 +16,5 @@ export const PAGE_HEADER_CONFIG: PageHeaderConfig = {
 
 export const SUCCESS_MESSAGE: SuccessMessageConfig = {
   title: "Success!",
-  message:
-    "Account created successfully! Please check your email to verify your account.",
+  message: "Account created successfully!",
 };
