@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export interface UseMenuReturn {
   isOpen: boolean;
@@ -10,8 +10,8 @@ export interface UseMenuReturn {
 export const useMenu = (): UseMenuReturn => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const closeMenu = () => setIsOpen(false);
-  const toggleMenu = () => setIsOpen((prev) => !prev);
+  const closeMenu = useCallback(() => setIsOpen(false), []);
+  const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
 
   useEffect(() => {
     if (isOpen) {
@@ -26,20 +26,20 @@ export const useMenu = (): UseMenuReturn => {
   }, [isOpen]);
 
   useEffect(() => {
+    if (!isOpen) return;
+
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
+      if (e.key === "Escape") {
         closeMenu();
       }
     };
 
-    if (isOpen) {
-      document.addEventListener("keydown", handleEscape);
-    }
+    document.addEventListener("keydown", handleEscape);
 
     return () => {
       document.removeEventListener("keydown", handleEscape);
     };
-  }, [isOpen]);
+  }, [isOpen, closeMenu]);
 
   return { isOpen, toggleMenu, closeMenu };
 };
