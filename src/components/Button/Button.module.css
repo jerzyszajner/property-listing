@@ -1,6 +1,5 @@
 /* Button component styles */
 .button {
-    font-family: inherit;
     border: 1px solid transparent;
     outline: none;
     cursor: pointer;

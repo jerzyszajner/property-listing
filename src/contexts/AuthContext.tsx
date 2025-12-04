@@ -1,4 +1,11 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import {
+  createContext,
+  useEffect,
+  useState,
+  useContext,
+  useCallback,
+  useMemo,
+} from "react";
 import type { ReactNode } from "react";
 import { onIdTokenChanged } from "firebase/auth";
 import type { User } from "firebase/auth";
@@ -32,13 +39,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return () => unsubscribe();
   }, []);
 
-  const refreshUser = async (): Promise<User | null> => {
+  const refreshUser = useCallback(async (): Promise<User | null> => {
     const updatedUser = await updateUser();
     if (updatedUser) {
       setUser(updatedUser);
     }
     return updatedUser;
-  };
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, isLoading, refreshUser }}>
