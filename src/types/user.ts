@@ -1,3 +1,5 @@
+import type { Timestamp } from "firebase/firestore";
+
 // User types for Firestore database
 export type CreateUserProfile = {
   firstName: string;
@@ -12,4 +14,5 @@ export type UserProfile = {
   firstName: string | null;
   lastName: string | null;
   phone: string | null;
+  createdAt?: Timestamp | null;
 };

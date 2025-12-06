@@ -7,6 +7,7 @@ export interface UseUserProfileReturn {
   userProfile: UserProfile | null;
   isLoading: boolean;
   error: string | null;
+  setError: (error: string | null) => void;
 }
 
 // Hook for fetching user profile data
@@ -42,5 +43,5 @@ export const useUserProfile = (): UseUserProfileReturn => {
     loadUserProfile();
   }, [user]);
 
-  return { userProfile, isLoading, error };
+  return { userProfile, isLoading, error, setError };
 };

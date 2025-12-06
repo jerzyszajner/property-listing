@@ -118,7 +118,9 @@ Return valid JSON only.
       matches: parsed.matches ?? [],
     };
   } catch (error) {
-    console.error("Gemini error:", error);
+    if (import.meta.env.DEV) {
+      console.error("Gemini error:", error);
+    }
     return { suggest: [], matches: [] };
   }
 };

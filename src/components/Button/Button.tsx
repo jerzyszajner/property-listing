@@ -3,7 +3,13 @@ import styles from "./Button.module.css";
 
 interface ButtonProps {
   children?: React.ReactNode;
-  variant?: "primary" | "secondary" | "filter" | "active" | "closeCircle";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "filter"
+    | "active"
+    | "closeCircle"
+    | "danger";
   className?: string;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";

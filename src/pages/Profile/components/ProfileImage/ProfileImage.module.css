@@ -1,0 +1,52 @@
+/* ProfileImage component styles */
+.profileImage {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: var(--border-radius-circle);
+    border: 1px solid var(--color-border-default);
+    background-color: var(--color-bg-panel);
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.editImageButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border-radius: var(--border-radius-circle);
+    border: 2px solid var(--color-text-muted);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    background-color: var(--color-bg-medium);
+    color: var(--color-text-dark);
+}
+
+.editImageButton:hover {
+    background-color: var(--color-bg-light);
+}
+
+.editImageButton:focus-visible {
+    border-color: var(--color-focus);
+    outline: 0.5px solid var(--color-focus);
+    outline-offset: 2px;
+}
+
+.editImageIcon {
+    width: var(--spacing-md);
+    height: var(--spacing-md);
+}
+
+.inputFile {
+    display: none;
+}

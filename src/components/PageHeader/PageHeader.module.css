@@ -8,11 +8,12 @@
 .title {
     font-size: var(--font-size-xxl);
     line-height: 1.2;
-    margin-bottom: var(--spacing-md);
+
 }
 
 .subtitle {
     font-size: var(--font-size-lg);
+    margin-top: var(--spacing-md);
 }
 
 .left {

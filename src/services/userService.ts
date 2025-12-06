@@ -34,5 +34,6 @@ export const fetchUserProfile = async (
     firstName: data.firstName ?? null,
     lastName: data.lastName ?? null,
     phone: data.phone ?? null,
+    createdAt: data.createdAt ?? null,
   };
 };
