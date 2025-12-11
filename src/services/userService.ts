@@ -1,39 +1,65 @@
-import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, serverTimestamp, onSnapshot } from "firebase/firestore";
 import { database } from "@/config/firebaseConfig";
-import type { CreateUserProfile, UserProfile } from "@/types/user";
+import type {
+  CreateUserProfile,
+  UserProfile,
+  UpdateUserProfile,
+} from "@/types/user";
 
-// Service function for creating user profile in Firestore database
+// Service function for creating basic user profile in Firestore database
 export const createUserProfile = async (
   uid: string,
   profileData: CreateUserProfile
 ): Promise<void> => {
   await setDoc(doc(database, "users", uid), {
-    firstName: profileData.firstName,
-    lastName: profileData.lastName,
     email: profileData.email,
-    phone: profileData.phone,
-    createdAt: serverTimestamp(),
+    accountCreatedAt: serverTimestamp(),
   });
 };
 
-// Service function for fetching user profile from Firestore database
-export const fetchUserProfile = async (
-  uid: string
-): Promise<UserProfile | null> => {
+// Service function for real-time user profile subscription
+export const listenToUserProfile = (
+  uid: string,
+  onProfileChange: (profile: UserProfile | null) => void,
+  onProfileError: (error: unknown) => void
+) => {
   const docRef = doc(database, "users", uid);
-  const docSnap = await getDoc(docRef);
 
-  if (!docSnap.exists()) {
-    return null;
-  }
+  return onSnapshot(
+    docRef,
+    (docSnap) => {
+      if (!docSnap.exists()) {
+        onProfileChange(null);
+        return;
+      }
+      const data = docSnap.data();
+      onProfileChange({
+        uid,
+        email: data.email ?? null,
+        firstName: data.firstName ?? null,
+        lastName: data.lastName ?? null,
+        phone: data.phone ?? null,
+        accountCreatedAt: data.accountCreatedAt ?? null,
+        updatedAt: data.updatedAt ?? null,
+      });
+    },
+    onProfileError
+  );
+};
 
-  const data = docSnap.data();
-  return {
-    uid,
-    email: data.email ?? null,
-    firstName: data.firstName ?? null,
-    lastName: data.lastName ?? null,
-    phone: data.phone ?? null,
-    createdAt: data.createdAt ?? null,
-  };
+// Service function for updating user profile in Firestore database
+export const updateUserProfile = async (
+  uid: string,
+  profileData: UpdateUserProfile
+): Promise<void> => {
+  await setDoc(
+    doc(database, "users", uid),
+    {
+      firstName: profileData.firstName ?? null,
+      lastName: profileData.lastName ?? null,
+      phone: profileData.phone ?? null,
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true }
+  );
 };

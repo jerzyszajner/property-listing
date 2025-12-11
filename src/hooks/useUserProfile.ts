@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchUserProfile } from "@/services/userService";
+import { listenToUserProfile } from "@/services/userService";
 import { useAuthContext } from "@/contexts/AuthContext";
 import type { UserProfile } from "@/types/user";
 
@@ -19,28 +19,31 @@ export const useUserProfile = (): UseUserProfileReturn => {
   const { user } = useAuthContext();
 
   useEffect(() => {
-    const loadUserProfile = async () => {
-      if (!user) {
-        setUserProfile(null);
-        setIsLoading(false);
-        return;
-      }
+    if (!user) {
+      setUserProfile(null);
+      setIsLoading(false);
+      return;
+    }
 
-      try {
-        setError(null);
-        setIsLoading(true);
-        const data = await fetchUserProfile(user.uid);
-        setUserProfile(data);
-      } catch (err) {
+    setIsLoading(true);
+    setError(null);
+
+    const unsubscribe = listenToUserProfile(
+      user.uid,
+      (profile) => {
+        setUserProfile(profile);
+        setIsLoading(false);
+      },
+      (err) => {
         setError(
           err instanceof Error ? err.message : "Failed to load user profile"
         );
         setUserProfile(null);
-      } finally {
         setIsLoading(false);
       }
-    };
-    loadUserProfile();
+    );
+
+    return () => unsubscribe();
   }, [user]);
 
   return { userProfile, isLoading, error, setError };
