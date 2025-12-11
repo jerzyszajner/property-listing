@@ -2,7 +2,7 @@ import clsx from "clsx";
 import styles from "./Button.module.css";
 
 interface ButtonProps {
-  children?: React.ReactNode;
+  children: React.ReactNode;
   variant?:
     | "primary"
     | "secondary"

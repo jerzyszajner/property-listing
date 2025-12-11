@@ -108,8 +108,8 @@ img {
     -webkit-user-select: none;
 }
 
-/* Prevent scrolling when menu is open */
-body.menu-open {
+/* Stop scrolling when overlay is open */
+body.scroll-lock {
     position: fixed;
     width: 100%;
 }
