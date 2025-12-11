@@ -10,7 +10,7 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
+    gap: var(--spacing-sm);
     max-width: 520px;
     width: 100%;
     margin: 0 auto;
@@ -25,7 +25,7 @@
 .formGroup {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
+    gap: var(--spacing-sm);
     flex: 1;
 }
 
@@ -38,7 +38,7 @@
 
 .charCount {
     font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    color: var(--color-text-label);
     white-space: nowrap;
 }
 

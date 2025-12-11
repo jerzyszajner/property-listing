@@ -2,6 +2,7 @@ import type { Property } from "@/types/property";
 import clsx from "clsx";
 import { GUEST_OPTIONS } from "./propertyBookingPanelConfig";
 import Label from "@/components/Label/Label";
+import Input from "@/components/Input/Input";
 import Select from "@/components/Select/Select";
 import Button from "@/components/Button/Button";
 import Divider from "@/components/Divider/Divider";
@@ -35,7 +36,7 @@ const PropertyBookingPanel = ({
           <Label htmlFor="check-inn" required>
             Check-in
           </Label>
-          <input type="date" id="check-inn" className={styles.input} />
+          <Input type="date" id="check-inn" />
         </div>
 
         {/* === Check-out === */}
@@ -43,7 +44,7 @@ const PropertyBookingPanel = ({
           <Label htmlFor="check-out" required>
             Check-out
           </Label>
-          <input type="date" id="check-out" className={styles.input} />
+          <Input type="date" id="check-out" />
         </div>
       </div>
 
