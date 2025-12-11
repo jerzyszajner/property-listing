@@ -8,6 +8,7 @@
     outline: none;
     transition: border-color 0.3s ease;
     width: 100%;
+    height: 42px;
     line-height: 1.5;
     padding: var(--spacing-sm) var(--spacing-md);
     color-scheme: dark;
@@ -45,4 +46,13 @@
 .transparent:focus {
     border: none;
     outline: none;
+}
+
+@media (max-width: 768px) {
+    .input {
+        height: 46px;
+    }
+
+
+
 }

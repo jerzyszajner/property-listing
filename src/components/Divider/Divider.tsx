@@ -2,12 +2,13 @@ import styles from "./Divider.module.css";
 import clsx from "clsx";
 
 interface DividerProps {
-  variant?: "default" | "muted";
+  variant?: "default" | "muted" | "text";
+  children?: string;
 }
 
 /* Divider component */
-const Divider = ({ variant = "default" }: DividerProps) => {
-  return <div className={clsx(styles[variant])}></div>;
+const Divider = ({ variant = "default", children }: DividerProps) => {
+  return <div className={clsx(styles[variant])}>{children}</div>;
 };
 
 export default Divider;

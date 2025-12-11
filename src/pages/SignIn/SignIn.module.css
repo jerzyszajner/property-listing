@@ -10,22 +10,16 @@
 .form {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
-    max-width: 500px;
+    gap: var(--spacing-sm);
+    max-width: 380px;
     width: 100%;
     margin: 0 auto;
-}
-
-.formRow {
-    display: flex;
-    gap: var(--spacing-lg);
-    width: 100%;
 }
 
 .formGroup {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
+    gap: var(--spacing-sm);
     flex: 1;
 }
 
@@ -52,10 +46,5 @@
     .signIn {
         padding: var(--spacing-xl) var(--spacing-md);
         gap: var(--spacing-xl);
-    }
-
-    .formRow {
-        flex-direction: column;
-        gap: var(--spacing-xs);
     }
 }

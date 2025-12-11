@@ -8,6 +8,8 @@ import { useSignInForm } from "./hooks/useSignInForm";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import Label from "@/components/Label/Label";
 import Input from "@/components/Input/Input";
+import PasswordInput from "@/components/PasswordInput/PasswordInput";
+import Divider from "@/components/Divider/Divider";
 import Button from "@/components/Button/Button";
 import FormError from "@/components/FormError/FormError";
 import Toast from "@/components/Toast/Toast";
@@ -24,6 +26,7 @@ function SignIn() {
     isLoading,
     error,
     setError,
+    handleGoogleSignIn,
   } = useSignInForm();
   return (
     <div className={styles.signIn}>
@@ -49,41 +52,44 @@ function SignIn() {
       {/* === Sign In Form === */}
       <form className={styles.form} onSubmit={handleSubmit}>
         {/* === Name Fields === */}
-        <div className={styles.formRow}>
-          <div className={styles.formGroup}>
-            <Label htmlFor="email" required>
-              Email
-            </Label>
-            <Input
-              type="email"
-              id="email"
-              maxLength={30}
-              placeholder="Email"
-              autoComplete="email"
-              {...register("email")}
-            />
-            <FormError error={errors.email?.message} />
-          </div>
+        <div className={styles.formGroup}>
+          <Label htmlFor="email" required>
+            Email
+          </Label>
+          <Input
+            type="email"
+            id="email"
+            maxLength={30}
+            placeholder="Email"
+            autoComplete="email"
+            {...register("email")}
+          />
+          <FormError error={errors.email?.message} />
+        </div>
 
-          <div className={styles.formGroup}>
-            <Label htmlFor="password" required>
-              Password
-            </Label>
-            <Input
-              type="password"
-              id="password"
-              placeholder="Password"
-              autoComplete="current-password"
-              {...register("password")}
-            />
-            <FormError error={errors.password?.message} />
-          </div>
+        <div className={styles.formGroup}>
+          <Label htmlFor="password" required>
+            Password
+          </Label>
+          <PasswordInput
+            // type="password"
+            id="password"
+            placeholder="Password"
+            autoComplete="current-password"
+            {...register("password")}
+          />
+          <FormError error={errors.password?.message} />
         </div>
 
         {/* === Submit Button === */}
         <Button type="submit" variant="primary" disabled={isLoading}>
           {isLoading ? "Signing in..." : "Sign In"}
         </Button>
+
+        <Divider variant="text"> OR </Divider>
+
+        {/* === Google Button === */}
+        <Button onClick={handleGoogleSignIn}>Continue with Google</Button>
 
         {/* === Link to Reset Password === */}
         <div className={styles.linkContainer}>

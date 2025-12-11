@@ -4,6 +4,8 @@ import {
   signInWithEmailAndPassword,
   signOut as firebaseSignOut,
   sendPasswordResetEmail,
+  signInWithPopup,
+  GoogleAuthProvider,
   type UserCredential,
   type User,
 } from "firebase/auth";
@@ -21,15 +23,19 @@ export const getAuthErrorMessage = (error: unknown): string => {
     case "auth/weak-password":
       return "Password should be at least 8 characters";
     case "auth/invalid-credential":
-      return "Invalid email or password";
-    case "auth/user-not-found":
-      return "User not found";
+      return "Invalid email or password. Used Google before? Continue with Google instead.";
     case "auth/wrong-password":
       return "Wrong password";
     case "auth/user-disabled":
       return "This account has been disabled";
     case "auth/too-many-requests":
       return "Too many requests. Please try again later";
+    case "auth/popup-closed-by-user":
+      return "Sign in cancelled";
+    case "auth/popup-blocked":
+      return "Popup blocked. Please allow popups for this site";
+    case "auth/account-exists-with-different-credential":
+      return "An account already exists with this email";
 
     // Network and system errors
     case "auth/network-request-failed":
@@ -90,6 +96,7 @@ export const updateUser = async (): Promise<User | null> => {
     return null;
   }
   await currentUser.reload();
+  await currentUser.getIdToken(true);
   return currentUser;
 };
 
@@ -100,4 +107,14 @@ export const emailVerification = async (): Promise<void> => {
     throw new Error("No user is currently signed in");
   }
   await sendEmailVerification(currentUser);
+};
+
+// Service function for Google Sign-In
+export const signInWithGoogle = async (): Promise<UserCredential> => {
+  const provider = new GoogleAuthProvider();
+  provider.addScope("profile");
+  provider.addScope("email");
+
+  const result = await signInWithPopup(auth, provider);
+  return result;
 };

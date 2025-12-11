@@ -11,7 +11,7 @@ export type SuccessMessageConfig = {
 
 export const PAGE_HEADER_CONFIG: PageHeaderConfig = {
   title: "Reset Password",
-  subtitle: "Enter your email to reset your password",
+  subtitle: "Used Google before? Sign in with Google instead.",
 };
 
 export const SUCCESS_MESSAGE: SuccessMessageConfig = {

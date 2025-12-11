@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInFormSchema, type SignInFormData } from "../signInFormSchema";
-import { signIn, getAuthErrorMessage } from "@/services/authService";
+import {
+  signIn,
+  getAuthErrorMessage,
+  signInWithGoogle,
+} from "@/services/authService";
 import { useRedirectFrom } from "@/hooks/useRedirectFrom";
 
 // Hook for sign in form
@@ -51,6 +55,17 @@ export const useSignInForm = () => {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    setError(null);
+    try {
+      await signInWithGoogle();
+
+      setIsSuccess(true);
+    } catch (err) {
+      setError(getAuthErrorMessage(err));
+    }
+  };
+
   return {
     register,
     handleSubmit: handleSubmit(onSubmit),
@@ -60,5 +75,6 @@ export const useSignInForm = () => {
     isLoading: isSubmitting,
     error,
     setError,
+    handleGoogleSignIn,
   };
 };

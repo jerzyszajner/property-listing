@@ -17,7 +17,7 @@
     cursor: pointer;
     transition: border-color 0.3s ease;
     width: 100%;
-    height: 2.3rem;
+    height: 42px
 }
 
 .select:focus {
@@ -40,6 +40,6 @@
 
 @media (max-width: 768px) {
     .select {
-        height: var(--spacing-xxl);
+        height: 46px;
     }
 }

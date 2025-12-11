@@ -29,7 +29,6 @@
     position: absolute;
     top: -6px;
     left: -6px;
-
 }
 
 .closeIcon {
@@ -60,6 +59,7 @@
 @media (max-width: 480px) {
     .toast {
         right: var(--spacing-md);
+        left: var(--spacing-md);
         max-width: none;
     }
 }

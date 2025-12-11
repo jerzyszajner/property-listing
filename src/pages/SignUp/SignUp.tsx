@@ -4,7 +4,9 @@ import { useSignUpForm } from "./hooks/useSignUpForm";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import Label from "@/components/Label/Label";
 import Input from "@/components/Input/Input";
+import PasswordInput from "@/components/PasswordInput/PasswordInput";
 import Button from "@/components/Button/Button";
+import Divider from "@/components/Divider/Divider";
 import FormError from "@/components/FormError/FormError";
 import Toast from "@/components/Toast/Toast";
 import SuccessMessage from "@/components/SuccesMessage/SuccesMessage";
@@ -20,6 +22,7 @@ const SignUp = () => {
     isLoading,
     error,
     setError,
+    handleGoogleSignUp,
   } = useSignUpForm();
 
   return (
@@ -45,107 +48,44 @@ const SignUp = () => {
 
       {/* === Sign Up Form === */}
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
-        {/* === Name Fields === */}
-        <div className={styles.formRow}>
-          <div className={styles.formGroup}>
-            <Label htmlFor="firstName" required>
-              First Name
-            </Label>
-            <Input
-              type="text"
-              id="firstName"
-              maxLength={30}
-              placeholder="First name"
-              autoComplete="given-name"
-              {...register("firstName")}
-            />
-            <FormError error={errors.firstName?.message} />
-          </div>
-
-          <div className={styles.formGroup}>
-            <Label htmlFor="lastName" required>
-              Last Name
-            </Label>
-            <Input
-              type="text"
-              id="lastName"
-              maxLength={30}
-              placeholder="Last name"
-              autoComplete="family-name"
-              {...register("lastName")}
-            />
-            <FormError error={errors.lastName?.message} />
-          </div>
+        {/* === Email Field === */}
+        <div className={styles.formGroup}>
+          <Label htmlFor="email" required>
+            Email
+          </Label>
+          <Input
+            type="email"
+            id="email"
+            maxLength={30}
+            placeholder="Email"
+            autoComplete="email"
+            {...register("email")}
+          />
+          <FormError error={errors.email?.message} />
         </div>
-
-        {/* === Contact Fields === */}
-        <div className={styles.formRow}>
-          <div className={styles.formGroup}>
-            <Label htmlFor="email" required>
-              Email
-            </Label>
-            <Input
-              type="email"
-              id="email"
-              maxLength={30}
-              placeholder="Email"
-              autoComplete="email"
-              {...register("email")}
-            />
-            <FormError error={errors.email?.message} />
-          </div>
-
-          <div className={styles.formGroup}>
-            <Label htmlFor="phone" required>
-              Phone
-            </Label>
-            <Input
-              type="tel"
-              id="phone"
-              maxLength={10}
-              placeholder="Phone"
-              autoComplete="tel"
-              {...register("phone")}
-            />
-            <FormError error={errors.phone?.message} />
-          </div>
-        </div>
-
-        {/* === Password Fields === */}
-        <div className={styles.formRow}>
-          <div className={styles.formGroup}>
-            <Label htmlFor="password" required>
-              Password
-            </Label>
-            <Input
-              type="password"
-              id="password"
-              placeholder="Password"
-              autoComplete="new-password"
-              {...register("password")}
-            />
-            <FormError error={errors.password?.message} />
-          </div>
-
-          <div className={styles.formGroup}>
-            <Label htmlFor="confirmPassword" required>
-              Confirm Password
-            </Label>
-            <Input
-              type="password"
-              id="confirmPassword"
-              placeholder="Confirm password"
-              autoComplete="new-password"
-              {...register("confirmPassword")}
-            />
-            <FormError error={errors.confirmPassword?.message} />
-          </div>
+        {/* === Password Field === */}
+        <div className={styles.formGroup}>
+          <Label htmlFor="password" required>
+            Password
+          </Label>
+          <PasswordInput
+            id="password"
+            placeholder="Password"
+            autoComplete="new-password"
+            {...register("password")}
+          />
+          <FormError error={errors.password?.message} />
         </div>
 
         {/* === Submit Button === */}
         <Button type="submit" variant="primary" disabled={isLoading}>
           {isLoading ? "Signing up..." : "Sign Up"}
         </Button>
+
+        <Divider variant="text"> OR </Divider>
+
+        {/* === Google Button === */}
+        <Button onClick={handleGoogleSignUp}>Continue with Google</Button>
 
         {/* === Link to Sign In === */}
         <div className={styles.linkContainer}>

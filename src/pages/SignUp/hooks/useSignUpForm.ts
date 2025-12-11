@@ -3,12 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpFormSchema, type SignUpFormData } from "../signUpFormSchema";
-import { signUp, getAuthErrorMessage } from "@/services/authService";
+import {
+  signUp,
+  signInWithGoogle,
+  getAuthErrorMessage,
+} from "@/services/authService";
 import { createUserProfile } from "@/services/userService";
 
 // Hook for sign up form
 export const useSignUpForm = () => {
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [redirectPath, setRedirectPath] = useState<string>(
+    "/email-verification"
+  );
   const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
@@ -21,12 +28,8 @@ export const useSignUpForm = () => {
   } = useForm<SignUpFormData>({
     resolver: zodResolver(signUpFormSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
       email: "",
-      phone: "",
       password: "",
-      confirmPassword: "",
     },
     mode: "onBlur",
   });
@@ -35,26 +38,37 @@ export const useSignUpForm = () => {
     if (isSuccess) {
       const timer = setTimeout(() => {
         setIsSuccess(false);
-        navigate("/email-verification");
+        navigate(redirectPath, { replace: true });
       }, 2500);
 
       return () => clearTimeout(timer);
     }
-  }, [isSuccess, navigate]);
+  }, [isSuccess, navigate, redirectPath]);
 
   const onSubmit = async (data: SignUpFormData) => {
     setError(null);
     try {
-      const userCredential = await signUp(data.email, data.password);
-
-      await createUserProfile(userCredential.user.uid, {
-        firstName: data.firstName,
-        lastName: data.lastName,
+      const credential = await signUp(data.email, data.password);
+      await createUserProfile(credential.user.uid, {
         email: data.email,
-        phone: data.phone,
       });
 
       reset();
+      setIsSuccess(true);
+    } catch (err) {
+      setError(getAuthErrorMessage(err));
+    }
+  };
+
+  const handleGoogleSignUp = async () => {
+    setError(null);
+    try {
+      const credential = await signInWithGoogle();
+      await createUserProfile(credential.user.uid, {
+        email: credential.user.email ?? "",
+      });
+
+      setRedirectPath("/");
       setIsSuccess(true);
     } catch (err) {
       setError(getAuthErrorMessage(err));
@@ -70,5 +84,6 @@ export const useSignUpForm = () => {
     isLoading: isSubmitting,
     error,
     setError,
+    handleGoogleSignUp,
   };
 };
