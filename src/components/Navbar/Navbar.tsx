@@ -1,7 +1,8 @@
+import { useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X, LogIn, LogOut } from "lucide-react";
 import { MAIN_LINKS, AUTHENTICATED_LINKS, AUTH_LINK } from "./navbarConfig";
-import { useMenu } from "./hooks/useMenu";
+import { useSidebarMenu } from "./hooks/useSidebarMenu";
 import { useSignOut } from "./hooks/useSignOut";
 import { useAuthContext } from "@/contexts/AuthContext";
 import clsx from "clsx";
@@ -13,8 +14,14 @@ import styles from "./Navbar.module.css";
 /* Navbar component */
 const Navbar = () => {
   const { user } = useAuthContext();
-  const { isOpen, toggleMenu, closeMenu } = useMenu();
+  const { isOpen, toggleMenu, closeMenu } = useSidebarMenu();
   const { handleSignOut, isSigningOut, error, setError } = useSignOut();
+  const toggleButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  const closeMenuAndFocusToggle = () => {
+    closeMenu();
+    toggleButtonRef.current?.focus();
+  };
 
   return (
     <>
@@ -45,6 +52,7 @@ const Navbar = () => {
           {/* === Hamburger Button === */}
           <button
             onClick={toggleMenu}
+            ref={toggleButtonRef}
             className={styles.hamburgerButton}
             aria-label="Toggle menu"
             aria-expanded={isOpen}
@@ -61,7 +69,7 @@ const Navbar = () => {
           <>
             <div
               className={clsx(styles.overlay, isOpen && styles.overlayVisible)}
-              onClick={closeMenu}
+              onClick={closeMenuAndFocusToggle}
             ></div>
             <aside
               id="sidebar-menu"
@@ -87,7 +95,7 @@ const Navbar = () => {
                         className={({ isActive }) =>
                           clsx(styles.sidebarLink, isActive && styles.active)
                         }
-                        onClick={closeMenu}
+                        onClick={closeMenuAndFocusToggle}
                       >
                         {link.label}
                       </NavLink>
@@ -111,7 +119,7 @@ const Navbar = () => {
                                 isActive && styles.active
                               )
                             }
-                            onClick={closeMenu}
+                            onClick={closeMenuAndFocusToggle}
                           >
                             {link.label}
                           </NavLink>
@@ -122,7 +130,7 @@ const Navbar = () => {
                     <button
                       className={styles.sidebarLogout}
                       onClick={() => {
-                        closeMenu();
+                        closeMenuAndFocusToggle();
                         handleSignOut();
                       }}
                       disabled={isSigningOut}
