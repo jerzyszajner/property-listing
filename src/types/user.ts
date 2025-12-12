@@ -7,6 +7,7 @@ export type UserProfile = {
   firstName: string | null;
   lastName: string | null;
   phone: string | null;
+  profileImage: string | null;
   accountCreatedAt: Timestamp | null;
   updatedAt: Timestamp | null;
 };

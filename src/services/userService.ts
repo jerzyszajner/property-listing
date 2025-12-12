@@ -1,4 +1,10 @@
-import { doc, setDoc, serverTimestamp, onSnapshot } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  serverTimestamp,
+  onSnapshot,
+} from "firebase/firestore";
 import { database } from "@/config/firebaseConfig";
 import type {
   CreateUserProfile,
@@ -11,10 +17,17 @@ export const createUserProfile = async (
   uid: string,
   profileData: CreateUserProfile
 ): Promise<void> => {
-  await setDoc(doc(database, "users", uid), {
-    email: profileData.email,
-    accountCreatedAt: serverTimestamp(),
-  });
+  const userRef = doc(database, "users", uid);
+
+  // Check if user profile already exists
+  const userSnap = await getDoc(userRef);
+
+  if (!userSnap.exists()) {
+    await setDoc(userRef, {
+      email: profileData.email,
+      accountCreatedAt: serverTimestamp(),
+    });
+  }
 };
 
 // Service function for real-time user profile subscription
@@ -39,6 +52,7 @@ export const listenToUserProfile = (
         firstName: data.firstName ?? null,
         lastName: data.lastName ?? null,
         phone: data.phone ?? null,
+        profileImage: data.profileImage ?? null,
         accountCreatedAt: data.accountCreatedAt ?? null,
         updatedAt: data.updatedAt ?? null,
       });
@@ -58,6 +72,21 @@ export const updateUserProfile = async (
       firstName: profileData.firstName ?? null,
       lastName: profileData.lastName ?? null,
       phone: profileData.phone ?? null,
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true }
+  );
+};
+
+// Service function for updating user profile image
+export const updateUserProfileImage = async (
+  uid: string,
+  profileImageUrl: string
+): Promise<void> => {
+  await setDoc(
+    doc(database, "users", uid),
+    {
+      profileImage: profileImageUrl,
       updatedAt: serverTimestamp(),
     },
     { merge: true }
