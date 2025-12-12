@@ -17,7 +17,7 @@ export const getAuthErrorMessage = (error: unknown): string => {
 
   switch (code) {
     case "auth/email-already-in-use":
-      return "Email already in use";
+      return "This email is already registered. Please sign in instead of creating a new account.";
     case "auth/invalid-email":
       return "Invalid email address";
     case "auth/weak-password":
