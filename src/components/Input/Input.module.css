@@ -12,6 +12,14 @@
     line-height: 1.5;
     padding: var(--spacing-sm) var(--spacing-md);
     color-scheme: dark;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.input:hover {
+    border-color: var(--color-border-hover);
 }
 
 .input::placeholder {

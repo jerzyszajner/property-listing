@@ -6,6 +6,7 @@ export interface UsePropertiesReturn {
   properties: Property[];
   isLoading: boolean;
   error: string | null;
+  setError: (error: string | null) => void;
 }
 
 // Hook for fetching properties data
@@ -33,5 +34,5 @@ export const useProperties = (): UsePropertiesReturn => {
     loadProperties();
   }, []);
 
-  return { properties, isLoading, error };
+  return { properties, isLoading, error, setError };
 };

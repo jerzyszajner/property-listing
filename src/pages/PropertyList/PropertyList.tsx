@@ -4,11 +4,12 @@ import PropertyListFilterPanel from "./components/PropertyListFilterPanel/Proper
 import PropertyCard from "@/components/PropertyCard/PropertyCard";
 import EmptyState from "@/components/EmptyState/EmptyState";
 import Spinner from "@/components/Spinner/Spinner";
+import Toast from "@/components/Toast/Toast";
 import styles from "./PropertyList.module.css";
 
 /* PropertyList page */
 const PropertyList = () => {
-  const { properties, isLoading, error } = useProperties();
+  const { properties, isLoading, error, setError } = useProperties();
   const {
     selectedLocation,
     setSelectedLocation,
@@ -21,28 +22,37 @@ const PropertyList = () => {
   } = usePropertyFilters(properties);
 
   if (isLoading) return <Spinner />;
-  if (error) return <div>Error: {error}</div>;
-  if (properties.length === 0)
-    return <EmptyState message="No properties found." />;
+
   return (
     <div className={styles.propertyListPage}>
-      <PropertyListFilterPanel
-        selectedLocation={selectedLocation}
-        onLocationChange={setSelectedLocation}
-        availableLocations={availableLocations}
-        isSuperhost={isSuperhost}
-        onSuperhostChange={setIsSuperhost}
-        guestCount={guestCount}
-        onGuestCountChange={setGuestCount}
-      />
-      {filteredByGuests.length === 0 ? (
-        <EmptyState message="No properties found matching your filters." />
+      {/* === Error Toast === */}
+      {error && (
+        <Toast message={error} variant="error" onClose={() => setError(null)} />
+      )}
+
+      {properties.length === 0 ? (
+        <EmptyState message="No properties found." />
       ) : (
-        <ul className={styles.propertyList}>
-          {filteredByGuests.map((property) => (
-            <PropertyCard key={property.id} property={property} />
-          ))}
-        </ul>
+        <>
+          <PropertyListFilterPanel
+            selectedLocation={selectedLocation}
+            onLocationChange={setSelectedLocation}
+            availableLocations={availableLocations}
+            isSuperhost={isSuperhost}
+            onSuperhostChange={setIsSuperhost}
+            guestCount={guestCount}
+            onGuestCountChange={setGuestCount}
+          />
+          {filteredByGuests.length === 0 ? (
+            <EmptyState message="No properties found matching your filters." />
+          ) : (
+            <ul className={styles.propertyList}>
+              {filteredByGuests.map((property) => (
+                <PropertyCard key={property.id} property={property} />
+              ))}
+            </ul>
+          )}
+        </>
       )}
     </div>
   );
