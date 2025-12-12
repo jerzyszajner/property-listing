@@ -11,6 +11,7 @@ Modern property listing application built with React and TypeScript. Search vaca
 - Interactive Google Maps integration
 - Property details page
 - User authentication (sign up)
+- User profile with image upload
 - Contact form with Firestore integration
 - Responsive design with modern UI
 
@@ -23,6 +24,7 @@ Modern property listing application built with React and TypeScript. Search vaca
 - [Firebase (Firestore + Authentication)](https://firebase.google.com)
 - [Google Maps API](https://developers.google.com/maps) - Interactive maps for property locations
 - [Google Gemini AI](https://ai.google.dev) - Natural language property search
+- [Cloudinary](https://cloudinary.com) - Image upload and storage for user profiles
 - [Zod](https://zod.dev) - Schema validation for forms
 - [React Hook Form](https://react-hook-form.com) - Form state management and validation
 - [Lucide React](https://lucide.dev) - Icon library
@@ -45,6 +47,7 @@ Modern property listing application built with React and TypeScript. Search vaca
    VITE_FIREBASE_APP_ID=your_app_id
    VITE_GOOGLE_MAPS_API_KEY=your_api_key
    VITE_GEMINI_API_KEY=your_api_key
+   VITE_CLOUDINARY_NAME=your_cloudinary_cloud_name
    ```
 
 ## Getting Started
