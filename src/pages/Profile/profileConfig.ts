@@ -19,3 +19,6 @@ export const PROFILE_FIELDS: ProfileFieldsConfig[] = [
   { label: "Email:", key: "email" },
   { label: "Phone:", key: "phone" },
 ];
+
+export const INCOMPLETE_PROFILE_MESSAGE =
+  "Your profile is incomplete. Add your details to finish.";

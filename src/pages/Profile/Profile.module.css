@@ -17,41 +17,6 @@
     margin: 0 auto;
 }
 
-.profileInfo {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-}
-
-.infoRow {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--color-border-default);
-    padding: var(--spacing-sm);
-    line-height: 1.5;
-    font-weight: 400;
-    color: var(--color-bg-label);
-}
-
-.buttons {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-}
-
-/*--------------------form-------------------*/
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-}
-
-.formGroup {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-}
-
 @media (max-width: 768px) {
     .profile {
         padding: var(--spacing-md);
@@ -60,9 +25,4 @@
     .profileContent {
         flex-direction: column;
     }
-
-    .buttons {
-        gap: var(--spacing-md);
-    }
-
 }
