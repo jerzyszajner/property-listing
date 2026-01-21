@@ -9,6 +9,7 @@ import {
   signInWithGoogle,
 } from "@/services/authService";
 import { useRedirectFrom } from "@/hooks/useRedirectFrom";
+import { createUserProfile } from "@/services/userService";
 
 // Hook for sign in form
 export const useSignInForm = () => {
@@ -58,7 +59,10 @@ export const useSignInForm = () => {
   const handleGoogleSignIn = async () => {
     setError(null);
     try {
-      await signInWithGoogle();
+      const credential = await signInWithGoogle();
+      await createUserProfile(credential.user.uid, {
+        email: credential.user.email ?? "",
+      });
 
       setIsSuccess(true);
     } catch (err) {
