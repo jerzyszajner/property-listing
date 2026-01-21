@@ -129,8 +129,10 @@ export const isGoogleUser = (user: User): boolean => {
   );
 };
 
-// Service function for deleting user account
-export const deleteUserAccount = async (password?: string): Promise<void> => {
+// Service function for reauthenticating user before sensitive actions
+export const reauthenticateUser = async (
+  password?: string
+): Promise<void> => {
   const currentUser = auth.currentUser;
   if (!currentUser) {
     throw new Error("No user is currently signed in");
@@ -157,9 +159,16 @@ export const deleteUserAccount = async (password?: string): Promise<void> => {
     await reauthenticateWithCredential(currentUser, credential);
   }
 
-    // Refresh user and token after reauthentication (important for mobile devices)
-    await currentUser.reload();
-    await currentUser.getIdToken(true);
+  await currentUser.reload();
+  await currentUser.getIdToken(true);
+};
+
+// Service function for deleting user account
+export const deleteUserAccount = async (): Promise<void> => {
+  const currentUser = auth.currentUser;
+  if (!currentUser) {
+    throw new Error("No user is currently signed in");
+  }
 
   await currentUser.delete();
 };

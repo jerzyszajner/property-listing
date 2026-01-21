@@ -10,6 +10,7 @@ import {
   deleteUserAccount,
   getAuthErrorMessage,
   isGoogleUser,
+  reauthenticateUser,
 } from "@/services/authService";
 import { deleteUserProfile } from "@/services/userService";
 import { useAuthContext } from "@/contexts/AuthContext";
@@ -50,8 +51,9 @@ export const useDeleteAccountForm = () => {
     setError(null);
 
     try {
+      await reauthenticateUser(data.password);
       await deleteUserProfile(user.uid);
-      await deleteUserAccount(data.password);
+      await deleteUserAccount();
       reset();
       navigate("/sign-in", { replace: true });
     } catch (err) {
