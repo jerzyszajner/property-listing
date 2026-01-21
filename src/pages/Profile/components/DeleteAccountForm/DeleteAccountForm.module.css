@@ -1,0 +1,37 @@
+/* DeleteAccountForm component styles */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.message {
+    padding: var(--spacing-md);
+    background-color: var(--color-background-light);
+    border-radius: var(--border-radius-sm);
+}
+
+.message p {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+@media (max-width: 768px) {
+    .buttons {
+        gap: var(--spacing-md);
+    }
+}

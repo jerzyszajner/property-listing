@@ -8,6 +8,7 @@ interface ProfileInfoProps {
   userProfile: UserProfile;
   isIncomplete: boolean;
   onEditClick: () => void;
+  onDeleteClick: () => void;
 }
 
 /* ProfileInfo component */
@@ -15,6 +16,7 @@ const ProfileInfo = ({
   userProfile,
   isIncomplete,
   onEditClick,
+  onDeleteClick,
 }: ProfileInfoProps) => {
   return (
     <>
@@ -44,7 +46,9 @@ const ProfileInfo = ({
         <Button variant="primary" onClick={onEditClick}>
           {isIncomplete ? "Complete Profile" : "Edit Profile"}
         </Button>
-        <Button variant="danger">Delete Account</Button>
+        <Button variant="danger" onClick={onDeleteClick}>
+          Delete Account
+        </Button>
       </div>
     </>
   );

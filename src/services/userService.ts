@@ -4,6 +4,7 @@ import {
   setDoc,
   serverTimestamp,
   onSnapshot,
+  deleteDoc,
 } from "firebase/firestore";
 import { database } from "@/config/firebaseConfig";
 import type {
@@ -91,4 +92,10 @@ export const updateUserProfileImage = async (
     },
     { merge: true }
   );
+};
+
+// Service function for deleting user profile from Firestore database
+export const deleteUserProfile = async (uid: string): Promise<void> => {
+  const userRef = doc(database, "users", uid);
+  await deleteDoc(userRef);
 };
