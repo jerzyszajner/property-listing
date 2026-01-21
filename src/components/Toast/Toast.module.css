@@ -10,7 +10,7 @@
     text-align: center;
     animation: slideIn 0.3s ease-out;
     color: var(--color-text-light);
-    z-index: 600;
+    z-index: 9999;
 }
 
 .toast:hover .closeCircle {

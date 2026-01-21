@@ -157,5 +157,9 @@ export const deleteUserAccount = async (password?: string): Promise<void> => {
     await reauthenticateWithCredential(currentUser, credential);
   }
 
+    // Refresh user and token after reauthentication (important for mobile devices)
+    await currentUser.reload();
+    await currentUser.getIdToken(true);
+
   await currentUser.delete();
 };
