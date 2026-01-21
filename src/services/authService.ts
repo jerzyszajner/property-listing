@@ -6,6 +6,9 @@ import {
   sendPasswordResetEmail,
   signInWithPopup,
   GoogleAuthProvider,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  reauthenticateWithPopup,
   type UserCredential,
   type User,
 } from "firebase/auth";
@@ -117,4 +120,42 @@ export const signInWithGoogle = async (): Promise<UserCredential> => {
 
   const result = await signInWithPopup(auth, provider);
   return result;
+};
+
+// Service function for checking if user signed in with Google
+export const isGoogleUser = (user: User): boolean => {
+  return user.providerData.some(
+    (provider) => provider.providerId === "google.com"
+  );
+};
+
+// Service function for deleting user account
+export const deleteUserAccount = async (password?: string): Promise<void> => {
+  const currentUser = auth.currentUser;
+  if (!currentUser) {
+    throw new Error("No user is currently signed in");
+  }
+
+  const isGoogle = isGoogleUser(currentUser);
+
+  if (isGoogle) {
+    const provider = new GoogleAuthProvider();
+    provider.addScope("profile");
+    provider.addScope("email");
+    await reauthenticateWithPopup(currentUser, provider);
+  } else {
+    if (!password) {
+      throw new Error("Password is required for email/password users");
+    }
+    if (!currentUser.email) {
+      throw new Error("User email is not available");
+    }
+    const credential = EmailAuthProvider.credential(
+      currentUser.email,
+      password
+    );
+    await reauthenticateWithCredential(currentUser, credential);
+  }
+
+  await currentUser.delete();
 };
