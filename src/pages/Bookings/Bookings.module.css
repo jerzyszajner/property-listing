@@ -1,0 +1,25 @@
+/* Bookings page styles */
+.bookings {
+  padding: var(--spacing-xxl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.bookingsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  min-height: 30rem;
+}
+
+@media (max-width: 768px) {
+  .bookings {
+    padding: var(--spacing-md);
+  }
+
+  .bookingsList {
+    padding: 0;
+  }
+}
