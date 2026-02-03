@@ -6,11 +6,12 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { router } from "@/routes/routes";
 
 import "./index.css";
+import "react-day-picker/style.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
-  </StrictMode>
+  </StrictMode>,
 );
