@@ -6,22 +6,18 @@ import Textarea from "@/components/Textarea/Textarea";
 import Button from "@/components/Button/Button";
 import FormError from "@/components/FormError/FormError";
 import { useContactForm } from "./hooks/useContactForm";
-import Confetti from "react-confetti";
-import { useWindowSize } from "react-use";
 import SuccessMessage from "@/components/SuccesMessage/SuccesMessage";
 import Toast from "@/components/Toast/Toast";
 import styles from "./Contact.module.css";
 
 /* Contact page component */
 const Contact = () => {
-  const { width, height } = useWindowSize();
   const {
     register,
     handleSubmit,
     errors,
     watch,
     isSuccess,
-    setIsSuccess,
     isLoading,
     error,
     setError,
@@ -36,24 +32,10 @@ const Contact = () => {
         <Toast message={error} variant="error" onClose={() => setError(null)} />
       )}
       {isSuccess && (
-        <>
-          <Confetti
-            width={width}
-            height={height}
-            recycle={false}
-            numberOfPieces={250}
-            gravity={0.6}
-            friction={0.95}
-            onConfettiComplete={() => {
-              setIsSuccess(false);
-            }}
-          />
-          {/* === Success Message === */}
-          <SuccessMessage
-            title={SUCCESS_MESSAGE.title}
-            message={SUCCESS_MESSAGE.message}
-          />
-        </>
+        <SuccessMessage
+          title={SUCCESS_MESSAGE.title}
+          message={SUCCESS_MESSAGE.message}
+        />
       )}
       {/* === Page Header === */}
       <PageHeader

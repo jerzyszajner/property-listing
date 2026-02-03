@@ -1,6 +1,5 @@
 import {
   doc,
-  getDoc,
   setDoc,
   serverTimestamp,
   onSnapshot,
@@ -16,26 +15,25 @@ import type {
 // Service function for creating basic user profile in Firestore database
 export const createUserProfile = async (
   uid: string,
-  profileData: CreateUserProfile
+  profileData: CreateUserProfile,
 ): Promise<void> => {
   const userRef = doc(database, "users", uid);
 
-  // Check if user profile already exists
-  const userSnap = await getDoc(userRef);
-
-  if (!userSnap.exists()) {
-    await setDoc(userRef, {
+  await setDoc(
+    userRef,
+    {
       email: profileData.email,
       accountCreatedAt: serverTimestamp(),
-    });
-  }
+    },
+    { merge: true },
+  );
 };
 
 // Service function for real-time user profile subscription
 export const listenToUserProfile = (
   uid: string,
   onProfileChange: (profile: UserProfile | null) => void,
-  onProfileError: (error: unknown) => void
+  onProfileError: (error: unknown) => void,
 ) => {
   const docRef = doc(database, "users", uid);
 
@@ -58,14 +56,14 @@ export const listenToUserProfile = (
         updatedAt: data.updatedAt ?? null,
       });
     },
-    onProfileError
+    onProfileError,
   );
 };
 
 // Service function for updating user profile in Firestore database
 export const updateUserProfile = async (
   uid: string,
-  profileData: UpdateUserProfile
+  profileData: UpdateUserProfile,
 ): Promise<void> => {
   await setDoc(
     doc(database, "users", uid),
@@ -75,14 +73,14 @@ export const updateUserProfile = async (
       phone: profileData.phone ?? null,
       updatedAt: serverTimestamp(),
     },
-    { merge: true }
+    { merge: true },
   );
 };
 
 // Service function for updating user profile image
 export const updateUserProfileImage = async (
   uid: string,
-  profileImageUrl: string
+  profileImageUrl: string,
 ): Promise<void> => {
   await setDoc(
     doc(database, "users", uid),
@@ -90,7 +88,7 @@ export const updateUserProfileImage = async (
       profileImage: profileImageUrl,
       updatedAt: serverTimestamp(),
     },
-    { merge: true }
+    { merge: true },
   );
 };
 

@@ -1,3 +1,4 @@
+import type { ChangeEvent } from "react";
 import Button from "@/components/Button/Button";
 import ToggleSwitch from "@/components/ToggleSwitch/ToggleSwitch";
 import Select from "@/components/Select/Select";
@@ -56,7 +57,9 @@ const PropertyListFilterPanel = ({
           <Select
             options={GUEST_OPTIONS}
             value={guestCount}
-            onChange={onGuestCountChange}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+              onGuestCountChange(e.target.value)
+            }
             ariaLabel="Select number of guests"
             id="guests"
           />

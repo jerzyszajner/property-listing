@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema, type ContactFormData } from "../contactFormSchema";
@@ -29,6 +29,16 @@ export const useContactForm = () => {
     mode: "onBlur",
   });
 
+  useEffect(() => {
+    if (isSuccess) {
+      const timer = setTimeout(() => {
+        setIsSuccess(false);
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess]);
+
   const onSubmit = async (data: ContactFormData) => {
     setError(null);
     try {
@@ -47,7 +57,7 @@ export const useContactForm = () => {
       setError(
         err instanceof Error
           ? err.message
-          : "Failed to send message. Please try again."
+          : "Failed to send message. Please try again.",
       );
     }
   };
