@@ -13,12 +13,12 @@ const PropertyInfo = ({ property }: PropertyInfoProps) => {
   const hostName = property.host?.name;
   const hostImage = property.host?.image;
   const bedrooms = property.capacity?.bedroom;
-  const persons = property.capacity?.people;
+  const guests = property.capacity?.people;
   const amenities = property.amenities ?? [];
   const description = property.description ?? "";
 
   const amenitiesToShow = AMENITIES_CONFIG.filter(({ key }) =>
-    amenities.includes(key)
+    amenities.includes(key),
   );
 
   return (
@@ -35,11 +35,11 @@ const PropertyInfo = ({ property }: PropertyInfoProps) => {
       <div className={styles.capacitySection}>
         <span className={styles.capacityItem}>
           <Home className={styles.capacityIcon} />
-          {bedrooms} bedroom
+          {bedrooms} {bedrooms === 1 ? "bedroom" : "bedrooms"}
         </span>
         <span className={styles.capacityItem}>
           <Users className={styles.capacityIcon} />
-          {persons} person
+          {guests} {guests === 1 ? "guest" : "guests"}
         </span>
       </div>
 

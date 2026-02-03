@@ -1,42 +1,120 @@
-import type { Property } from "@/types/property";
+import { useMemo, useEffect } from "react";
 import clsx from "clsx";
-import { GUEST_OPTIONS } from "./propertyBookingPanelConfig";
+import { Controller } from "react-hook-form";
 import Label from "@/components/Label/Label";
-import Input from "@/components/Input/Input";
 import Select from "@/components/Select/Select";
 import Button from "@/components/Button/Button";
 import Divider from "@/components/Divider/Divider";
+import FormError from "@/components/FormError/FormError";
+import DatePickerInput from "../DatePickerInput/DatePickerInput";
+import { formatPrice, getStartOfDay } from "@/utils/helpers";
+import { usePropertyBookedDates } from "../../hooks/usePropertyBookedDates";
+import type { useBookingForm } from "../../hooks/useBookingForm";
+import type { Matcher } from "react-day-picker";
 import styles from "./PropertyBookingPanel.module.css";
 
+type UseBookingFormReturn = ReturnType<typeof useBookingForm>;
+
+type GuestOption = {
+  value: string;
+  label: string;
+};
+
 interface PropertyBookingPanelProps {
-  property: Property;
-  guestCount: string;
-  onGuestCountChange: (value: string) => void;
+  bookingForm: UseBookingFormReturn;
+  propertyId: string;
+  maxGuests: number;
+  onSendInquiry: () => void;
 }
 
 /* PropertyBookingPanel component */
 const PropertyBookingPanel = ({
-  property,
-  guestCount,
-  onGuestCountChange,
+  bookingForm,
+  propertyId,
+  maxGuests,
+  onSendInquiry,
 }: PropertyBookingPanelProps) => {
-  const price = property.price ?? 0;
+  const {
+    register,
+    control,
+    errors,
+    checkIn,
+    checkOut,
+    guests,
+    nights,
+    pricePerNight,
+    totalPrice,
+    isLoading,
+    isSuccess,
+  } = bookingForm;
+
+  const {
+    bookedRanges,
+    isLoading: isLoadingBookedDates,
+    error: bookedDatesError,
+    refetch: refetchBookedDates,
+  } = usePropertyBookedDates(propertyId);
+
+  useEffect(() => {
+    if (isSuccess) {
+      refetchBookedDates();
+    }
+  }, [isSuccess, refetchBookedDates]);
+
+  const hasDates = checkIn && checkOut;
+  const isFormDisabled = isLoading || isLoadingBookedDates || !hasDates;
+
+  const disabledDatesForCheckIn = useMemo<Matcher[]>(
+    () => [{ before: getStartOfDay(new Date()) }, ...bookedRanges],
+    [bookedRanges]
+  );
+
+  const disabledDatesForCheckOut = useMemo<Matcher[]>(
+    () => [{ before: getStartOfDay(checkIn ?? new Date()) }, ...bookedRanges],
+    [checkIn, bookedRanges]
+  );
+
+  const guestOptions = useMemo<GuestOption[]>(
+    () =>
+      Array.from({ length: maxGuests }, (_, index) => {
+        const guests = index + 1;
+        return {
+          value: String(guests),
+          label: `${guests} ${guests === 1 ? "guest" : "guests"}`,
+        };
+      }),
+    [maxGuests]
+  );
 
   return (
     <div className={styles.panel}>
       {/* === Price === */}
       <div className={styles.price}>
-        ${price}
+        ${formatPrice(pricePerNight)}
         <span className={styles.priceUnit}>/night</span>
       </div>
 
-      <div className={styles.inputGrupRow}>
+      <div className={styles.inputGroupRow}>
         {/* === Check-in === */}
         <div className={styles.inputGroup}>
-          <Label htmlFor="check-inn" required>
+          <Label htmlFor="check-in" required>
             Check-in
           </Label>
-          <Input type="date" id="check-inn" />
+          <Controller
+            name="checkIn"
+            control={control}
+            render={({ field }) => (
+              <DatePickerInput
+                id="check-in"
+                label="check-in"
+                selected={field.value}
+                onSelect={field.onChange}
+                disabled={disabledDatesForCheckIn}
+                placeholder="Select check-in date"
+                error={errors.checkIn?.message}
+              />
+            )}
+          />
         </div>
 
         {/* === Check-out === */}
@@ -44,7 +122,21 @@ const PropertyBookingPanel = ({
           <Label htmlFor="check-out" required>
             Check-out
           </Label>
-          <Input type="date" id="check-out" />
+          <Controller
+            name="checkOut"
+            control={control}
+            render={({ field }) => (
+              <DatePickerInput
+                id="check-out"
+                label="check-out"
+                selected={field.value}
+                onSelect={field.onChange}
+                disabled={disabledDatesForCheckOut}
+                placeholder="Select check-out date"
+                error={errors.checkOut?.message}
+              />
+            )}
+          />
         </div>
       </div>
 
@@ -54,43 +146,58 @@ const PropertyBookingPanel = ({
           Guests
         </Label>
         <Select
-          options={GUEST_OPTIONS}
-          value={guestCount}
-          onChange={onGuestCountChange}
+          {...register("guests")}
+          value={guests}
+          options={guestOptions}
           placeholder="Choose guests"
           ariaLabel="Select number of guests"
           id="guests"
+          disabled={isLoading}
         />
+        <FormError error={errors.guests?.message} />
       </div>
 
       {/* === Buttons === */}
       <div className={styles.buttons}>
-        <Button variant="primary">Book Now</Button>
-        <Button variant="filter">Send Inquiry</Button>
+        <Button
+          variant="primary"
+          onClick={bookingForm.handleSubmit}
+          disabled={isFormDisabled}
+        >
+          Book Now
+        </Button>
+        <Button variant="filter" onClick={onSendInquiry} disabled={isLoading}>
+          Send Inquiry
+        </Button>
       </div>
 
       <span className={styles.disclaimer}>You won't be charged yet</span>
 
-      <Divider />
+      <FormError error={bookedDatesError ?? undefined} />
 
       {/* === Price Summary === */}
-      <div className={styles.priceSummary}>
-        <div className={styles.priceItem}>
-          <span className={styles.priceLabel}>$250 x 5 nights</span>
-          <span className={styles.priceValue}>$1,250</span>
-        </div>
-        <div className={styles.priceItem}>
-          <span className={styles.priceLabel}>Service fee</span>
-          <span className={styles.priceValue}>$175</span>
-        </div>
+      {hasDates && (
+        <div className={styles.priceSummary}>
+          <div className={styles.priceItem}>
+            <span className={styles.priceLabel}>
+              ${formatPrice(pricePerNight)} x {nights}{" "}
+              {nights === 1 ? "night" : "nights"}
+            </span>
+            <span className={styles.priceValue}>
+              ${formatPrice(totalPrice)}
+            </span>
+          </div>
 
-        <Divider />
+          <Divider />
 
-        <div className={clsx(styles.priceItem, styles.priceTotal)}>
-          <span className={styles.priceLabel}>Total</span>
-          <span className={styles.priceValue}>$1,425</span>
+          <div className={clsx(styles.priceItem, styles.priceTotal)}>
+            <span className={styles.priceLabel}>Total</span>
+            <span className={styles.priceValue}>
+              ${formatPrice(totalPrice)}
+            </span>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

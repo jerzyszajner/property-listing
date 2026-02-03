@@ -23,8 +23,9 @@
     font-weight: 400;
 }
 
-.inputGrupRow {
+.inputGroupRow {
     display: flex;
+    flex-direction: column;
     gap: var(--spacing-sm);
     width: 100%;
 }
@@ -42,6 +43,8 @@
     gap: var(--spacing-sm);
     margin-top: var(--spacing-sm);
 }
+
+
 
 .priceSummary {
     display: flex;
@@ -69,11 +72,4 @@
     .buttons {
         gap: var(--spacing-md);
     }
-}
-
-@media (max-width: 480px) {
-    .inputGrupRow {
-        flex-direction: column;
-    }
-
 }
