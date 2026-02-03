@@ -42,11 +42,11 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
           <div className={styles.capacity}>
             <span className={styles.capacityItem}>
               <Home className={styles.capacityIcon} />
-              {bedrooms} bedroom
+              {bedrooms} {bedrooms === 1 ? "bedroom" : "bedrooms"}
             </span>
             <span className={styles.capacityItem}>
               <Users className={styles.capacityIcon} />
-              {guests} person
+              {guests} {guests === 1 ? "guest" : "guests"}
             </span>
           </div>
 

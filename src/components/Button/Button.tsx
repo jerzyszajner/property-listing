@@ -11,7 +11,7 @@ interface ButtonProps {
     | "closeCircle"
     | "danger";
   className?: string;
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   type?: "button" | "submit" | "reset";
   "aria-pressed"?: boolean;
   disabled?: boolean;
