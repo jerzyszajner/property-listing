@@ -1,14 +1,10 @@
 import type { ChangeEvent } from "react";
-import Button from "@/components/Button/Button";
 import ToggleSwitch from "@/components/ToggleSwitch/ToggleSwitch";
 import Select from "@/components/Select/Select";
 import { GUEST_OPTIONS } from "./propertyListFilterPanelConfig";
 import styles from "./PropertyListFilterPanel.module.css";
 
 interface PropertyListFilterPanelProps {
-  selectedLocation: string;
-  onLocationChange: (newLocation: string) => void;
-  availableLocations: string[];
   isSuperhost: boolean;
   onSuperhostChange: (value: boolean) => void;
   guestCount: string;
@@ -17,9 +13,6 @@ interface PropertyListFilterPanelProps {
 
 /* PropertyListFilterPanel component */
 const PropertyListFilterPanel = ({
-  selectedLocation,
-  onLocationChange,
-  availableLocations,
   isSuperhost,
   onSuperhostChange,
   guestCount,
@@ -27,20 +20,6 @@ const PropertyListFilterPanel = ({
 }: PropertyListFilterPanelProps) => {
   return (
     <div className={styles.filterPanel}>
-      <div className={styles.locationFilters}>
-        {/* Map availableLocations (location filter buttons) */}
-        {availableLocations.map((location) => (
-          <Button
-            key={location}
-            variant={selectedLocation === location ? "active" : "secondary"}
-            aria-pressed={selectedLocation === location}
-            onClick={() => onLocationChange(location)}
-          >
-            {location}
-          </Button>
-        ))}
-      </div>
-
       <div className={styles.rightFilters}>
         <div className={styles.superhostToggle}>
           <label htmlFor="superhost" className={styles.switchLabel}>

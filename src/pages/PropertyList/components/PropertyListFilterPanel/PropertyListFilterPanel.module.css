@@ -1,16 +1,11 @@
 /* PropertyListFilterPanel component styles */
 .filterPanel {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: var(--spacing-md);
     border: 1px solid var(--color-border-default);
     border-radius: var(--border-radius-md);
-}
-
-.locationFilters {
-    display: flex;
-    gap: var(--spacing-md);
 }
 
 .rightFilters {
@@ -34,12 +29,6 @@
         flex-direction: column;
         gap: var(--spacing-md);
         border-radius: 0;
-    }
-
-    .locationFilters {
-        width: 100%;
-        justify-content: space-between;
-        flex-direction: column;
     }
 
     .rightFilters {

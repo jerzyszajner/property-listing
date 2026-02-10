@@ -11,9 +11,6 @@ import styles from "./PropertyList.module.css";
 const PropertyList = () => {
   const { properties, isLoading, error, setError } = useProperties();
   const {
-    selectedLocation,
-    setSelectedLocation,
-    availableLocations,
     isSuperhost,
     setIsSuperhost,
     guestCount,
@@ -35,9 +32,6 @@ const PropertyList = () => {
       ) : (
         <>
           <PropertyListFilterPanel
-            selectedLocation={selectedLocation}
-            onLocationChange={setSelectedLocation}
-            availableLocations={availableLocations}
             isSuperhost={isSuperhost}
             onSuperhostChange={setIsSuperhost}
             guestCount={guestCount}
