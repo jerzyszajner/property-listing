@@ -15,7 +15,6 @@ export const useUserProfile = (): UseUserProfileReturn => {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
   const { user } = useAuthContext();
 
   useEffect(() => {

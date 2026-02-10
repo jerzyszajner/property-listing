@@ -14,8 +14,7 @@ interface SelectProps extends Omit<
 > {
   options: SelectOption[];
   value?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onChange?: any;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   placeholder?: string;
   ariaLabel?: string;
   className?: string;
@@ -37,19 +36,15 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     },
     ref,
   ) => {
-    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      if (onChange) {
-        onChange(e);
-      }
-    };
+    const isControlled = value !== undefined;
 
     return (
       <div className={clsx(styles.selectWrapper, className)}>
         <select
           ref={ref}
           id={id}
-          value={value ?? ""}
-          onChange={handleChange}
+          value={isControlled ? value : undefined}
+          onChange={onChange}
           disabled={disabled}
           aria-label={ariaLabel}
           className={styles.select}
