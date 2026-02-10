@@ -4,6 +4,7 @@ import {
   serverTimestamp,
   onSnapshot,
   deleteDoc,
+  getDoc,
 } from "firebase/firestore";
 import { database } from "@/config/firebaseConfig";
 import type {
@@ -11,6 +12,7 @@ import type {
   UserProfile,
   UpdateUserProfile,
 } from "@/types/user";
+import { updateUserPropertiesHostInfo } from "@/services/propertyService";
 
 // Service function for creating basic user profile in Firestore database
 export const createUserProfile = async (
@@ -75,6 +77,17 @@ export const updateUserProfile = async (
     },
     { merge: true },
   );
+
+  const userDoc = await getDoc(doc(database, "users", uid));
+  if (userDoc.exists()) {
+    const userData = userDoc.data();
+    const firstName = (userData.firstName as string | null) ?? "";
+    const profileImage = (userData.profileImage as string | null) ?? "";
+
+    if (firstName || profileImage) {
+      await updateUserPropertiesHostInfo(uid, firstName, profileImage);
+    }
+  }
 };
 
 // Service function for updating user profile image
@@ -90,6 +103,16 @@ export const updateUserProfileImage = async (
     },
     { merge: true },
   );
+
+  const userDoc = await getDoc(doc(database, "users", uid));
+  if (userDoc.exists()) {
+    const userData = userDoc.data();
+    const firstName = (userData.firstName as string | null) ?? "";
+
+    if (firstName || profileImageUrl) {
+      await updateUserPropertiesHostInfo(uid, firstName, profileImageUrl);
+    }
+  }
 };
 
 // Service function for deleting user profile from Firestore database

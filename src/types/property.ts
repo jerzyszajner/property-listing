@@ -1,6 +1,7 @@
 // Property type for Firestore database
 export type Property = {
   id: string;
+  hostId: string;
   title: string;
   amenities: string[];
   description: string;
@@ -9,8 +10,7 @@ export type Property = {
   superhost: boolean;
   address: {
     street: string;
-    number: string;
-    postalCode: string;
+    zipCode: string;
     city: string;
     country: string;
   };
@@ -19,7 +19,7 @@ export type Property = {
     lng: number;
   };
   capacity: {
-    people: number;
+    guest: number;
     bedroom: number;
   };
   host: {
@@ -27,4 +27,7 @@ export type Property = {
     image: string;
   };
   image: string;
+  images?: string[];
 };
+
+export type CreatePropertyData = Omit<Property, "id">;
