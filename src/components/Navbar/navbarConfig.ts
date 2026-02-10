@@ -28,7 +28,10 @@ export const AUTHENTICATED_LINKS: Link[] = [
     to: "/bookings",
     label: "My Bookings",
   },
-
+  {
+    to: "/add-listing",
+    label: "Add Listing",
+  },
   {
     to: "/profile",
     label: "Profile",

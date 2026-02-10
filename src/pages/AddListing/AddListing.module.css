@@ -1,0 +1,90 @@
+/* AddListing page styles */
+.addListing {
+    padding: var(--spacing-xxl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxxl);
+    height: 100%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    max-width: 550px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.formRow {
+    display: flex;
+    gap: var(--spacing-lg);
+    width: 100%;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    flex: 1;
+}
+
+.errorRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.charCount {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-label);
+    white-space: nowrap;
+}
+
+.amenitiesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+}
+
+.checkboxRow {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.checkbox {
+    width: var(--spacing-md);
+    height: var(--spacing-md);
+    accent-color: var(--color-accent-blue);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .addListing {
+        padding: var(--spacing-xl) var(--spacing-xxxl);
+    }
+
+    .form {
+        max-width: 100%;
+    }
+
+
+}
+
+@media (max-width: 480px) {
+    .addListing {
+        gap: var(--spacing-xl);
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .formRow {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .amenitiesGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

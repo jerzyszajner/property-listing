@@ -19,14 +19,15 @@ import ResetPassword from "@/pages/ResetPassword/ResetPassword";
 const Home = lazy(() => import("@/pages/Home/Home"));
 const PropertyList = lazy(() => import("@/pages/PropertyList/PropertyList"));
 const PropertyDetails = lazy(
-  () => import("@/pages/PropertyDetails/PropertyDetails")
+  () => import("@/pages/PropertyDetails/PropertyDetails"),
 );
 const About = lazy(() => import("@/pages/About/About"));
 const Contact = lazy(() => import("@/pages/Contact/Contact"));
 
 /* Protected pages */
-const Profile = lazy(() => import("@/pages/Profile/Profile"));
 const Bookings = lazy(() => import("@/pages/Bookings/Bookings"));
+const AddListing = lazy(() => import("@/pages/AddListing/AddListing"));
+const Profile = lazy(() => import("@/pages/Profile/Profile"));
 
 /* Error page */
 import NotFound from "@/pages/NotFound/NotFound";
@@ -81,16 +82,7 @@ export const router = createBrowserRouter(
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/email-verification" element={<EmailVerification />} />
       {/* Protected routes */}
-      <Route
-        path="/profile"
-        element={
-          <Suspense fallback={<Spinner />}>
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          </Suspense>
-        }
-      />
+
       <Route
         path="/bookings"
         element={
@@ -101,8 +93,28 @@ export const router = createBrowserRouter(
           </Suspense>
         }
       />
+      <Route
+        path="/add-listing"
+        element={
+          <Suspense fallback={<Spinner />}>
+            <ProtectedRoute>
+              <AddListing />
+            </ProtectedRoute>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <Suspense fallback={<Spinner />}>
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          </Suspense>
+        }
+      />
       {/* Error page */}
       <Route path="*" element={<NotFound />} />
-    </Route>
-  )
+    </Route>,
+  ),
 );
