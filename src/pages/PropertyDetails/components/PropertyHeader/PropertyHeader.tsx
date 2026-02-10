@@ -2,6 +2,7 @@ import type { Property } from "@/types/property";
 import { Star, ShieldCheck, MapPin } from "lucide-react";
 import fallbackImage from "@/assets/images/fallback.webp";
 import PageHeader from "@/components/PageHeader/PageHeader";
+import { capitalizeFirst } from "@/utils/helpers";
 import styles from "./PropertyHeader.module.css";
 
 interface PropertyHeaderProps {
@@ -37,7 +38,9 @@ const PropertyHeader = ({ property }: PropertyHeaderProps) => {
 
         <div className={styles.location}>
           <MapPin className={styles.locationIcon} />
-          <span className={styles.locationText}>{country}</span>
+          <span className={styles.locationText}>
+            {capitalizeFirst(country)}
+          </span>
         </div>
       </div>
 

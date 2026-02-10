@@ -146,12 +146,12 @@ const PropertyBookingPanel = ({
           Guests
         </Label>
         <Select
-          {...register("guests")}
+          id="guests"
           value={guests}
           options={guestOptions}
           placeholder="Choose guests"
           ariaLabel="Select number of guests"
-          id="guests"
+          {...register("guests")}
           disabled={isLoading}
         />
         <FormError error={errors.guests?.message} />

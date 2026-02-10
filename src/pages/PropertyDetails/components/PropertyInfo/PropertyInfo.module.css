@@ -20,6 +20,7 @@
     border-radius: var(--border-radius-circle);
     width: var(--spacing-xxl);
     height: var(--spacing-xxl);
+    object-fit: cover;
 }
 
 .capacitySection {

@@ -7,7 +7,7 @@ export const formatDate = (
     | Timestamp
     | { seconds: number; nanoseconds: number }
     | null
-    | undefined
+    | undefined,
 ): string | null => {
   if (!timestamp) return null;
 
@@ -32,6 +32,20 @@ export const formatPrice = (price: number): string => {
   return price.toLocaleString("en-US");
 };
 
+// Helper to display text with first letter uppercase (e.g. country, address parts)
+export const capitalizeFirst = (text: string): string => {
+  if (!text.trim()) return text;
+  return (
+    text.trim().charAt(0).toUpperCase() + text.trim().slice(1).toLowerCase()
+  );
+};
+
 // Returns a new Date set to start of day (00:00:00) for date comparisons
 export const getStartOfDay = (date: Date): Date =>
   new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+// Helper function to truncate text to specified length with ellipsis
+export const truncateText = (text: string, maxLength: number = 120): string => {
+  if (!text || text.length <= maxLength) return text;
+  return text.slice(0, maxLength).trim() + "...";
+};

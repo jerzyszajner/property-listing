@@ -66,7 +66,7 @@ const PropertyDetails = () => {
           <PropertyBookingPanel
             bookingForm={bookingForm}
             propertyId={property.id}
-            maxGuests={property.capacity.people}
+            maxGuests={property.capacity.guest}
             onSendInquiry={handleSendInquiry}
           />
         )}

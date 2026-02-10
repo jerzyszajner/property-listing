@@ -1,6 +1,8 @@
 import type { Property } from "@/types/property";
 import { Home, Users } from "lucide-react";
 import Divider from "@/components/Divider/Divider";
+import fallbackImage from "@/assets/images/fallback.webp";
+import { capitalizeFirst } from "@/utils/helpers";
 import { AMENITIES_CONFIG } from "./propertyInfoConfig";
 import styles from "./PropertyInfo.module.css";
 
@@ -10,10 +12,10 @@ interface PropertyInfoProps {
 
 /* PropertyInfo component */
 const PropertyInfo = ({ property }: PropertyInfoProps) => {
-  const hostName = property.host?.name;
-  const hostImage = property.host?.image;
+  const hostName = capitalizeFirst(property.host?.name || "");
+  const hostImage = property.host?.image || fallbackImage;
   const bedrooms = property.capacity?.bedroom;
-  const guests = property.capacity?.people;
+  const guests = property.capacity?.guest;
   const amenities = property.amenities ?? [];
   const description = property.description ?? "";
 
