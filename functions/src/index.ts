@@ -1,7 +1,10 @@
 import { onCall, HttpsError } from "firebase-functions/v2/https";
+import { onDocumentWritten } from "firebase-functions/v2/firestore";
 import { setGlobalOptions } from "firebase-functions/v2";
 import * as admin from "firebase-admin";
+import { FieldValue } from "firebase-admin/firestore";
 import { generateEmbedding } from "./embeddings.js";
+import { buildSearchableContent } from "./propertyUtils.js";
 
 setGlobalOptions({ maxInstances: 10 });
 
@@ -45,5 +48,37 @@ export const searchProperties = onCall<{ query: string }>(
     const matches = snapshot.docs.map((doc) => doc.id);
 
     return { matches };
+  },
+);
+
+/* Trigger: generates and stores embedding when a property is created or updated */
+export const onPropertyWrite = onDocumentWritten(
+  { document: "properties/{propertyId}" },
+  async (event): Promise<void> => {
+    const eventData = event.data;
+    if (!eventData) return;
+
+    const afterData = eventData.after.data();
+    if (!afterData) return;
+
+    const beforeData = eventData.before.data();
+    if (beforeData) {
+      const beforeContent = buildSearchableContent(beforeData);
+      const afterContent = buildSearchableContent(afterData);
+      if (beforeContent === afterContent) return;
+    }
+
+    const searchableContent = buildSearchableContent(afterData);
+    if (!searchableContent.trim()) return;
+
+    const embedding = await generateEmbedding(
+      searchableContent,
+      "RETRIEVAL_DOCUMENT",
+    );
+    if (embedding.length === 0) return;
+
+    await eventData.after.ref.update({
+      embedding: FieldValue.vector(embedding),
+    });
   },
 );
