@@ -23,7 +23,8 @@ Modern property listing application built with React and TypeScript. Search vaca
 - Custom React Hooks
 - [Firebase (Firestore + Authentication)](https://firebase.google.com)
 - [Google Maps API](https://developers.google.com/maps) - Interactive maps for property locations
-- [Google Gemini AI](https://ai.google.dev) - Natural language property search
+- [Firebase Functions](https://firebase.google.com/docs/functions) - Backend AI search API
+- [Google Gemini AI](https://ai.google.dev) - Embeddings for vector search
 - [Cloudinary](https://cloudinary.com) - Image upload and storage for user profiles
 - [Zod](https://zod.dev) - Schema validation for forms
 - [React Hook Form](https://react-hook-form.com) - Form state management and validation
@@ -46,9 +47,22 @@ Modern property listing application built with React and TypeScript. Search vaca
    VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
    VITE_FIREBASE_APP_ID=your_app_id
    VITE_GOOGLE_MAPS_API_KEY=your_api_key
-   VITE_GEMINI_API_KEY=your_api_key
    VITE_CLOUDINARY_NAME=your_cloudinary_cloud_name
    ```
+
+4. Configure backend secret for Functions:
+
+   ```bash
+   firebase functions:secrets:set GEMINI_API_KEY
+   ```
+
+5. Create Firestore vector index for `properties.embedding` with dimension `768`.
+
+## AI Search (New)
+
+- Search runs on backend via Firebase Function `searchProperties`.
+- Function uses Gemini embeddings + Firestore vector search (`embedding`, 768 dimensions).
+- `onPropertyWrite` automatically refreshes embeddings after property create/update.
 
 ## Getting Started
 

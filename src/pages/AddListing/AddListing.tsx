@@ -72,7 +72,9 @@ const AddListing = () => {
           <PropertyImageUpload
             imageUpload={propertyImageUpload}
             imageUrl={imageUrl || null}
-            onImageChange={(url) => setValue("image", url, { shouldValidate: true })}
+            onImageChange={(url) =>
+              setValue("image", url, { shouldValidate: true })
+            }
           />
           <FormError error={errors.image?.message} />
         </div>
@@ -84,7 +86,7 @@ const AddListing = () => {
           <Input
             type="text"
             id="title"
-            maxLength={70}
+            maxLength={120}
             placeholder="Title"
             autoComplete="off"
             {...register("title")}
@@ -162,7 +164,7 @@ const AddListing = () => {
             id="description"
             placeholder="Description"
             rows={5}
-            maxLength={400}
+            maxLength={5000}
             {...register("description")}
           />
           <div className={styles.errorRow}>

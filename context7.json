@@ -6,7 +6,7 @@
     "typescript@5.9",
     "vite@7.1.7",
     "firebase@12.5.0",
-    "@google/genai@1.29.1",
+    "@google/genai@1.41.0",
     "@react-google-maps/api@2.20.7",
     "lucide-react@0.548.0",
     "clsx@2.1.1"

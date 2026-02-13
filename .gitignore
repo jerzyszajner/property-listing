@@ -27,3 +27,4 @@ dist-ssr
 # Cursor IDE
 .cursor/
 dev-notes/
+docs/
