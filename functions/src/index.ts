@@ -1,30 +1,49 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * import {onCall} from "firebase-functions/v2/https";
- * import {onDocumentWritten} from "firebase-functions/v2/firestore";
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+import { onCall, HttpsError } from "firebase-functions/v2/https";
+import { setGlobalOptions } from "firebase-functions/v2";
+import * as admin from "firebase-admin";
+import { generateEmbedding } from "./embeddings.js";
 
-import {setGlobalOptions} from "firebase-functions";
-
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
-
-// For cost control, you can set the maximum number of containers that can be
-// running at the same time. This helps mitigate the impact of unexpected
-// traffic spikes by instead downgrading performance. This limit is a
-// per-function limit. You can override the limit for each function using the
-// `maxInstances` option in the function's options, e.g.
-// `onRequest({ maxInstances: 5 }, (req, res) => { ... })`.
-// NOTE: setGlobalOptions does not apply to functions using the v1 API. V1
-// functions should each use functions.runWith({ maxInstances: 10 }) instead.
-// In the v1 API, each function can only serve one request per container, so
-// this will be the maximum concurrent request count.
 setGlobalOptions({ maxInstances: 10 });
 
-// export const helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+admin.initializeApp();
+
+const db = admin.firestore();
+
+const VECTOR_SEARCH_LIMIT = 10;
+
+/* Callable function for vector search over properties */
+export const searchProperties = onCall<{ query: string }>(
+  { cors: true },
+  async (request): Promise<{ matches: string[] }> => {
+    const query = request.data?.query;
+
+    if (typeof query !== "string" || !query.trim()) {
+      throw new HttpsError(
+        "invalid-argument",
+        "query must be a non-empty string",
+      );
+    }
+
+    const trimmedQuery = query.trim();
+    const queryVector = await generateEmbedding(
+      trimmedQuery,
+      "RETRIEVAL_QUERY",
+    );
+
+    if (queryVector.length === 0) {
+      return { matches: [] };
+    }
+
+    const vectorQuery = db.collection("properties").findNearest({
+      vectorField: "embedding",
+      queryVector,
+      limit: VECTOR_SEARCH_LIMIT,
+      distanceMeasure: "EUCLIDEAN",
+    });
+
+    const snapshot = await vectorQuery.get();
+    const matches = snapshot.docs.map((doc) => doc.id);
+
+    return { matches };
+  },
+);
