@@ -6,7 +6,7 @@ import { FieldValue } from "firebase-admin/firestore";
 import { generateEmbedding } from "./embeddings.js";
 import { buildSearchableContent } from "./propertyUtils.js";
 
-setGlobalOptions({ maxInstances: 10 });
+setGlobalOptions({ maxInstances: 10, region: "europe-north1" });
 
 admin.initializeApp();
 
