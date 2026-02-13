@@ -1,4 +1,3 @@
-import { useProperties } from "@/hooks/useProperties";
 import { useAISearch } from "@/pages/Home/hooks/useAISearch";
 import SearchInput from "./SearchInput/SearchInput";
 import SearchSuggestions from "./SearchSuggestions/SearchSuggestions";
@@ -7,7 +6,6 @@ import styles from "./AISearchBar.module.css";
 
 /* AISearchBar component */
 const AISearchBar = () => {
-  const { properties } = useProperties();
   const {
     searchQuery,
     setSearchQuery,
@@ -17,7 +15,7 @@ const AISearchBar = () => {
     error,
     handleSearch,
     showEmptyState,
-  } = useAISearch(properties);
+  } = useAISearch();
 
   return (
     <div className={styles.container}>

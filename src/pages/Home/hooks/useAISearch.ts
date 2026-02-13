@@ -1,6 +1,15 @@
 import { useState } from "react";
-import { searchPropertiesWithAI } from "@/services/geminiService";
+import { getFunctions, httpsCallable } from "firebase/functions";
+import { app } from "@/config/firebaseConfig";
 import type { Property } from "@/types/property";
+
+type SearchPropertiesRequest = {
+  query: string;
+};
+
+type SearchPropertiesResponse = {
+  results: Property[];
+};
 
 export interface UseAISearchReturn {
   searchQuery: string;
@@ -14,7 +23,7 @@ export interface UseAISearchReturn {
 }
 
 /* Hook for searching properties with AI */
-export const useAISearch = (properties: Property[]): UseAISearchReturn => {
+export const useAISearch = (): UseAISearchReturn => {
   const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState<Property[]>([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -35,23 +44,25 @@ export const useAISearch = (properties: Property[]): UseAISearchReturn => {
     setHasSearched(true);
 
     try {
-      const { suggest, matches } = await searchPropertiesWithAI(
-        trimmedQuery,
-        properties
-      );
+      const searchProperties = httpsCallable<
+        SearchPropertiesRequest,
+        SearchPropertiesResponse
+      >(getFunctions(app, "europe-north1"), "searchProperties");
+      const { data } = await searchProperties({ query: trimmedQuery });
+      if (!Array.isArray(data.results)) {
+        throw new Error(
+          "Search API response is outdated. Deploy latest Firebase Functions with { results } contract.",
+        );
+      }
+      const responseResults = data.results;
 
-      setSuggestions(suggest);
-
-      const matchingProperties = properties.filter((property) =>
-        matches.includes(property.id)
-      );
-
-      setResults(matchingProperties);
+      setSuggestions([]);
+      setResults(responseResults);
     } catch (err) {
       setError(
         err instanceof Error
           ? err.message
-          : "Failed to search properties. Please try again."
+          : "Failed to search properties. Please try again.",
       );
       setResults([]);
       setSuggestions([]);
