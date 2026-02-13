@@ -4,6 +4,7 @@ type FirestorePropertyData = {
   amenities?: string[];
   address?: { city?: string; country?: string };
   capacity?: { guest?: number; bedroom?: number };
+  price?: number;
 };
 
 /* Builds searchable text from property data for embedding generation */
@@ -16,6 +17,7 @@ export function buildSearchableContent(data: FirestorePropertyData): string {
     data.capacity
       ? `guests: ${data.capacity.guest ?? 0}, bedrooms: ${data.capacity.bedroom ?? 0}`
       : "",
+    typeof data.price === "number" ? `price: ${data.price}` : "",
   ].filter(Boolean);
 
   return parts.join(" | ");
