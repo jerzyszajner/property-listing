@@ -1,9 +1,9 @@
-import type { Property } from "@/types/property";
+import type { SearchPropertyResult } from "@/types/searchPropertyResult";
 import PropertyCard from "@/components/PropertyCard/PropertyCard";
 import styles from "./SearchResults.module.css";
 
 interface SearchResultsProps {
-  results: Property[];
+  results: SearchPropertyResult[];
 }
 
 /* SearchResults component */

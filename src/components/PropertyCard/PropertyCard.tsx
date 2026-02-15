@@ -4,8 +4,20 @@ import { Link } from "react-router-dom";
 import { truncateText } from "@/utils/helpers";
 import styles from "./PropertyCard.module.css";
 
+type PropertyCardProperty = Pick<
+  Property,
+  | "id"
+  | "title"
+  | "description"
+  | "price"
+  | "rating"
+  | "superhost"
+  | "image"
+  | "capacity"
+>;
+
 interface PropertyCardProps {
-  property: Property;
+  property: PropertyCardProperty;
 }
 
 /* PropertyCard component */

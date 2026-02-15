@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { app } from "@/config/firebaseConfig";
-import type { Property } from "@/types/property";
+import type { SearchPropertyResult } from "@/types/searchPropertyResult";
 
 type SearchPropertiesRequest = {
   query: string;
 };
 
 type SearchPropertiesResponse = {
-  results: Property[];
+  results: SearchPropertyResult[];
 };
 
 export interface UseAISearchReturn {
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-  results: Property[];
+  results: SearchPropertyResult[];
   suggestions: string[];
   isLoading: boolean;
   error: string | null;
@@ -25,7 +25,7 @@ export interface UseAISearchReturn {
 /* Hook for searching properties with AI */
 export const useAISearch = (): UseAISearchReturn => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [results, setResults] = useState<Property[]>([]);
+  const [results, setResults] = useState<SearchPropertyResult[]>([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
