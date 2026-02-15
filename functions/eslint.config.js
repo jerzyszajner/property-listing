@@ -17,7 +17,6 @@ export default [
     ignores: [
       "lib/**/*",
       "generated/**/*",
-      ".eslintrc.cjs",
       "eslint.config.js",
     ],
   },
