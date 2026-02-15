@@ -1,7 +1,7 @@
 import * as admin from "firebase-admin";
-import { FieldValue } from "firebase-admin/firestore";
-import { generateEmbedding } from "./embeddings.js";
-import { buildSearchableContent } from "./propertyUtils.js";
+import {FieldValue} from "firebase-admin/firestore";
+import {generateEmbedding} from "./embeddings.js";
+import {buildSearchableContent} from "./propertyUtils.js";
 
 const PROPERTIES_COLLECTION = "properties";
 
@@ -12,7 +12,9 @@ type BackfillStats = {
   failed: number;
 };
 
-/* Script for backfilling vector embeddings for existing properties */
+/**
+ * Script for backfilling vector embeddings for existing properties.
+ */
 async function backfillEmbeddings(): Promise<void> {
   if (admin.apps.length === 0) {
     admin.initializeApp();
@@ -65,9 +67,12 @@ async function backfillEmbeddings(): Promise<void> {
   }
 
   console.log("Backfill finished.");
-  console.log(
-    `Updated: ${stats.updated}, skipped: ${stats.skipped}, failed: ${stats.failed}`,
-  );
+  const summary = [
+    `Updated: ${stats.updated}`,
+    `skipped: ${stats.skipped}`,
+    `failed: ${stats.failed}`,
+  ].join(", ");
+  console.log(summary);
 }
 
 backfillEmbeddings().catch((err) => {
