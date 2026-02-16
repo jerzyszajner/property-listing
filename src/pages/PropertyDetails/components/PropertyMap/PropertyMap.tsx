@@ -10,6 +10,7 @@ import {
 import { googleMapsConfig } from "@/config/googleMapsConfig";
 import { capitalizeFirst } from "@/utils/helpers";
 import { useGeocoder } from "../../hooks/useGeocoder";
+import { truncateText } from "@/utils/helpers";
 import Spinner from "@/components/Spinner/Spinner";
 import styles from "./PropertyMap.module.css";
 
@@ -84,7 +85,7 @@ const PropertyMap = ({ property }: PropertyMapProps) => {
               onCloseClick={() => setInfoOpen(false)}
               options={{
                 pixelOffset: new google.maps.Size(0, -43),
-                headerContent: `${title}`,
+                headerContent: `${truncateText(title, 35)}`,
               }}
             >
               <div className={styles.infoWindowContent}>

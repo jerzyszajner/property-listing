@@ -31,9 +31,10 @@ export const usePropertyBookedDates = (
       const ranges = await fetchPropertyBookedDates(propertyId);
       setBookedRanges(ranges);
     } catch (err) {
+      const message = err instanceof Error ? err.message : "";
       setError(
-        err instanceof Error
-          ? err.message
+        message.toLowerCase().includes("permission")
+          ? "You must be logged in to make a booking"
           : "Failed to load booked dates. Please try again.",
       );
       setBookedRanges([]);

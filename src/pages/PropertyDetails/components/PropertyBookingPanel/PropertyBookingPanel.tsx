@@ -66,12 +66,12 @@ const PropertyBookingPanel = ({
 
   const disabledDatesForCheckIn = useMemo<Matcher[]>(
     () => [{ before: getStartOfDay(new Date()) }, ...bookedRanges],
-    [bookedRanges]
+    [bookedRanges],
   );
 
   const disabledDatesForCheckOut = useMemo<Matcher[]>(
     () => [{ before: getStartOfDay(checkIn ?? new Date()) }, ...bookedRanges],
-    [checkIn, bookedRanges]
+    [checkIn, bookedRanges],
   );
 
   const guestOptions = useMemo<GuestOption[]>(
@@ -83,7 +83,7 @@ const PropertyBookingPanel = ({
           label: `${guests} ${guests === 1 ? "guest" : "guests"}`,
         };
       }),
-    [maxGuests]
+    [maxGuests],
   );
 
   return (
@@ -171,9 +171,9 @@ const PropertyBookingPanel = ({
         </Button>
       </div>
 
-      <span className={styles.disclaimer}>You won't be charged yet</span>
+      <FormError error={bookedDatesError ?? undefined} variant="center" />
 
-      <FormError error={bookedDatesError ?? undefined} />
+      <span className={styles.disclaimer}>You won't be charged yet</span>
 
       {/* === Price Summary === */}
       {hasDates && (

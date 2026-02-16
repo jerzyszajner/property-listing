@@ -13,20 +13,19 @@ const PropertyHeader = ({ property }: PropertyHeaderProps) => {
   const title = property.title ?? "";
   const rating = property.rating ?? 0;
   const isSuperhost = property.superhost ?? false;
-  const country = property.address.country;
+  const location = property.address.city ?? "";
   const image = property.image ?? fallbackImage;
 
   return (
     <section className={styles.header}>
       {/* === Title === */}
-      {/* <h1 className={styles.title}>{title}</h1> */}
       <PageHeader title={title} variant="left" />
 
       {/* === Meta Info === */}
       <div className={styles.meta}>
         <div className={styles.rating}>
-          <Star className={styles.ratingIcon} />
           <span className={styles.ratingText}>{rating}</span>
+          <Star className={styles.ratingIcon} />
         </div>
 
         {isSuperhost && (
@@ -39,7 +38,7 @@ const PropertyHeader = ({ property }: PropertyHeaderProps) => {
         <div className={styles.location}>
           <MapPin className={styles.locationIcon} />
           <span className={styles.locationText}>
-            {capitalizeFirst(country)}
+            {capitalizeFirst(location)}
           </span>
         </div>
       </div>

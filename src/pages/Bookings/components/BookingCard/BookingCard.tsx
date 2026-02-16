@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import type { Booking } from "@/types/booking";
 import { CalendarDays, Users } from "lucide-react";
 import { formatDate, formatPrice } from "@/utils/helpers";
+import { truncateText } from "@/utils/helpers";
 import Button from "@/components/Button/Button";
 import Divider from "@/components/Divider/Divider";
 import styles from "./BookingCard.module.css";
@@ -55,7 +56,7 @@ const BookingCard = ({
 
         {/* === Content section === */}
         <div className={styles.content}>
-          <h3 className={styles.title}>{propertyTitle}</h3>
+          <h3 className={styles.title}>{truncateText(propertyTitle, 80)}</h3>
 
           {/* === Dates section === */}
           <div className={styles.dates}>

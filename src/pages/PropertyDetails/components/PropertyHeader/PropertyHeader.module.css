@@ -34,13 +34,19 @@
 }
 
 .ratingIcon {
-    color: var(--color-accent-gold)
+    color: var(--color-accent-gold);
+    fill: var(--color-accent-gold);
 }
 
 .ratingText,
 .hostText {
     font-weight: 700;
 }
+
+.ratingText {
+    color: var(--color-text-light);
+}
+
 
 .hostIcon {
     color: var(--color-accent-blue);
