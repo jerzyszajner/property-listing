@@ -1,4 +1,4 @@
-import type {PriceConstraint, RawMatch} from "./types.js";
+import type { PriceConstraint, RawMatch } from "./types.js";
 
 type ApplyBusinessFiltersParams = {
   rawMatches: RawMatch[];
@@ -37,11 +37,9 @@ export function applyBusinessFilters({
     filteredByPrice = filteredByPrice.filter(
       (item) =>
         Number.isFinite(item.price) &&
-        (
-          priceConstraint?.inclusive ?
-            item.price <= maxPrice :
-            item.price < maxPrice
-        ),
+        (priceConstraint?.inclusive
+          ? item.price <= maxPrice
+          : item.price < maxPrice),
     );
   }
 
@@ -58,8 +56,7 @@ export function applyBusinessFilters({
   const cityInQuery =
     filteredByPrice.find(
       (item) => item.city.length > 0 && queryLower.includes(item.city),
-    )
-      ?.city ?? null;
+    )?.city ?? null;
 
   const bestDistance = filteredByPrice[0].distance;
   const distanceCutoff = Math.min(

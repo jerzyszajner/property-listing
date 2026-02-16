@@ -1,4 +1,4 @@
-import type {RawMatch, SearchPropertyResult} from "./types.js";
+import type { RawMatch, SearchPropertyResult } from "./types.js";
 
 type MapToResponseParams = {
   matches: RawMatch[];
@@ -18,9 +18,9 @@ export function mapToResponse({
     const data = item.data;
     const capacity = data.capacity as
       | {
-        guest?: number;
-        bedroom?: number;
-      }
+          guest?: number;
+          bedroom?: number;
+        }
       | undefined;
 
     return {

@@ -1,7 +1,7 @@
 import * as admin from "firebase-admin";
-import {FieldValue} from "firebase-admin/firestore";
-import {generateEmbedding} from "./embeddings.js";
-import {buildSearchableContent} from "./propertyUtils.js";
+import { FieldValue } from "firebase-admin/firestore";
+import { generateEmbedding } from "./embeddings.js";
+import { buildSearchableContent } from "./propertyUtils.js";
 
 const PROPERTIES_COLLECTION = "properties";
 

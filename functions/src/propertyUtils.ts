@@ -13,15 +13,15 @@ type FirestorePropertyData = {
  * @return {string} Normalized searchable text.
  */
 export function buildSearchableContent(data: FirestorePropertyData): string {
-  const locationPart = data.address ?
-    `${data.address.city ?? ""} ${data.address.country ?? ""}`.trim() :
-    "";
-  const capacityPart = data.capacity ?
-    [
-      `guests: ${data.capacity.guest ?? 0}`,
-      `bedrooms: ${data.capacity.bedroom ?? 0}`,
-    ].join(", ") :
-    "";
+  const locationPart = data.address
+    ? `${data.address.city ?? ""} ${data.address.country ?? ""}`.trim()
+    : "";
+  const capacityPart = data.capacity
+    ? [
+        `guests: ${data.capacity.guest ?? 0}`,
+        `bedrooms: ${data.capacity.bedroom ?? 0}`,
+      ].join(", ")
+    : "";
 
   const parts = [
     data.title,

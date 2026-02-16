@@ -1,4 +1,4 @@
-import type {PriceConstraint, SearchIntent} from "./types.js";
+import type { PriceConstraint, SearchIntent } from "./types.js";
 
 /**
  * Service function for detecting whether max price should be inclusive.

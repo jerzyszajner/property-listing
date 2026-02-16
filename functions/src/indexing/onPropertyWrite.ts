@@ -1,13 +1,13 @@
-import {onDocumentWritten} from "firebase-functions/v2/firestore";
-import type {SecretParam} from "firebase-functions/params";
-import {FieldValue} from "firebase-admin/firestore";
-import {generateEmbedding} from "../embeddings.js";
-import {buildSearchableContent} from "../propertyUtils.js";
+import { onDocumentWritten } from "firebase-functions/v2/firestore";
+import type { SecretParam } from "firebase-functions/params";
+import { FieldValue } from "firebase-admin/firestore";
+import { generateEmbedding } from "../embeddings.js";
+import { buildSearchableContent } from "../propertyUtils.js";
 
 // Service function for creating property write trigger with embedding indexing.
 export const createOnPropertyWrite = (geminiApiKey: SecretParam) =>
   onDocumentWritten(
-    {document: "properties/{propertyId}", secrets: [geminiApiKey]},
+    { document: "properties/{propertyId}", secrets: [geminiApiKey] },
     async (event): Promise<void> => {
       const eventData = event.data;
       if (!eventData) return;

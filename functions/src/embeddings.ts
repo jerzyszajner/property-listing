@@ -1,4 +1,4 @@
-import {GoogleGenAI} from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 
 const EMBEDDING_MODEL = "gemini-embedding-001";
 const EMBEDDING_DIMENSIONALITY = 768;
@@ -26,7 +26,7 @@ export async function generateEmbedding(
     );
   }
 
-  const ai = new GoogleGenAI({apiKey});
+  const ai = new GoogleGenAI({ apiKey });
 
   const response = await ai.models.embedContent({
     model: EMBEDDING_MODEL,

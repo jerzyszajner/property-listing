@@ -32,6 +32,7 @@ export default [
       "plugin:import/typescript",
       "google",
       "plugin:@typescript-eslint/recommended",
+      "prettier",
     ],
     parser: "@typescript-eslint/parser",
     parserOptions: {
@@ -45,8 +46,10 @@ export default [
     rules: {
       quotes: ["error", "double"],
       "import/no-unresolved": 0,
-      indent: ["error", 2],
+      indent: "off",
       "@typescript-eslint/no-unused-expressions": "off",
+      "object-curly-spacing": "off",
+      "operator-linebreak": "off",
     },
   }),
 ];
