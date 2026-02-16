@@ -96,7 +96,7 @@ const AddListing = () => {
             type="text"
             id="title"
             maxLength={120}
-            placeholder="Enter som keywords and use Generate with AI."
+            placeholder="Enter some keywords and use Generate with AI"
             autoComplete="off"
             {...register("title")}
           />
@@ -173,7 +173,7 @@ const AddListing = () => {
             <Textarea
               id="description"
               className={styles.descriptionTextarea}
-              placeholder="Enter some keywords and use Generate with AI. Fill in all inputs for best results."
+              placeholder="Enter some keywords, then click Generate with AI. Fill in all other inputs for best results."
               rows={12}
               maxLength={5000}
               {...register("description")}
@@ -200,7 +200,9 @@ const AddListing = () => {
 
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
-            <Label htmlFor="bedroom">Bedrooms</Label>
+            <Label htmlFor="bedroom" required>
+              Bedrooms
+            </Label>
             <Input
               type="number"
               id="bedroom"
@@ -213,7 +215,9 @@ const AddListing = () => {
           </div>
 
           <div className={styles.formGroup}>
-            <Label htmlFor="guest">Guests</Label>
+            <Label htmlFor="guest" required>
+              Guests
+            </Label>
             <Input
               type="number"
               id="guest"
@@ -225,7 +229,9 @@ const AddListing = () => {
             <FormError error={errors.guest?.message} />
           </div>
           <div className={styles.formGroup}>
-            <Label htmlFor="price">Price</Label>
+            <Label htmlFor="price" required>
+              Price
+            </Label>
             <Input
               type="number"
               id="price"

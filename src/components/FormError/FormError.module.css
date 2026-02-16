@@ -5,3 +5,7 @@
     line-height: 1.1;
     min-height: var(--spacing-md);
 }
+
+.center {
+    text-align: center;
+}
