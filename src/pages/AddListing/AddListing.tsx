@@ -17,6 +17,7 @@ import {
   COUNTRY_OPTIONS,
 } from "./addListingConfig";
 import { useAddListingForm } from "./hooks/useAddListingForm";
+import { useGenerateDescription } from "./hooks/useGenerateDescription";
 import { usePropertyImageUpload } from "./hooks/usePropertyImageUpload";
 import PropertyImageUpload from "./components/PropertyImageUpload/PropertyImageUpload";
 import styles from "./AddListing.module.css";
@@ -34,9 +35,16 @@ const AddListing = () => {
     setError,
     setValue,
     watch,
+    getValues,
   } = useAddListingForm();
   const propertyImageUpload = usePropertyImageUpload();
   const imageUrl = watch("image");
+  const titleValue = watch("title");
+  const { isGenerating, handleGenerateDescription } = useGenerateDescription({
+    getValues,
+    setValue,
+    setError,
+  });
 
   useEffect(() => {
     if (propertyImageUpload.error) {
@@ -87,7 +95,7 @@ const AddListing = () => {
             type="text"
             id="title"
             maxLength={120}
-            placeholder="Title"
+            placeholder="Write som keywords and use Generate with AI."
             autoComplete="off"
             {...register("title")}
           />
@@ -157,12 +165,30 @@ const AddListing = () => {
 
         {/* === Description Field === */}
         <div className={styles.formGroup}>
-          <Label htmlFor="description" required>
-            Description
-          </Label>
+          <div className={styles.descriptionActions}>
+            <Label htmlFor="description" required>
+              Description
+            </Label>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={handleGenerateDescription}
+              disabled={isGenerating || isLoading || !titleValue.trim()}
+            >
+              {isGenerating ? (
+                <span className={styles.generateButtonContent}>
+                  <span className={styles.inlineSpinner} aria-hidden="true" />
+                  Generating...
+                </span>
+              ) : (
+                "Generate with AI"
+              )}
+            </Button>
+          </div>
+
           <Textarea
             id="description"
-            placeholder="Description"
+            placeholder="Write some keywords and use Generate with AI. Fill in title, city, amenities, bedrooms, and guests for best results."
             rows={5}
             maxLength={5000}
             {...register("description")}

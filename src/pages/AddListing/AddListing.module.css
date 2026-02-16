@@ -29,6 +29,31 @@
     flex: 1;
 }
 
+.descriptionActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: var(--spacing-xs);
+}
+
+.generateButtonContent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    min-width: 8rem;
+}
+
+.inlineSpinner {
+    width: var(--spacing-md);
+    height: var(--spacing-md);
+    border-radius: var(--border-radius-circle);
+    border: 2px solid var(--color-text-label);
+    border-top-color: transparent;
+    animation: spin 0.8s linear infinite;
+    flex-shrink: 0;
+}
+
 .errorRow {
     display: flex;
     justify-content: space-between;
@@ -59,6 +84,12 @@
     height: var(--spacing-md);
     accent-color: var(--color-accent-blue);
     cursor: pointer;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @media (max-width: 768px) {

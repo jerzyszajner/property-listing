@@ -26,6 +26,7 @@ export const useAddListingForm = () => {
     reset,
     watch,
     setValue,
+    getValues,
   } = useForm<AddListingFormData>({
     resolver: zodResolver(addListingFormSchema),
     defaultValues: {
@@ -108,6 +109,7 @@ export const useAddListingForm = () => {
     errors,
     watch,
     setValue,
+    getValues,
     resetForm: reset,
     isSuccess,
     setIsSuccess,

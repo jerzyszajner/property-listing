@@ -10,6 +10,31 @@ interface PropertyInfoProps {
   property: Property;
 }
 
+const SECTION_HEADINGS = [
+  "Stemning og opplevelse",
+  "Fasiliteter",
+  "Beliggenhet og praktisk info",
+] as const;
+
+const parseDescriptionSections = (rawDescription: string): string[] => {
+  const normalizedDescription = rawDescription
+    .replace(/\r\n/g, "\n")
+    .replace(/^##\s.*$/gm, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+
+  if (!normalizedDescription) {
+    return ["", "", ""];
+  }
+
+  const sections = normalizedDescription
+    .split(/\n{2,}/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+  return [sections[0] ?? "", sections[1] ?? "", sections[2] ?? ""];
+};
+
 /* PropertyInfo component */
 const PropertyInfo = ({ property }: PropertyInfoProps) => {
   const hostName = capitalizeFirst(property.host?.name || "");
@@ -17,7 +42,9 @@ const PropertyInfo = ({ property }: PropertyInfoProps) => {
   const bedrooms = property.capacity?.bedroom;
   const guests = property.capacity?.guest;
   const amenities = property.amenities ?? [];
-  const description = property.description ?? "";
+  const descriptionSections = parseDescriptionSections(
+    property.description ?? "",
+  );
 
   const amenitiesToShow = AMENITIES_CONFIG.filter(({ key }) =>
     amenities.includes(key),
@@ -49,7 +76,14 @@ const PropertyInfo = ({ property }: PropertyInfoProps) => {
 
       {/* === Description === */}
       <div className={styles.description}>
-        <p>{description}</p>
+        {SECTION_HEADINGS.map((heading, index) => (
+          <div key={heading}>
+            <h3 className={styles.descriptionHeading}>{heading}</h3>
+            <p className={styles.descriptionParagraph}>
+              {descriptionSections[index] || "Information will be available soon."}
+            </p>
+          </div>
+        ))}
       </div>
 
       <Divider variant="default" />

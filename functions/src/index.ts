@@ -9,6 +9,7 @@ import { retrieveCandidates } from "./search/retrieveCandidates.js";
 import { applyBusinessFilters } from "./search/applyBusinessFilters.js";
 import { mapToResponse } from "./search/mapToResponse.js";
 import { createOnPropertyWrite } from "./indexing/onPropertyWrite.js";
+import { createGenerateDescription } from "./content/generateDescription.js";
 import type { SearchPropertyResult } from "./search/types.js";
 
 setGlobalOptions({ maxInstances: 10, region: "europe-north1" });
@@ -93,3 +94,6 @@ export const searchProperties = onCall<{ query: string }>(
 
 /* Trigger: stores embedding after property create/update */
 export const onPropertyWrite = createOnPropertyWrite(GEMINI_API_KEY);
+
+/* NEW: AI Magic Description Generator */
+export const generateDescription = createGenerateDescription(GEMINI_API_KEY);
