@@ -28,6 +28,7 @@ const AddListing = () => {
     register,
     control,
     handleSubmit,
+    trigger,
     errors,
     isLoading,
     isSuccess,
@@ -39,10 +40,10 @@ const AddListing = () => {
   } = useAddListingForm();
   const propertyImageUpload = usePropertyImageUpload();
   const imageUrl = watch("image");
-  const titleValue = watch("title");
   const { isGenerating, handleGenerateDescription } = useGenerateDescription({
     getValues,
     setValue,
+    trigger,
     setError,
   });
 
@@ -95,7 +96,7 @@ const AddListing = () => {
             type="text"
             id="title"
             maxLength={120}
-            placeholder="Write som keywords and use Generate with AI."
+            placeholder="Enter som keywords and use Generate with AI."
             autoComplete="off"
             {...register("title")}
           />
@@ -165,37 +166,36 @@ const AddListing = () => {
 
         {/* === Description Field === */}
         <div className={styles.formGroup}>
-          <div className={styles.descriptionActions}>
-            <Label htmlFor="description" required>
-              Description
-            </Label>
+          <Label htmlFor="description" required>
+            Description
+          </Label>
+          <div className={styles.descriptionWrapper}>
+            <Textarea
+              id="description"
+              className={styles.descriptionTextarea}
+              placeholder="Enter some keywords and use Generate with AI. Fill in all inputs for best results."
+              rows={12}
+              maxLength={5000}
+              {...register("description")}
+            />
             <Button
               type="button"
               variant="secondary"
+              className={styles.generateButton}
               onClick={handleGenerateDescription}
-              disabled={isGenerating || isLoading || !titleValue.trim()}
+              disabled={isGenerating || isLoading}
             >
               {isGenerating ? (
                 <span className={styles.generateButtonContent}>
                   <span className={styles.inlineSpinner} aria-hidden="true" />
-                  Generating...
+                  <span className={styles.buttonText}>Generating...</span>
                 </span>
               ) : (
                 "Generate with AI"
               )}
             </Button>
           </div>
-
-          <Textarea
-            id="description"
-            placeholder="Write some keywords and use Generate with AI. Fill in title, city, amenities, bedrooms, and guests for best results."
-            rows={5}
-            maxLength={5000}
-            {...register("description")}
-          />
-          <div className={styles.errorRow}>
-            <FormError error={errors.description?.message} />
-          </div>
+          <FormError error={errors.description?.message} />
         </div>
 
         <div className={styles.formRow}>
@@ -206,8 +206,8 @@ const AddListing = () => {
               id="bedroom"
               min={0}
               max={20}
-              placeholder="e.g. 2"
-              {...register("bedroom", { valueAsNumber: true })}
+              placeholder="0"
+              {...register("bedroom")}
             />
             <FormError error={errors.bedroom?.message} />
           </div>
@@ -219,8 +219,8 @@ const AddListing = () => {
               id="guest"
               min={0}
               max={20}
-              placeholder="e.g. 4"
-              {...register("guest", { valueAsNumber: true })}
+              placeholder="0"
+              {...register("guest")}
             />
             <FormError error={errors.guest?.message} />
           </div>
@@ -230,8 +230,8 @@ const AddListing = () => {
               type="number"
               id="price"
               min={0}
-              placeholder="e.g. 100"
-              {...register("price", { valueAsNumber: true })}
+              placeholder="0"
+              {...register("price")}
             />
             <FormError error={errors.price?.message} />
           </div>
@@ -264,6 +264,7 @@ const AddListing = () => {
               </div>
             )}
           />
+          <FormError error={errors.amenities?.message} />
           <Divider />
         </div>
         {/* === Submit Button === */}

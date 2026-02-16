@@ -25,12 +25,20 @@ const addListingFormSchema = z.object({
     .trim()
     .min(1, "Description is required")
     .max(5000, "Max 5000 characters"),
-  bedroom: z.number().min(0, "Min 0").max(20, "Max 20"),
-  guest: z.number().min(0, "Min 0").max(20, "Max 20"),
-  price: z.number().min(0, "Min 0"),
-  amenities: z.array(z.string()),
+  bedroom: z
+    .string()
+    .min(1, "Bedrooms is required")
+    .transform(Number)
+    .pipe(z.number().min(0, "Min 0").max(20, "Max 20")),
+  guest: z.coerce.number().min(1, "Guests is required"),
+  price: z.coerce.number().min(1, "Price is required"),
+  amenities: z
+    .array(z.string())
+    .min(1, "Amenities is required")
+    .min(3, "Select at least 3 amenities"),
   image: z.string().min(1, "Property image is required"),
 });
 
 export type AddListingFormData = z.infer<typeof addListingFormSchema>;
+export type AddListingFormInput = z.input<typeof addListingFormSchema>;
 export { addListingFormSchema };

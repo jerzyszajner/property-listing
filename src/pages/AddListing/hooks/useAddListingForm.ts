@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   addListingFormSchema,
   type AddListingFormData,
+  type AddListingFormInput,
 } from "../addListing.FormSchema";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useUserProfile } from "@/hooks/useUserProfile";
@@ -22,12 +23,13 @@ export const useAddListingForm = () => {
     register,
     handleSubmit,
     control,
+    trigger,
     formState: { errors, isSubmitting },
     reset,
     watch,
     setValue,
     getValues,
-  } = useForm<AddListingFormData>({
+  } = useForm<AddListingFormInput, unknown, AddListingFormData>({
     resolver: zodResolver(addListingFormSchema),
     defaultValues: {
       title: "",
@@ -36,9 +38,9 @@ export const useAddListingForm = () => {
       city: "",
       country: "",
       description: "",
-      bedroom: 0,
-      guest: 0,
-      price: 0,
+      bedroom: "",
+      guest: "",
+      price: "",
       amenities: defaultAmenities,
       image: "",
     },
@@ -106,6 +108,7 @@ export const useAddListingForm = () => {
     register,
     handleSubmit: handleSubmit(onSubmit),
     control,
+    trigger,
     errors,
     watch,
     setValue,

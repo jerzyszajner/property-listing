@@ -29,11 +29,19 @@
     flex: 1;
 }
 
-.descriptionActions {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: var(--spacing-xs);
+.descriptionWrapper {
+    position: relative;
+}
+
+.descriptionTextarea {
+    resize: vertical;
+}
+
+.generateButton {
+    position: absolute;
+    bottom: var(--spacing-lg);
+    right: var(--spacing-md);
+    background-color: var(--color-bg-panel);
 }
 
 .generateButtonContent {
@@ -41,7 +49,6 @@
     align-items: center;
     justify-content: center;
     gap: var(--spacing-sm);
-    min-width: 8rem;
 }
 
 .inlineSpinner {
@@ -52,19 +59,6 @@
     border-top-color: transparent;
     animation: spin 0.8s linear infinite;
     flex-shrink: 0;
-}
-
-.errorRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.charCount {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-label);
-    white-space: nowrap;
 }
 
 .amenitiesGrid {
@@ -100,8 +94,6 @@
     .form {
         max-width: 100%;
     }
-
-
 }
 
 @media (max-width: 480px) {

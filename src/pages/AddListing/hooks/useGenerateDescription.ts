@@ -1,8 +1,15 @@
 import { useState } from "react";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import type { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import type {
+  UseFormGetValues,
+  UseFormSetValue,
+  UseFormTrigger,
+} from "react-hook-form";
 import { app } from "@/config/firebaseConfig";
-import type { AddListingFormData } from "../addListing.FormSchema";
+import {
+  addListingFormSchema,
+  type AddListingFormInput,
+} from "../addListing.FormSchema";
 
 type GenerateDescriptionRequest = {
   title: string;
@@ -19,8 +26,9 @@ type GenerateDescriptionResponse = {
 };
 
 type UseGenerateDescriptionParams = {
-  getValues: UseFormGetValues<AddListingFormData>;
-  setValue: UseFormSetValue<AddListingFormData>;
+  getValues: UseFormGetValues<AddListingFormInput>;
+  setValue: UseFormSetValue<AddListingFormInput>;
+  trigger: UseFormTrigger<AddListingFormInput>;
   setError: (message: string | null) => void;
 };
 
@@ -33,20 +41,18 @@ export interface UseGenerateDescriptionReturn {
 export const useGenerateDescription = ({
   getValues,
   setValue,
+  trigger,
   setError,
 }: UseGenerateDescriptionParams): UseGenerateDescriptionReturn => {
   const [isGenerating, setIsGenerating] = useState(false);
 
   const handleGenerateDescription = async (): Promise<void> => {
-    const formValues = getValues();
-    const title = formValues.title.trim();
-
-    if (!title) {
-      setError("Please enter a title before generating description.");
-      return;
-    }
-
     setError(null);
+
+    const isValid = await trigger();
+    if (!isValid) return;
+
+    const parsed = addListingFormSchema.parse(getValues());
     setIsGenerating(true);
 
     try {
@@ -54,16 +60,17 @@ export const useGenerateDescription = ({
         GenerateDescriptionRequest,
         GenerateDescriptionResponse
       >(getFunctions(app, "europe-north1"), "generateDescription");
+
       const { data } = await generateDescription({
-        title,
-        city: formValues.city.trim(),
-        amenities: formValues.amenities,
-        notes: formValues.description.trim(),
-        bedroom: formValues.bedroom,
-        guest: formValues.guest,
+        title: parsed.title,
+        city: parsed.city.trim(),
+        amenities: parsed.amenities,
+        notes: parsed.description.trim(),
+        bedroom: parsed.bedroom,
+        guest: parsed.guest,
       });
 
-      const generatedTitle = data.title?.trim() || title;
+      const generatedTitle = data.title?.trim() || parsed.title;
       const generatedDescription = data.description?.trim() ?? "";
 
       if (!generatedDescription) {
