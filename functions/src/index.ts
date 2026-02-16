@@ -1,30 +1,31 @@
-import {onCall, HttpsError} from "firebase-functions/v2/https";
-import {setGlobalOptions} from "firebase-functions/v2";
-import {defineSecret} from "firebase-functions/params";
-import * as admin from "firebase-admin";
-import {generateEmbedding} from "./embeddings.js";
-import {parseSearchIntent} from "./search/parseSearchIntent.js";
-import {retrieveCandidates} from "./search/retrieveCandidates.js";
-import {applyBusinessFilters} from "./search/applyBusinessFilters.js";
-import {mapToResponse} from "./search/mapToResponse.js";
-import {createOnPropertyWrite} from "./indexing/onPropertyWrite.js";
-import type {SearchPropertyResult} from "./search/types.js";
+import { onCall, HttpsError } from "firebase-functions/v2/https";
+import { setGlobalOptions } from "firebase-functions/v2";
+import { defineSecret } from "firebase-functions/params";
+import { initializeApp } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
+import { generateEmbedding } from "./embeddings.js";
+import { parseSearchIntent } from "./search/parseSearchIntent.js";
+import { retrieveCandidates } from "./search/retrieveCandidates.js";
+import { applyBusinessFilters } from "./search/applyBusinessFilters.js";
+import { mapToResponse } from "./search/mapToResponse.js";
+import { createOnPropertyWrite } from "./indexing/onPropertyWrite.js";
+import type { SearchPropertyResult } from "./search/types.js";
 
-setGlobalOptions({maxInstances: 10, region: "europe-north1"});
+setGlobalOptions({ maxInstances: 10, region: "europe-north1" });
 
-admin.initializeApp();
+initializeApp();
 
-const db = admin.firestore();
+const db = getFirestore();
 
-const VECTOR_SEARCH_LIMIT = 10;
-const VECTOR_MAX_RESULTS = 3;
-const VECTOR_ABSOLUTE_DISTANCE_THRESHOLD = 0.32;
+const VECTOR_SEARCH_LIMIT = 15;
+const VECTOR_MAX_RESULTS = 5;
+const VECTOR_ABSOLUTE_DISTANCE_THRESHOLD = 0.35;
 const VECTOR_RELATIVE_DISTANCE_MARGIN = 0.08;
 const GEMINI_API_KEY = defineSecret("GEMINI_API_KEY");
 
 /* Callable function for vector search over properties */
 export const searchProperties = onCall<{ query: string }>(
-  {cors: true, secrets: [GEMINI_API_KEY]},
+  { cors: true, secrets: [GEMINI_API_KEY] },
   async (request): Promise<{ results: SearchPropertyResult[] }> => {
     const query = request.data?.query;
 
@@ -36,12 +37,8 @@ export const searchProperties = onCall<{ query: string }>(
     }
 
     const searchIntent = parseSearchIntent(query);
-    const {
-      trimmedQuery,
-      maxPrice,
-      capacityHint,
-      priceConstraint,
-    } = searchIntent;
+    const { trimmedQuery, maxPrice, capacityHint, priceConstraint } =
+      searchIntent;
     const queryVector = await generateEmbedding(
       trimmedQuery,
       "RETRIEVAL_QUERY",
@@ -52,15 +49,15 @@ export const searchProperties = onCall<{ query: string }>(
     });
 
     if (queryVector.length === 0) {
-      return {results: []};
+      return { results: [] };
     }
 
-    const {rawMatches, fetchedCount} = await retrieveCandidates({
+    const { rawMatches, fetchedCount } = await retrieveCandidates({
       db,
       queryVector,
       limit: VECTOR_SEARCH_LIMIT,
     });
-    const {filteredMatches, cityInQuery, bestDistance, distanceCutoff} =
+    const { filteredMatches, cityInQuery, bestDistance, distanceCutoff } =
       applyBusinessFilters({
         rawMatches,
         query: trimmedQuery,
@@ -72,7 +69,7 @@ export const searchProperties = onCall<{ query: string }>(
       });
 
     if (filteredMatches.length === 0) {
-      return {results: []};
+      return { results: [] };
     }
 
     const results = mapToResponse({
@@ -90,7 +87,7 @@ export const searchProperties = onCall<{ query: string }>(
       resultsCount: results.length,
     });
 
-    return {results};
+    return { results };
   },
 );
 
