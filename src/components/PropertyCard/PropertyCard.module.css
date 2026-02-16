@@ -38,25 +38,39 @@
     object-fit: cover;
 }
 
-.hostBadge {
+.badge {
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
     position: absolute;
     top: var(--spacing-sm);
-    left: var(--spacing-sm);
     background-color: var(--color-bg-card);
     color: var(--color-text-light);
     padding: var(--spacing-xs) var(--spacing-md);
+    border: 1px solid var(--color-border-default);
     border-radius: var(--border-radius-md);
     font-size: var(--font-size-sm);
+}
 
+.badgeLeft {
+    left: var(--spacing-sm);
+}
+
+.badgeRight {
+    right: var(--spacing-sm);
 }
 
 .hostIcon {
     width: var(--icon-size-inline);
     height: var(--icon-size-inline);
     color: var(--color-accent-blue);
+}
+
+.ratingIcon {
+    width: var(--icon-size-inline);
+    height: var(--icon-size-inline);
+    color: var(--color-accent-gold);
+    fill: var(--color-accent-gold);
 }
 
 .content {
@@ -115,17 +129,16 @@
     font-weight: 400;
 }
 
-.rating {
+.location {
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
     font-size: var(--font-size-sm);
     font-weight: 700;
+    color: var(--color-text-muted);
 }
 
-.ratingIcon {
+.locationIcon {
+    width: var(--icon-size-inline);
     height: var(--icon-size-inline);
-    color: var(--color-accent-gold);
-    color: var(--color-accent-gold);
-    fill: var(--color-accent-gold);
 }

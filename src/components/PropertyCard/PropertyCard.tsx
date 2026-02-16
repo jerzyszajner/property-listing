@@ -1,7 +1,9 @@
 import type { Property } from "@/types/property";
-import { Star, ShieldCheck, Home, Users } from "lucide-react";
+import { Star, ShieldCheck, Home, Users, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import clsx from "clsx";
 import { truncateText } from "@/utils/helpers";
+import { capitalizeFirst } from "@/utils/helpers";
 import styles from "./PropertyCard.module.css";
 
 type PropertyCardProperty = Pick<
@@ -14,6 +16,7 @@ type PropertyCardProperty = Pick<
   | "superhost"
   | "image"
   | "capacity"
+  | "address"
 >;
 
 interface PropertyCardProps {
@@ -31,6 +34,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
   const isSuperhost = property.superhost ?? false;
   const bedrooms = property.capacity?.bedroom ?? 0;
   const guests = property.capacity?.guest ?? 0;
+  const location = property.address?.city ?? "";
 
   return (
     <li className={styles.card}>
@@ -40,16 +44,21 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
           <img src={image} alt={title} className={styles.image} />
 
           {isSuperhost && (
-            <span className={styles.hostBadge}>
+            <span className={clsx(styles.badge, styles.badgeLeft)}>
               Superhost <ShieldCheck className={styles.hostIcon} />
+            </span>
+          )}
+          {rating > 0 && (
+            <span className={clsx(styles.badge, styles.badgeRight)}>
+              {rating} <Star className={styles.ratingIcon} />
             </span>
           )}
         </div>
 
         {/* === Content section === */}
         <div className={styles.content}>
-          <h3 className={styles.title}>{truncateText(title, 35)}</h3>
-          <p className={styles.description}>{truncateText(description, 70)}</p>
+          <h3 className={styles.title}>{truncateText(title, 80)}</h3>
+          <p className={styles.description}>{truncateText(description, 90)}</p>
 
           {/* === Capacity section === */}
           <div className={styles.capacity}>
@@ -70,10 +79,12 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
               <span className={styles.priceUnit}>/night</span>
             </span>
 
-            <span className={styles.rating}>
-              <Star className={styles.ratingIcon} />
-              {rating}
-            </span>
+            <div className={styles.location}>
+              <MapPin className={styles.locationIcon} />
+              <span className={styles.locationText}>
+                {capitalizeFirst(location)}
+              </span>
+            </div>
           </div>
         </div>
       </Link>
