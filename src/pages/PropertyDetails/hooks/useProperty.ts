@@ -6,6 +6,7 @@ export interface UsePropertyReturn {
   property: Property | null;
   isLoading: boolean;
   error: string | null;
+  setError: (error: string | null) => void;
 }
 
 // Hook for fetching a single property by id
@@ -29,7 +30,7 @@ export const useProperty = (id: string | undefined): UsePropertyReturn => {
         setProperty(data);
       } catch (err) {
         setError(
-          err instanceof Error ? err.message : "Failed to load property"
+          err instanceof Error ? err.message : "Failed to load property",
         );
         setProperty(null);
       } finally {
@@ -39,5 +40,5 @@ export const useProperty = (id: string | undefined): UsePropertyReturn => {
     loadProperty();
   }, [id]);
 
-  return { property, isLoading, error };
+  return { property, isLoading, error, setError };
 };

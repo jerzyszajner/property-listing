@@ -1,5 +1,5 @@
 import { CheckCircle2 } from "lucide-react";
-import styles from "./SuccesMessage.module.css";
+import styles from "./SuccessMessage.module.css";
 
 interface SuccessMessageProps {
   title: string;

@@ -13,7 +13,7 @@ import Divider from "@/components/Divider/Divider";
 import Button from "@/components/Button/Button";
 import FormError from "@/components/FormError/FormError";
 import Toast from "@/components/Toast/Toast";
-import SuccessMessage from "@/components/SuccesMessage/SuccesMessage";
+import SuccessMessage from "@/components/SuccessMessage/SuccessMessage";
 import styles from "./SignIn.module.css";
 
 /* SignIn page component */

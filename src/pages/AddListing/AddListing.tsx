@@ -9,7 +9,7 @@ import Divider from "@/components/Divider/Divider";
 import FormError from "@/components/FormError/FormError";
 import Button from "@/components/Button/Button";
 import Toast from "@/components/Toast/Toast";
-import SuccessMessage from "@/components/SuccesMessage/SuccesMessage";
+import SuccessMessage from "@/components/SuccessMessage/SuccessMessage";
 import {
   PAGE_HEADER_CONFIG,
   AMENITIES_OPTIONS,

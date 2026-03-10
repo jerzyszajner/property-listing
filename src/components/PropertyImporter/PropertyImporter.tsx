@@ -25,8 +25,8 @@ const PropertyImporter = () => {
       }
 
       console.info("🎉 Bingo!");
-    } catch (error) {
-      console.error("❌ Error import", error);
+    } catch (err) {
+      console.error("❌ Error import", err);
     }
   };
 

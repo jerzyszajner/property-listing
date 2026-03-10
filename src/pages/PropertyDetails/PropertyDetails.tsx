@@ -8,8 +8,9 @@ import PropertyBookingSummary from "./components/PropertyBookingSummary/Property
 import Divider from "@/components/Divider/Divider";
 import type { Booking } from "@/types/booking";
 import PropertyMap from "./components/PropertyMap/PropertyMap";
+import EmptyState from "@/components/EmptyState/EmptyState";
 import Spinner from "@/components/Spinner/Spinner";
-import SuccessMessage from "@/components/SuccesMessage/SuccesMessage";
+import SuccessMessage from "@/components/SuccessMessage/SuccessMessage";
 import Toast from "@/components/Toast/Toast";
 import { SUCCESS_MESSAGE } from "./propertyDetailsConfig";
 import styles from "./PropertyDetails.module.css";
@@ -21,26 +22,26 @@ const PropertyDetails = () => {
   const bookingFromState = (location.state as { booking?: Booking } | null)
     ?.booking;
 
-  const { property, isLoading, error } = useProperty(id);
+  const { property, isLoading, error, setError } = useProperty(id);
 
   // Hook must be called unconditionally to follow Rules of Hooks
   const bookingForm = useBookingForm(property ?? null);
 
   const handleSendInquiry = () => {
     // Placeholder for inquiry functionality
-    console.log("Send inquiry clicked");
   };
 
   const isUserBookingForThisProperty =
     bookingFromState && property && bookingFromState.propertyId === property.id;
 
   if (isLoading) return <Spinner />;
-  if (error) return <div>Error: {error}</div>;
-  if (!property) return <div>Property not found</div>;
 
   return (
     <div className={styles.propertyDetails}>
       {/* === Error Toast === */}
+      {error && (
+        <Toast message={error} variant="error" onClose={() => setError(null)} />
+      )}
       {bookingForm.error && (
         <Toast
           message={bookingForm.error}
@@ -57,22 +58,28 @@ const PropertyDetails = () => {
         />
       )}
 
-      <PropertyHeader property={property} />
-      <div className={styles.propertyContent}>
-        <PropertyInfo property={property} />
-        {isUserBookingForThisProperty && bookingFromState ? (
-          <PropertyBookingSummary booking={bookingFromState} />
-        ) : (
-          <PropertyBookingPanel
-            bookingForm={bookingForm}
-            propertyId={property.id}
-            maxGuests={property.capacity.guest}
-            onSendInquiry={handleSendInquiry}
-          />
-        )}
-      </div>
-      <Divider variant="default" />
-      <PropertyMap property={property} />
+      {error || !property ? (
+        <EmptyState message={error ?? "Property not found."} />
+      ) : (
+        <>
+          <PropertyHeader property={property} />
+          <div className={styles.propertyContent}>
+            <PropertyInfo property={property} />
+            {isUserBookingForThisProperty && bookingFromState ? (
+              <PropertyBookingSummary booking={bookingFromState} />
+            ) : (
+              <PropertyBookingPanel
+                bookingForm={bookingForm}
+                propertyId={property.id}
+                maxGuests={property.capacity.guest}
+                onSendInquiry={handleSendInquiry}
+              />
+            )}
+          </div>
+          <Divider variant="default" />
+          <PropertyMap property={property} />
+        </>
+      )}
     </div>
   );
 };

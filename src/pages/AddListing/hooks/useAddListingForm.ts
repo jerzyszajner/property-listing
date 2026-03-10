@@ -5,7 +5,7 @@ import {
   addListingFormSchema,
   type AddListingFormData,
   type AddListingFormInput,
-} from "../addListing.FormSchema";
+} from "../addListingFormSchema";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { createProperty } from "@/services/propertyService";

@@ -9,7 +9,7 @@ import { app } from "@/config/firebaseConfig";
 import {
   addListingFormSchema,
   type AddListingFormInput,
-} from "../addListing.FormSchema";
+} from "../addListingFormSchema";
 
 type GenerateDescriptionRequest = {
   title: string;

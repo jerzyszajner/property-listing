@@ -5,7 +5,7 @@ import Label from "@/components/Label/Label";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import FormError from "@/components/FormError/FormError";
-import SuccessMessage from "@/components/SuccesMessage/SuccesMessage";
+import SuccessMessage from "@/components/SuccessMessage/SuccessMessage";
 import Toast from "@/components/Toast/Toast";
 import styles from "./ResetPassword.module.css";
 

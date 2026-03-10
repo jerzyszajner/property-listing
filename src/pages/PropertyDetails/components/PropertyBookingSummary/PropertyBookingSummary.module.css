@@ -8,6 +8,7 @@
   border: 1px solid var(--color-text-muted);
   border-radius: var(--border-radius-md);
   flex: 1;
+  height: fit-content;
 }
 
 .title {
