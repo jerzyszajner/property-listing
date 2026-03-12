@@ -11,6 +11,7 @@ import { googleMapsConfig } from "@/config/googleMapsConfig";
 import { capitalizeFirst } from "@/utils/helpers";
 import { useGeocoder } from "../../hooks/useGeocoder";
 import { truncateText } from "@/utils/helpers";
+import { getCloudinaryImageUrl } from "@/utils/cloudinaryImage";
 import Spinner from "@/components/Spinner/Spinner";
 import styles from "./PropertyMap.module.css";
 
@@ -21,7 +22,7 @@ interface PropertyMapProps {
 /* PropertyMap component */
 const PropertyMap = ({ property }: PropertyMapProps) => {
   const title = property.title ?? "";
-  const image = property.image ?? "";
+  const image = getCloudinaryImageUrl(property.image ?? "", "thumbnail");
   const address = property.address;
   const street = address.street;
   const zipCode = address.zipCode;

@@ -3,6 +3,7 @@ import type { Booking } from "@/types/booking";
 import { CalendarDays, Users } from "lucide-react";
 import { formatDate, formatPrice } from "@/utils/helpers";
 import { truncateText } from "@/utils/helpers";
+import { getCloudinaryImageUrl } from "@/utils/cloudinaryImage";
 import Button from "@/components/Button/Button";
 import Divider from "@/components/Divider/Divider";
 import styles from "./BookingCard.module.css";
@@ -33,6 +34,7 @@ const BookingCard = ({
 
   const checkInDate = formatDate(checkIn);
   const checkOutDate = formatDate(checkOut);
+  const bookingImage = getCloudinaryImageUrl(propertyImage, "thumbnail");
 
   const handleCancelClick = () => {
     onCancel(id);
@@ -48,9 +50,10 @@ const BookingCard = ({
         {/* === Image section === */}
         <div className={styles.imageWrapper}>
           <img
-            src={propertyImage}
+            src={bookingImage}
             alt={propertyTitle}
             className={styles.image}
+            loading="lazy"
           />
         </div>
 

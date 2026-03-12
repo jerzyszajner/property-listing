@@ -57,12 +57,20 @@
     aspect-ratio: 16 / 9;
     overflow: hidden;
     border-radius: var(--border-radius-md);
+    background-size: cover;
+    background-position: center;
 }
 
 .image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.imageLoaded {
+    opacity: 1;
 }
 
 @media (max-width: 768px) {

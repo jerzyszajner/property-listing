@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { truncateText } from "@/utils/helpers";
 import { capitalizeFirst } from "@/utils/helpers";
+import { getCloudinaryImageUrl } from "@/utils/cloudinaryImage";
 import styles from "./PropertyCard.module.css";
 
 type PropertyCardProperty = Pick<
@@ -27,7 +28,7 @@ interface PropertyCardProps {
 /* PropertyCard component */
 const PropertyCard = ({ property }: PropertyCardProps) => {
   const id = property.id;
-  const image = property.image ?? "";
+  const image = getCloudinaryImageUrl(property.image ?? "", "thumbnail");
   const title = property.title ?? "";
   const description = property.description ?? "";
   const price = property.price ?? 0;
@@ -42,7 +43,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
       <Link to={`/property/${id}`} className={styles.link}>
         {/* === Image section === */}
         <div className={styles.imageWrapper}>
-          <img src={image} alt={title} className={styles.image} />
+          <img src={image} alt={title} className={styles.image} loading="lazy" />
 
           {isSuperhost && (
             <span className={clsx(styles.badge, styles.badgeLeft)}>

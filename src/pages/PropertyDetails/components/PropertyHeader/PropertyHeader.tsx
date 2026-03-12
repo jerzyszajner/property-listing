@@ -1,8 +1,11 @@
+import { useState } from "react";
 import type { Property } from "@/types/property";
 import { Star, ShieldCheck, MapPin } from "lucide-react";
 import fallbackImage from "@/assets/images/fallback.webp";
 import PageHeader from "@/components/PageHeader/PageHeader";
+import { getCloudinaryImageUrl } from "@/utils/cloudinaryImage";
 import { capitalizeFirst } from "@/utils/helpers";
+import clsx from "clsx";
 import styles from "./PropertyHeader.module.css";
 
 interface PropertyHeaderProps {
@@ -10,11 +13,16 @@ interface PropertyHeaderProps {
 }
 
 const PropertyHeader = ({ property }: PropertyHeaderProps) => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const title = property.title ?? "";
   const rating = property.rating ?? 0;
   const isSuperhost = property.superhost ?? false;
   const location = property.address.city ?? "";
-  const image = property.image ?? fallbackImage;
+  const imageUrl = property.image ?? fallbackImage;
+  const image = getCloudinaryImageUrl(imageUrl, "detail");
+  const blurImage = getCloudinaryImageUrl(imageUrl, "blur");
+  const hasBlurPlaceholder =
+    image !== imageUrl && blurImage !== imageUrl;
 
   return (
     <section className={styles.header}>
@@ -44,8 +52,23 @@ const PropertyHeader = ({ property }: PropertyHeaderProps) => {
       </div>
 
       {/* === Property Image  === */}
-      <div className={styles.imageWrapper}>
-        <img src={image} alt={title} className={styles.image} />
+      <div
+        className={styles.imageWrapper}
+        style={
+          hasBlurPlaceholder
+            ? { backgroundImage: `url(${blurImage})` }
+            : undefined
+        }
+      >
+        <img
+          src={image}
+          alt={title}
+          className={clsx(
+            styles.image,
+            (isImageLoaded || !hasBlurPlaceholder) && styles.imageLoaded,
+          )}
+          onLoad={() => setIsImageLoaded(true)}
+        />
       </div>
     </section>
   );
