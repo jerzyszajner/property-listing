@@ -1,4 +1,4 @@
-type FirestorePropertyData = {
+export type FirestorePropertyData = {
   title?: string;
   description?: string;
   amenities?: string[];

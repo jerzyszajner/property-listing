@@ -1,7 +1,10 @@
 import * as admin from "firebase-admin";
 import { FieldValue } from "firebase-admin/firestore";
 import { generateEmbedding } from "./embeddings.js";
-import { buildSearchableContent } from "./propertyUtils.js";
+import {
+  buildSearchableContent,
+  type FirestorePropertyData,
+} from "./propertyUtils.js";
 
 const PROPERTIES_COLLECTION = "properties";
 
@@ -34,7 +37,7 @@ async function backfillEmbeddings(): Promise<void> {
 
   for (const doc of snapshot.docs) {
     try {
-      const data = doc.data();
+      const data = doc.data() as FirestorePropertyData;
       const searchableContent = buildSearchableContent(data);
 
       if (!searchableContent.trim()) {

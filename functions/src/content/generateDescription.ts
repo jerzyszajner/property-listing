@@ -2,6 +2,24 @@ import { onCall, HttpsError } from "firebase-functions/v2/https";
 import type { SecretParam } from "firebase-functions/params";
 import { GoogleGenAI, Type } from "@google/genai";
 
+let cachedAi: GoogleGenAI | null = null;
+let cachedApiKey: string | null = null;
+
+/**
+ * Returns a cached GoogleGenAI instance, creating a new one only when
+ * the API key changes or no instance exists yet.
+ * @param {string} apiKey Gemini API key.
+ * @return {GoogleGenAI} Cached client instance.
+ */
+function getAiClient(apiKey: string): GoogleGenAI {
+  if (cachedAi && cachedApiKey === apiKey) {
+    return cachedAi;
+  }
+  cachedAi = new GoogleGenAI({ apiKey });
+  cachedApiKey = apiKey;
+  return cachedAi;
+}
+
 type GenerateDescriptionData = {
   title: string;
   type?: string;
@@ -18,6 +36,13 @@ type GenerateDescriptionResponse = {
 };
 
 const DESCRIPTION_MODEL = "gemini-2.5-flash";
+
+const MAX_TITLE_LENGTH = 150;
+const MAX_NOTES_LENGTH = 5000;
+const MAX_AMENITIES_COUNT = 20;
+const MAX_AMENITY_LENGTH = 100;
+const MAX_CITY_LENGTH = 50;
+const MAX_TYPE_LENGTH = 50;
 
 type GeneratedSections = {
   atmosphere?: string;
@@ -85,6 +110,48 @@ export const createGenerateDescription = (geminiApiKey: SecretParam) =>
         throw new HttpsError("invalid-argument", "Title is required");
       }
 
+      if (title.length > MAX_TITLE_LENGTH) {
+        throw new HttpsError(
+          "invalid-argument",
+          `Title must not exceed ${MAX_TITLE_LENGTH} characters`,
+        );
+      }
+
+      if (notes.length > MAX_NOTES_LENGTH) {
+        throw new HttpsError(
+          "invalid-argument",
+          `Notes must not exceed ${MAX_NOTES_LENGTH} characters`,
+        );
+      }
+
+      if (amenities.length > MAX_AMENITIES_COUNT) {
+        throw new HttpsError(
+          "invalid-argument",
+          `Amenities must not exceed ${MAX_AMENITIES_COUNT} items`,
+        );
+      }
+
+      if (amenities.some((a) => a.length > MAX_AMENITY_LENGTH)) {
+        throw new HttpsError(
+          "invalid-argument",
+          `Each amenity must not exceed ${MAX_AMENITY_LENGTH} characters`,
+        );
+      }
+
+      if (city.length > MAX_CITY_LENGTH) {
+        throw new HttpsError(
+          "invalid-argument",
+          `City must not exceed ${MAX_CITY_LENGTH} characters`,
+        );
+      }
+
+      if (listingType.length > MAX_TYPE_LENGTH) {
+        throw new HttpsError(
+          "invalid-argument",
+          `Type must not exceed ${MAX_TYPE_LENGTH} characters`,
+        );
+      }
+
       const apiKey = geminiApiKey.value().trim();
       if (!apiKey) {
         throw new HttpsError(
@@ -93,7 +160,7 @@ export const createGenerateDescription = (geminiApiKey: SecretParam) =>
         );
       }
 
-      const ai = new GoogleGenAI({ apiKey });
+      const ai = getAiClient(apiKey);
 
       const prompt = `
         Du er en erfaren tekstforfatter for ferieboliger i Norge.

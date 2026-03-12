@@ -22,6 +22,7 @@ const VECTOR_SEARCH_LIMIT = 15;
 const VECTOR_MAX_RESULTS = 5;
 const VECTOR_ABSOLUTE_DISTANCE_THRESHOLD = 0.35;
 const VECTOR_RELATIVE_DISTANCE_MARGIN = 0.08;
+const MAX_QUERY_LENGTH = 500;
 const GEMINI_API_KEY = defineSecret("GEMINI_API_KEY");
 
 /* Callable function for vector search over properties */
@@ -37,58 +38,77 @@ export const searchProperties = onCall<{ query: string }>(
       );
     }
 
-    const searchIntent = parseSearchIntent(query);
-    const { trimmedQuery, maxPrice, capacityHint, priceConstraint } =
-      searchIntent;
-    const queryVector = await generateEmbedding(
-      trimmedQuery,
-      "RETRIEVAL_QUERY",
-    );
-    console.info("searchProperties: generated query embedding", {
-      queryLength: trimmedQuery.length,
-      embeddingLength: queryVector.length,
-    });
-
-    if (queryVector.length === 0) {
-      return { results: [] };
+    if (query.length > MAX_QUERY_LENGTH) {
+      throw new HttpsError(
+        "invalid-argument",
+        `query must not exceed ${MAX_QUERY_LENGTH} characters`,
+      );
     }
 
-    const { rawMatches, fetchedCount } = await retrieveCandidates({
-      db,
-      queryVector,
-      limit: VECTOR_SEARCH_LIMIT,
-    });
-    const { filteredMatches, cityInQuery, bestDistance, distanceCutoff } =
-      applyBusinessFilters({
-        rawMatches,
-        query: trimmedQuery,
-        maxPrice,
-        priceConstraint,
-        capacityHint,
-        absoluteDistanceThreshold: VECTOR_ABSOLUTE_DISTANCE_THRESHOLD,
-        relativeDistanceMargin: VECTOR_RELATIVE_DISTANCE_MARGIN,
+    try {
+      const searchIntent = parseSearchIntent(query);
+      const { trimmedQuery, maxPrice, capacityHint, priceConstraint } =
+        searchIntent;
+      const queryVector = await generateEmbedding(
+        trimmedQuery,
+        "RETRIEVAL_QUERY",
+      );
+      console.info("searchProperties: generated query embedding", {
+        queryLength: trimmedQuery.length,
+        embeddingLength: queryVector.length,
       });
 
-    if (filteredMatches.length === 0) {
-      return { results: [] };
+      if (queryVector.length === 0) {
+        return { results: [] };
+      }
+
+      const { rawMatches, fetchedCount } = await retrieveCandidates({
+        db,
+        queryVector,
+        limit: VECTOR_SEARCH_LIMIT,
+      });
+      const { filteredMatches, cityInQuery, bestDistance, distanceCutoff } =
+        applyBusinessFilters({
+          rawMatches,
+          query: trimmedQuery,
+          maxPrice,
+          priceConstraint,
+          capacityHint,
+          absoluteDistanceThreshold: VECTOR_ABSOLUTE_DISTANCE_THRESHOLD,
+          relativeDistanceMargin: VECTOR_RELATIVE_DISTANCE_MARGIN,
+        });
+
+      if (filteredMatches.length === 0) {
+        return { results: [] };
+      }
+
+      const results = mapToResponse({
+        matches: filteredMatches,
+        maxResults: VECTOR_MAX_RESULTS,
+      });
+      console.info("searchProperties: vector search completed", {
+        maxPrice,
+        priceInclusive: priceConstraint?.inclusive ?? null,
+        capacityHint,
+        cityInQuery,
+        bestDistance,
+        distanceCutoff,
+        fetchedCount,
+        resultsCount: results.length,
+      });
+
+      return { results };
+    } catch (err) {
+      if (err instanceof HttpsError) throw err;
+      console.error("searchProperties: pipeline failed", {
+        query,
+        error: err instanceof Error ? err.message : err,
+      });
+      throw new HttpsError(
+        "internal",
+        "Search failed. Please try again later.",
+      );
     }
-
-    const results = mapToResponse({
-      matches: filteredMatches,
-      maxResults: VECTOR_MAX_RESULTS,
-    });
-    console.info("searchProperties: vector search completed", {
-      maxPrice,
-      priceInclusive: priceConstraint?.inclusive ?? null,
-      capacityHint,
-      cityInQuery,
-      bestDistance,
-      distanceCutoff,
-      fetchedCount,
-      resultsCount: results.length,
-    });
-
-    return { results };
   },
 );
 

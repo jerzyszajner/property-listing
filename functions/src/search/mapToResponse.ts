@@ -25,12 +25,12 @@ export function mapToResponse({
 
     return {
       id: item.id,
-      title: (data.title as string) ?? "",
-      description: (data.description as string) ?? "",
+      title: String(data.title ?? ""),
+      description: String(data.description ?? ""),
       price: Number(data.price ?? 0),
       rating: Number(data.rating ?? 0),
       superhost: Boolean(data.superhost),
-      image: (data.image as string) ?? "",
+      image: String(data.image ?? ""),
       capacity: {
         guest: Number(capacity?.guest ?? 0),
         bedroom: Number(capacity?.bedroom ?? 0),
