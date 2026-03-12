@@ -5,6 +5,8 @@
     "build": "tsc",
     "test": "vitest run",
     "backfill:embeddings": "npm run build && node lib/backfillEmbeddings.js",
+    "seed:test": "npm run build && node lib/scripts/seedTestProperties.js",
+    "delete:test": "npm run build && node lib/scripts/deleteTestProperties.js",
     "build:watch": "tsc --watch",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
