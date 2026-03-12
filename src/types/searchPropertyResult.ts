@@ -11,4 +11,5 @@ export type SearchPropertyResult = {
     guest: number;
     bedroom: number;
   };
+  address?: { city?: string };
 };

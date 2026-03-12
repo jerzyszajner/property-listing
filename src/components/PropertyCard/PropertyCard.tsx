@@ -17,7 +17,7 @@ type PropertyCardProperty = Pick<
   | "image"
   | "capacity"
 > & {
-  address?: Property["address"];
+  address?: { city?: string };
 };
 
 interface PropertyCardProps {

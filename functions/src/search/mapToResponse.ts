@@ -35,6 +35,7 @@ export function mapToResponse({
         guest: Number(capacity?.guest ?? 0),
         bedroom: Number(capacity?.bedroom ?? 0),
       },
+      address: { city: item.city ?? "" },
     };
   });
 }

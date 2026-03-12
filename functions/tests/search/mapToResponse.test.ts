@@ -37,6 +37,7 @@ describe("mapToResponse", () => {
         superhost: true,
         image: "https://example.com/img.jpg",
         capacity: { guest: 4, bedroom: 2 },
+        address: { city: "oslo" },
       },
     ]);
   });
