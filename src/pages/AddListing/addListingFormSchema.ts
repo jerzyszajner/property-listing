@@ -18,7 +18,7 @@ const addListingFormSchema = z.object({
     .string()
     .trim()
     .min(1, "City is required")
-    .max(20, "Max 20 characters"),
+    .max(30, "Max 30 characters"),
   country: z.string().trim().min(1, "Country is required"),
   description: z
     .string()
