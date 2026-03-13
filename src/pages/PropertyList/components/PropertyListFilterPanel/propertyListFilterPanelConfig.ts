@@ -4,8 +4,10 @@ export type GuestOption = {
   label: string;
 };
 
+export const ALL_GUESTS = "0";
+
 export const GUEST_OPTIONS: GuestOption[] = [
-  { value: "0", label: "All guests" },
+  { value: ALL_GUESTS, label: "All guests" },
   { value: "1", label: "1 guest" },
   { value: "2", label: "2 guests" },
   { value: "3", label: "3 guests" },

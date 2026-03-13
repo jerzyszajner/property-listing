@@ -32,6 +32,8 @@ const PropertyList = () => {
       ) : (
         <>
           <PropertyListFilterPanel
+            propertyCount={filteredByGuests.length}
+            totalCount={properties.length}
             isSuperhost={isSuperhost}
             onSuperhostChange={setIsSuperhost}
             guestCount={guestCount}
@@ -40,11 +42,13 @@ const PropertyList = () => {
           {filteredByGuests.length === 0 ? (
             <EmptyState message="No properties found matching your filters." />
           ) : (
-            <ul className={styles.propertyList}>
-              {filteredByGuests.map((property) => (
-                <PropertyCard key={property.id} property={property} />
-              ))}
-            </ul>
+            <>
+              <ul className={styles.propertyList}>
+                {filteredByGuests.map((property) => (
+                  <PropertyCard key={property.id} property={property} />
+                ))}
+              </ul>
+            </>
           )}
         </>
       )}
