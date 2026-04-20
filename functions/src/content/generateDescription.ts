@@ -24,6 +24,8 @@ type GenerateDescriptionData = {
   title: string;
   type?: string;
   city?: string;
+  country?: string;
+  zipCode?: string;
   amenities?: string[];
   notes?: string;
   bedroom?: number;
@@ -42,6 +44,8 @@ const MAX_NOTES_LENGTH = 5000;
 const MAX_AMENITIES_COUNT = 20;
 const MAX_AMENITY_LENGTH = 100;
 const MAX_CITY_LENGTH = 50;
+const MAX_COUNTRY_LENGTH = 60;
+const MAX_ZIPCODE_LENGTH = 12;
 const MAX_TYPE_LENGTH = 50;
 
 type GeneratedSections = {
@@ -97,6 +101,8 @@ export const createGenerateDescription = (geminiApiKey: SecretParam) =>
       const title = request.data?.title?.trim();
       const listingType = request.data?.type?.trim() || "Ikke spesifisert";
       const city = request.data?.city?.trim() || "Ukjent sted";
+      const country = request.data?.country?.trim() || "Ikke spesifisert";
+      const zipCode = request.data?.zipCode?.trim() || "";
       const notes = request.data?.notes?.trim() || "";
       const amenities = (request.data?.amenities ?? [])
         .map((amenity) => amenity.trim())
@@ -145,6 +151,20 @@ export const createGenerateDescription = (geminiApiKey: SecretParam) =>
         );
       }
 
+      if (country.length > MAX_COUNTRY_LENGTH) {
+        throw new HttpsError(
+          "invalid-argument",
+          `Country must not exceed ${MAX_COUNTRY_LENGTH} characters`,
+        );
+      }
+
+      if (zipCode.length > MAX_ZIPCODE_LENGTH) {
+        throw new HttpsError(
+          "invalid-argument",
+          `Zip code must not exceed ${MAX_ZIPCODE_LENGTH} characters`,
+        );
+      }
+
       if (listingType.length > MAX_TYPE_LENGTH) {
         throw new HttpsError(
           "invalid-argument",
@@ -170,6 +190,8 @@ export const createGenerateDescription = (geminiApiKey: SecretParam) =>
         - Type: ${listingType}
         - Tittel: "${title}"
         - Sted: ${city}
+        - Land: ${country}
+        - Postnummer: ${zipCode || "Ikke spesifisert"}
         - Soverom: ${bedroom != null ? bedroom : "Ikke spesifisert"}
         - Maks gjester: ${guest != null ? guest : "Ikke spesifisert"}
         - Fasiliteter: ${amenities.join(", ") || "Ikke spesifisert"}
@@ -187,12 +209,17 @@ export const createGenerateDescription = (geminiApiKey: SecretParam) =>
            - Maks 120 tegn.
            - Må være spesifikk og nyttig (sted, type, styrker).
            - Bygg videre på brukerens opprinnelige tittel, ikke ignorer den.
+           - Bevar tydelig særpreg (humor, egen formulering) når det kan
+             kombineres med presisjon og fakta.
         3. **Beskrivelse i tre faste seksjoner**:
            - atmosphere: stemning, hva slags opphold, hvem stedet passer for.
            - amenities: konkrete fasiliteter og praktisk komfort.
            - location: beliggenhet, avstander og praktisk transportinfo.
            - Hver seksjon: 2-4 setninger, konkret og lettlest for mobil.
            - Ikke dupliser samme informasjon på tvers av seksjonene.
+           - Hvis **Eiers notater** nevner særegne detaljer (humor, dekor,
+             rekvisitt, bilde): ta det kort inn i **atmosphere**. Ikke utelat
+             slike detaljer bare for å gjøre teksten mer «konvensjonell».
         4. **Språk**: Norsk (Bokmål).
         5. **Lengde beskrivelse**: Ca. 200-300 ord. Perfekt for lesing på mobil.
         6. **Søkeoptimalisering for semantisk/vector-søk**:

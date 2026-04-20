@@ -14,6 +14,8 @@ import {
 type GenerateDescriptionRequest = {
   title: string;
   city?: string;
+  country?: string;
+  zipCode?: string;
   amenities?: string[];
   notes?: string;
   bedroom?: number;
@@ -64,6 +66,8 @@ export const useGenerateDescription = ({
       const { data } = await generateDescription({
         title: parsed.title,
         city: parsed.city.trim(),
+        country: parsed.country.trim(),
+        zipCode: parsed.zipCode.trim(),
         amenities: parsed.amenities,
         notes: parsed.description.trim(),
         bedroom: parsed.bedroom,
