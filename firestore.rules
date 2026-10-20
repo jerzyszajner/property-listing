@@ -1,0 +1,66 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Property listings: public read, host-only writes
+    match /properties/{propertyId} {
+      allow read: if true;
+
+      // Signed-in users can create listings only under their own hostId
+      allow create: if isOwner(request.resource.data.hostId);
+
+      // Only the host snapshot may change; hostId and other fields are immutable.
+      // Embeddings are written by Cloud Functions via the Admin SDK.
+      allow update: if isOwner(resource.data.hostId)
+                    && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['host']);
+
+      allow delete: if isOwner(resource.data.hostId);
+    }
+
+    // Contact form messages: write-only for everyone, readable via console only
+    match /messages/{messageId} {
+      allow read: if false;
+
+      // Only known form fields and a message capped at 400 characters (matches the Zod schema)
+      allow create: if request.resource.data.keys().hasOnly(
+                         ['firstName', 'lastName', 'email', 'phone', 'subject', 'message', 'createdAt'])
+                    && request.resource.data.message is string
+                    && request.resource.data.message.size() <= 400;
+    }
+
+    // User profiles: private to the owner
+    match /users/{userId} {
+      // Profile is created during sign-up
+      allow create: if isOwner(userId);
+      allow read: if isOwner(userId);
+
+      // Edits require a verified email
+      allow update: if isOwner(userId) && request.auth.token.email_verified == true;
+      allow delete: if isOwner(userId);
+    }
+
+    // Bookings: created and managed by the guest who owns them
+    match /bookings/{bookingId} {
+      allow create: if isOwner(request.resource.data.userId);
+
+      // Any signed-in user can read bookings, which the client uses to check availability.
+      allow read: if isSignedIn();
+
+      allow update, delete: if isOwner(resource.data.userId);
+    }
+
+    // Deny everything else by default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
