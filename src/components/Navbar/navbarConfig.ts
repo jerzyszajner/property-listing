@@ -1,8 +1,5 @@
 /* Navbar navigation links configuration */
-export type Link = {
-  to: string;
-  label: string;
-};
+import type { Link } from "@/types/link";
 
 export const MAIN_LINKS: Link[] = [
   {

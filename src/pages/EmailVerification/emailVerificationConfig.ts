@@ -1,7 +1,5 @@
-export type PageHeaderConfig = {
-  title: string;
-  subtitle: string;
-};
+/* EmailVerification page configuration */
+import type { PageHeaderConfig } from "@/types/pageHeader";
 
 export type PageSubtitleConfig = {
   subtitle: string;

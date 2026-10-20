@@ -1,11 +1,7 @@
 /* About page configuration */
 import { Sparkles, ShieldCheck, Map } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-
-export type PageHeaderConfig = {
-  title: string;
-  subtitle: string;
-};
+import type { PageHeaderConfig } from "@/types/pageHeader";
 
 export type Feature = {
   icon: LucideIcon;

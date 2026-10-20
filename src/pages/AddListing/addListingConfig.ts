@@ -1,8 +1,5 @@
 /* AddListing page configuration */
-export type PageHeaderConfig = {
-  title: string;
-  subtitle: string;
-};
+import type { PageHeaderConfig } from "@/types/pageHeader";
 
 export type AmenityOption = {
   id: string;

@@ -1,17 +1,10 @@
 /* SignIn page configuration */
-export type PageHeaderConfig = {
-  title: string;
-  subtitle: string;
-};
+import type { PageHeaderConfig } from "@/types/pageHeader";
+import type { Link } from "@/types/link";
 
 export type SuccessMessageConfig = {
   title: string;
   message: string;
-};
-
-export type Link = {
-  to: string;
-  label: string;
 };
 
 export const PAGE_HEADER_CONFIG: PageHeaderConfig = {

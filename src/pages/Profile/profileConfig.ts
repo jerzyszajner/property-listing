@@ -1,12 +1,9 @@
 /* Profile page configuration */
+import type { PageHeaderConfig } from "@/types/pageHeader";
+
 export type ProfileFieldsConfig = {
   label: string;
   key: "firstName" | "lastName" | "email" | "phone";
-};
-
-export type PageHeaderConfig = {
-  title: string;
-  subtitle?: string;
 };
 
 export const PAGE_HEADER_CONFIG: PageHeaderConfig = {

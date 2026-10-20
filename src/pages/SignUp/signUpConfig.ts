@@ -1,8 +1,5 @@
 /* SignUp page configuration */
-export type PageHeaderConfig = {
-  title: string;
-  subtitle: string;
-};
+import type { PageHeaderConfig } from "@/types/pageHeader";
 
 export type SuccessMessageConfig = {
   title: string;
